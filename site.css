@@ -128,3 +128,4 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
 .socials a:hover,.socials a:focus-visible{color:var(--bc);border-color:var(--bc);background:#111;transform:translateY(-2px)}
 .socials a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 @media (max-width:600px){.socials{gap:12px}.socials a{width:46px;height:46px}.socials a svg{width:21px;height:21px}}
+footer .mail .em .tag,footer .mail .tag{display:inline-block;width:auto;color:#111;font-size:10.5px;letter-spacing:.05em;margin-left:6px;vertical-align:middle}
