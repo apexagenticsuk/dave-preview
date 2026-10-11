@@ -121,3 +121,10 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
 .bhero h1{overflow-wrap:break-word}
 @media (max-width:600px){.freebar .wrap{flex-direction:column;gap:2px}.bhero h1{font-size:36px}}
 .prod .pi{min-width:0}.prod p,.prod h3{overflow-wrap:anywhere}
+/* social brand icons (Simple Icons, CC0) */
+.socials{flex-wrap:wrap;gap:10px}
+.socials a{width:44px;height:44px;border-radius:50%;background:#1d1d20;border:1px solid #34343a;display:flex;align-items:center;justify-content:center;color:#f3f3f3;transition:background .15s,border-color .15s,color .15s,transform .15s}
+.socials a svg{width:20px;height:20px;fill:currentColor;display:block}
+.socials a:hover,.socials a:focus-visible{color:var(--bc);border-color:var(--bc);background:#111;transform:translateY(-2px)}
+.socials a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (max-width:600px){.socials{gap:12px}.socials a{width:46px;height:46px}.socials a svg{width:21px;height:21px}}
