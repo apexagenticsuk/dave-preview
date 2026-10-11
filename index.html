@@ -6,6 +6,15 @@ button.ham{background:none;cursor:pointer}
 .mnav{display:none}
 .clip{display:block}.clip p{color:var(--txt)}
 footer a{text-decoration:underline}.socials a{text-decoration:none}
+@media (min-width:900px){
+ .hero{position:relative;height:clamp(360px,55vh,560px);overflow:hidden;background:#000}
+ .hero:before{content:"";position:absolute;inset:-30px;background:url(assets/banner_hero.jpg) center/cover;filter:blur(24px) brightness(.45)}
+ .hero img{position:relative;height:100%;width:auto;max-width:100%;object-fit:contain;margin:0 auto}
+ .ctabar .wrap{padding-top:14px;padding-bottom:14px}
+ #live{padding-top:28px}
+ #live .lead{margin-top:6px}
+ #live .shows{margin-top:16px}
+}
 @media (max-width:600px){.mnav.open{display:grid;background:#000;border-top:1px solid #222}.mnav a{padding:14px 18px;border-bottom:1px solid #222;font-weight:700}body{padding-bottom:84px}}
 </style></head><body><div class="proto">Preview concept, not the live site</div><header class="top"><div class="wrap">
 <a class="brand" href="#top"><span class="d">Dave</span> <span class="y">Young</span><small>Seriously Funny!</small></a>
