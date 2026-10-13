@@ -41,7 +41,7 @@ function redo(){if(pos>=hist.length-1)return;pos++;c=JSON.parse(hist[pos]);persi
 window.addEventListener('beforeunload',function(){persist();});
 
 /* ---- frame ---- */
-function src(){return '../'+page+'.html?edit=1';}
+function src(){return new URL('../'+page+'.html?edit=1',location.href).href;}
 function setPage(p){page=p;$('#page').value=p;history.replaceState(null,'','?page='+p);scrollKeep=null;frame.src=src();}
 function reload(){try{scrollKeep=frame.contentWindow.scrollY;}catch(e){scrollKeep=null;}frame.contentWindow.location.replace(src());}
 frame.addEventListener('load',function(){if(scrollKeep!=null){try{frame.contentWindow.scrollTo(0,scrollKeep);}catch(e){}scrollKeep=null;}});
