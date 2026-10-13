@@ -1,15 +1,11 @@
 {
-  "_help": "Edited by /admin/. Dates use YYYY-MM-DD. Leave ticketUrl empty and fill phone for phone bookings.",
-  "home": {
-    "bannerImage": "assets/banner_hero.jpg",
-    "bannerAlt": "Dave Young Unwrapped Christmas Show poster",
-    "headline": "Six Unwrapped Christmas shows this December",
-    "bioExtra": "His first big break came at Dublin’s Olympia Theatre, where he was selected from hundreds of audition hopefuls, the start of many stage and TV appearances throughout Europe."
+  "version": 2,
+  "_help": "Edited by the visual editor at /admin/. 'pages' and 'site' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
+  "theme": {
+    "accent": "red"
   },
-  "live": {
-    "intro": "‘Unwrapped’ Christmas Show, December 2026. He’s naughty, he’s nice… he’s unmissable.",
-    "posterImage": "assets/portrait_tour.jpg",
-    "moreText": "More dates released soon."
+  "contact": {
+    "phone": "087 261 6317"
   },
   "shows": [
     {
@@ -79,26 +75,6 @@
       "soldOut": false
     }
   ],
-  "bio": {
-    "intro": "Dave Young is an Irish comedian. He gained notoriety for having one of the craziest comedy shows in the country and has been honoured with numerous industry accolades, including the Performing Arts Award for Outstanding Contribution to Comedy.",
-    "personal": "This natural-born performer is an only child from Dublin. After leaving school he worked as a butcher and then as a laboratory assistant in a Dublin maternity hospital, all the while doing magic shows and performances before becoming a professional comedian.",
-    "career": [
-      "His first big break came at Dublin’s Olympia Theatre, where he was selected from hundreds of audition hopefuls. The show was a resounding success and the start of many stage and TV appearances throughout Europe. During his late teens he formed his own band and played the local pubs and clubs of the capital, where he featured as the lead singer. It soon emerged that he had a unique talent for making people laugh, which led to him going solo with his own brand of zany comedy.",
-      "While touring with his show he has also appeared on the TV programmes “The Late Late Show”, “The Saturday Night Show”, “The Miriam Show” and the “TV3 Breakfast Show”, with parts in the movies “The Commitments”, “The Van”, “The Snapper”, “Braveheart”, “Michael Collins” and “When Harvey Met Bob”.",
-      "Young brought a national news campaign called “Chill-Blaine’s” to raise awareness and funding for the plight of Ireland’s homeless community. As a parody of magician David Blaine’s 44 days of starvation and deprivation in a glass box over the river Thames, Young was suspended for 44 hours over Dublin’s river Liffey in his own glass box full of luxuries, with meals delivered by silver-service waiters. He is now the charity’s leading celebrity patron, and brought in over €50,000 from telephone voting when he appeared in the popular RTÉ television series “Celebrity ICA Bootcamp”, where he made it to the final.",
-      "Other stage and theatre roles have seen him star as Fagin in “Oliver!” at the Tivoli Theatre, and he also appeared in “The Rat Pack”, which played in the Olympia Theatre, Dublin, and also theatres in Cork and Belfast. He was a special guest star at the Meteor International Music Awards at Dublin’s 3Arena alongside Amy Winehouse, Westlife, Ronan Keating, the Kaiser Chiefs and the Pussycat Dolls.",
-      "He is also an accomplished presenter on the corporate event scene, and has played host to Jack Charlton and Michael Flatley. He appears annually as a special guest star at the hugely successful “Marbella Ball” in Spain.",
-      "His discography includes “Seriously Frank”, “Shush While I Swing” and “Wired For Fun”, a compilation of his favourite songs with a comedy twist. His DVD releases are “Dave Young Live”, “Dave Young All Hushed Up”, “Dave Young Up Till Now!”, “Dave Young No Cutbacks on Laughter!” and “Dave Young’s Christmas Cracker”."
-    ]
-  },
-  "contact": {
-    "phone": "087 261 6317",
-    "emails": [
-      "young1productions@gmail.com",
-      "info@daveyounglive.com"
-    ],
-    "emailNote": "EMAIL TBC"
-  },
   "socials": [
     {
       "network": "instagram",
@@ -124,5 +100,7 @@
       "network": "vimeo",
       "url": "https://vimeo.com/channels/daveyoung"
     }
-  ]
+  ],
+  "site": {},
+  "pages": {}
 }

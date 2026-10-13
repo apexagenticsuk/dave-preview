@@ -1,79 +1,50 @@
 <!doctype html><html lang="en-IE"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Website editor | Dave Young</title>
-<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="admin.css"></head><body>
-<header class="top"><div class="wrap"><a class="brand" href="../index.html" target="_blank"><span class="d">Dave</span> <span class="y">Young</span><small>Website editor</small></a><div id="who" class="who"></div></div></header>
-
-<main class="wrap ed">
-<section id="login" class="card" hidden>
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="shell.css"></head><body>
+<div id="login" class="login" hidden><div class="card">
+  <div class="brand"><span class="d">Dave</span> <span class="y">Young</span><small>Website editor</small></div>
   <h1>Edit your website</h1>
-  <p class="lead2">Change show dates, the poster, your bio and contact details. No coding needed.</p>
+  <p class="lead2">Click on anything on your pages to change it, then press Publish. No coding needed.</p>
   <label for="tok">Your editor key</label>
   <input id="tok" type="password" autocomplete="off" placeholder="Starts with github_pat_…">
-  <p class="hint">Paste the key you were given once. It stays on this phone or computer only (in this browser) and is never put on the website.</p>
+  <p class="hint">Paste the key you were given. It stays in this browser on this device only and is never put on the website.</p>
   <div class="row"><button class="btn red" id="signin">Sign in</button><button class="btn ghost" id="demo">Just look around (demo mode)</button></div>
   <p id="loginmsg" class="msg"></p>
   <details class="help"><summary>Where do I get a key?</summary>
-  <p>Your web person sets this up once with you. In short: sign in to <b>github.com</b>, go to <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>. Pick <b>Only select repositories</b> → <b>apexagenticsuk/dave-preview</b>, and under <b>Repository permissions</b> set <b>Contents</b> to <b>Read and write</b>. Copy the key and paste it above. Your GitHub account also needs to be added to the website project by your web person.</p></details>
-</section>
+  <p>Your web person sets this up with you once. In short: sign in to <b>github.com</b>, go to <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>. Set Resource owner to <b>apexagenticsuk</b>, pick <b>Only select repositories → dave-preview</b>, and under <b>Repository permissions</b> set <b>Contents</b> to <b>Read and write</b>. Copy the key and paste it above.</p></details>
+</div></div>
 
-<section id="app" hidden>
-  <div id="demobar" class="demobar" hidden><b>Demo mode.</b> Try anything: your changes only show on this device and nothing goes on the real website. <a href="#" id="exitdemo">Sign in to publish</a></div>
-  <nav class="tabs" role="tablist">
-    <button data-tab="shows" class="on">Shows</button><button data-tab="poster">Poster</button><button data-tab="text">Text</button><button data-tab="contact">Contact</button><button data-tab="help">Help</button>
-  </nav>
+<div id="app" hidden>
+<header class="tb">
+  <div class="g"><span class="logo"><b>Dave</b> <i>Young</i></span><span id="demobadge" class="demob" hidden title="Demo mode: changes stay on this device and can't be published">DEMO</span>
+  <select id="page" aria-label="Page"><option value="index">Home</option><option value="live">Live</option><option value="about">About</option><option value="book">Book</option><option value="clips">Clips</option><option value="corporate">Corporate</option><option value="contact">Contact</option><option value="magician">The Unknown Magician</option><option value="shop">Shop</option></select></div>
+  <div class="g"><div class="seg" role="group" aria-label="View"><button id="vdesk" class="on" title="Desktop view">🖥 Desktop</button><button id="vphone" title="Phone view">📱 Phone</button></div>
+  <button id="undo" class="ib" title="Undo">↶</button><button id="redo" class="ib" title="Redo">↷</button></div>
+  <div class="g"><span id="pill" class="pill"></span></div>
+  <div class="g"><button id="style" class="tbb">Style</button><button id="helpb" class="tbb">Help</button><button id="preview" class="tbb gold">Preview</button><button id="publish" class="pub">Publish</button><button id="out" class="tbb ghost"></button></div>
+</header>
+<div id="stage" class="stage"><iframe id="frame" title="Your page"></iframe></div>
+<div id="toast" class="toast" hidden></div>
+</div>
 
-  <div class="tab" id="t-shows">
-    <h2>Show dates</h2><p class="hint">Shows appear on the website in this order. Use ▲ ▼ to move them, or <a href="#" id="sortdates">sort by date</a>.</p>
-    <div id="shows"></div>
-    <button class="btn gold wide" id="addshow">+ Add a show</button>
-    <label>Line under the dates (optional)</label><input data-k="live.moreText">
-  </div>
+<div id="helpm" class="modal" hidden><div class="mc"><button class="x" data-close>✕</button>
+<h2>How to edit your website</h2>
+<div class="steps">
+<div><h3>Sign in</h3><p>Open this page, paste your editor key and tap <b>Sign in</b>. You only do this once on each phone or computer. <b>Demo mode</b> lets you try everything without changing the real site.</p></div>
+<div><h3>Change words</h3><p>Pick a page at the top. Things you can change get a yellow outline when you point at them. Click a heading, paragraph or button and just type. Click somewhere else when you're done.</p></div>
+<div><h3>Change a button's link</h3><p>Click the button, then tap <b>🔗 Link</b> in the little bar that appears and paste the new web address (or a phone number).</p></div>
+<div><h3>Change a show date</h3><p>Click a show in the dates list to change its date, venue, town or ticket link. Use <b>Sold out</b> on the row when it sells out, drag <b>⠿</b> to change the order, <b>✕</b> to delete, and <b>+ Add show</b> under the list for a new one.</p></div>
+<div><h3>Swap the poster or a photo</h3><p>Click any picture and choose <b>Replace picture</b>. Photos from your phone are shrunk automatically.</p></div>
+<div><h3>Move or hide a section</h3><p>Click inside a section and use <b>Section ▲ ▼</b> to move it, or <b>Hide</b>. Hidden sections stay faded in the editor so you can bring them back. For repeated things like testimonials, clips or shop items use <b>⧉ Copy</b> and <b>🗑</b>.</p></div>
+<div><h3>Check, then publish</h3><p><b>📱 Phone</b> shows how it looks on a mobile. <b>Preview</b> opens the site with your changes. When you're happy, tap the big red <b>Publish</b>. The real website updates in about a minute.</p></div>
+<div><h3>Made a mistake?</h3><p>Use <b>↶ Undo</b>. Unpublished changes are kept even if you close the page. Every published version is saved, so your web person can always roll back.</p>
+<button class="btn ghost sm" id="discard">Throw away all unpublished changes</button></div>
+</div></div></div>
 
-  <div class="tab" id="t-poster" hidden>
-    <h2>Home page banner</h2><p class="hint">The big poster at the top of the home page. A wide image works best (about 3 times wider than tall).</p>
-    <div class="imgbox"><img id="banprev" alt=""></div>
-    <label class="btn red file">Choose a new banner<input type="file" accept="image/*" id="banfile"></label>
-    <label>Describe the image (for blind visitors)</label><input data-k="home.bannerAlt">
-    <h2 style="margin-top:34px">Live page poster</h2><p class="hint">The tour poster on the Live page.</p>
-    <div class="imgbox small"><img id="posprev" alt=""></div>
-    <label class="btn red file">Choose a new poster<input type="file" accept="image/*" id="posfile"></label>
-  </div>
+<div id="stylem" class="modal" hidden><div class="mc"><button class="x" data-close>✕</button>
+<h2>Site style</h2><p class="hint">Pick the accent colour used on buttons and highlights.</p><div id="accents" class="accents"></div>
+<label>Main booking phone number</label><input id="mphone" inputmode="tel"><p class="hint">Updates the number on every page and every “Call” button.</p>
+<h3 style="margin-top:20px">Social media links</h3><p class="hint">Also editable by clicking the icons on any page.</p><div id="socs"></div><button class="btn gold sm" id="addsoc">+ Add a social link</button>
+<div class="row"><button class="btn red" data-close>Done</button></div></div></div>
 
-  <div class="tab" id="t-text" hidden>
-    <h2>Headlines</h2>
-    <label>Home page headline (under the banner)</label><input data-k="home.headline">
-    <label>Live page intro</label><textarea data-k="live.intro" rows="2"></textarea>
-    <h2 style="margin-top:30px">Bio</h2>
-    <label>Short bio (home page and top of About page)</label><textarea data-k="bio.intro" rows="4"></textarea>
-    <label>Second paragraph on the home page</label><textarea data-k="home.bioExtra" rows="3"></textarea>
-    <label>Personal life (About page)</label><textarea data-k="bio.personal" rows="4"></textarea>
-    <label>Career (About page). Leave an empty line between paragraphs.</label><textarea data-k="bio.career" data-paras="1" rows="14"></textarea>
-  </div>
-
-  <div class="tab" id="t-contact" hidden>
-    <h2>Contact details</h2>
-    <label>Booking phone number</label><input data-k="contact.phone" inputmode="tel"><p class="hint">Changes it everywhere on the site, including the "Call" buttons.</p>
-    <label>Email addresses (one per line)</label><textarea data-k="contact.emails" data-lines="1" rows="3"></textarea>
-    <label>Small note beside the emails (leave empty to hide)</label><input data-k="contact.emailNote">
-    <h2 style="margin-top:30px">Social media</h2><p class="hint">Paste the full web address of each page.</p>
-    <div id="socials"></div><button class="btn gold" id="addsoc">+ Add a social link</button>
-  </div>
-
-  <div class="tab" id="t-help" hidden>
-    <h2>How to use the editor</h2>
-    <div class="steps">
-    <div><h3>1. Sign in</h3><p>Open this page and paste your editor key, then tap <b>Sign in</b>. You only do this once on each phone or computer. To sign out, tap <b>Sign out</b> at the top.</p></div>
-    <div><h3>2. Change a date</h3><p>Go to <b>Shows</b>. Tap the date and pick the new one, change the venue or town, and paste the ticket link (or a phone number for phone bookings). Tick <b>Sold out</b> when it sells out. <b>+ Add a show</b> adds a new one; <b>Delete</b> removes one.</p></div>
-    <div><h3>3. Swap the poster</h3><p>Go to <b>Poster</b>, tap <b>Choose a new banner</b> and pick a photo from your phone. It is shrunk automatically.</p></div>
-    <div><h3>4. Check it</h3><p>Tap <b>Preview</b> to see the whole site with your changes before anyone else does.</p></div>
-    <div><h3>5. Publish</h3><p>Tap the big red <b>Publish</b> button. The real website updates in about a minute. If it doesn't, wait two minutes and refresh the page.</p></div>
-    <div><h3>Made a mistake?</h3><p>Tap <b>Undo all changes</b> before publishing. After publishing, just fix it and publish again. Every published version is kept, so your web person can always roll back.</p></div>
-    </div>
-  </div>
-</section>
-</main>
-
-<div id="bar" class="pbar" hidden><div class="wrap"><span id="status" class="status"></span><div class="row">
-<button class="btn ghost sm" id="undo">Undo all changes</button><button class="btn gold" id="preview">Preview</button><button class="btn red big" id="publish">Publish</button></div></div></div>
-<script src="../content.js"></script>
-<script src="admin.js"></script>
+<script>window.DY_SHELL=true;</script><script src="../content.js"></script><script src="shell.js"></script>
 </body></html>
