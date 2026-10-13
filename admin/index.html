@@ -20,9 +20,11 @@
   <div class="g"><div class="seg" role="group" aria-label="View"><button id="vdesk" class="on" title="Desktop view">🖥 Desktop</button><button id="vphone" title="Phone view">📱 Phone</button></div>
   <button id="undo" class="ib" title="Undo">↶</button><button id="redo" class="ib" title="Redo">↷</button></div>
   <div class="g"><span id="pill" class="pill"></span></div>
-  <div class="g"><button id="style" class="tbb">Style</button><button id="helpb" class="tbb">Help</button><button id="preview" class="tbb gold">Preview</button><button id="publish" class="pub">Publish</button><button id="out" class="tbb ghost"></button></div>
+  <div class="g"><button id="psettings" class="tbb">Page settings</button><button id="style" class="tbb">Style</button><button id="helpb" class="tbb">Help</button><button id="preview" class="tbb gold">Preview</button><button id="publish" class="pub">Publish</button><button id="out" class="tbb ghost"></button></div>
 </header>
-<div id="stage" class="stage"><iframe id="frame" title="Your page"></iframe></div>
+<div id="selbar" class="selbar" hidden></div>
+<div class="work"><div id="stage" class="stage"><iframe id="frame" title="Your page"></iframe></div>
+<aside id="side" class="side" hidden><div class="sidehd"><b id="sidet"></b><button id="sidex" title="Close">✕</button></div><div id="sideb" class="sideb"></div></aside></div>
 <div id="toast" class="toast" hidden></div>
 </div>
 
@@ -31,10 +33,10 @@
 <div class="steps">
 <div><h3>Sign in</h3><p>Open this page, paste your editor key and tap <b>Sign in</b>. You only do this once on each phone or computer. <b>Demo mode</b> lets you try everything without changing the real site.</p></div>
 <div><h3>Change words</h3><p>Pick a page at the top. Things you can change get a yellow outline when you point at them. Click a heading, paragraph or button and just type. Click somewhere else when you're done.</p></div>
-<div><h3>Change a button's link</h3><p>Click the button, then tap <b>🔗 Link</b> in the little bar that appears and paste the new web address (or a phone number).</p></div>
-<div><h3>Change a show date</h3><p>Click a show in the dates list to change its date, venue, town or ticket link. Use <b>Sold out</b> on the row when it sells out, drag <b>⠿</b> to change the order, <b>✕</b> to delete, and <b>+ Add show</b> under the list for a new one.</p></div>
+<div><h3>Change a button</h3><p>Click any button or link. A panel opens on the right where you can change its words, where it goes (one of your pages, a web address, a phone number or an email) and its colour.</p></div>
+<div><h3>Change a show date</h3><p>Click a show (or its <b>Edit</b> button) to change the date, venue, town or ticket link. Shows sort themselves by date. Each row has its own <b>Sold out</b>, <b>Drag</b> and <b>Delete</b> buttons, and <b>+ Add show</b> is under the list.</p></div>
 <div><h3>Swap the poster or a photo</h3><p>Click any picture and choose <b>Replace picture</b>. Photos from your phone are shrunk automatically.</p></div>
-<div><h3>Move or hide a section</h3><p>Click inside a section and use <b>Section ▲ ▼</b> to move it, or <b>Hide</b>. Hidden sections stay faded in the editor so you can bring them back. For repeated things like testimonials, clips or shop items use <b>⧉ Copy</b> and <b>🗑</b>.</p></div>
+<div><h3>Move or hide a section</h3><p>Click inside a section: the bar under the toolbar shows what is selected, with <b>Move up</b>, <b>Move down</b>, <b>Reorder…</b> (drag in a list), <b>Hide</b>, <b>Copy</b> and <b>Delete</b>. Hidden sections stay faded in the editor so you can bring them back.</p></div>
 <div><h3>Check, then publish</h3><p><b>📱 Phone</b> shows how it looks on a mobile. <b>Preview</b> opens the site with your changes. When you're happy, tap the big red <b>Publish</b>. The real website updates in about a minute.</p></div>
 <div><h3>Add something new</h3><p>Click any heading or paragraph and tap the yellow <b>+</b> under it (or <b>+ Add below</b>) to add a heading, text, picture, button, video, gallery, quote, cards and more. Use the blue <b>+ Add section</b> lines between sections for ready-made layouts.</p></div>
 <div><h3>Add or change pages</h3><p>Tap <b>Pages</b> at the top. <b>+ New page</b> makes a new page from a ready-made layout and adds it to the menu. From there you can also rename, copy, delete, hide from the menu, change the menu order and the Google title and description.</p></div>
@@ -66,11 +68,15 @@
 <div class="row"><button class="btn red" id="np-go">Create page</button><button class="btn ghost" data-close>Cancel</button></div></div></div>
 
 <div id="seom" class="modal" hidden><div class="mc"><button class="x" data-close>✕</button>
-<h2>Search engine details</h2><p class="hint" id="seo-for"></p>
-<label for="seo-title">Title (shown in the browser tab and on Google)</label><input id="seo-title" maxlength="70">
-<label for="seo-desc">Description (the grey text under the title on Google)</label><textarea id="seo-desc" rows="3" maxlength="170"></textarea>
+<h2>Page settings</h2><p class="hint" id="seo-for"></p>
+<div id="ps-custom"><label for="ps-title">Page title</label><input id="ps-title"></div>
+<label for="ps-label">Name in the menu</label><input id="ps-label">
+<label for="ps-show">Show this page in</label><select id="ps-show"><option value="menu">The top menu and the footer</option><option value="footer">The footer only</option><option value="none">Nowhere (the page still exists)</option></select>
+<label for="seo-title">Google title (shown in the browser tab and on Google)</label><input id="seo-title" maxlength="70">
+<label for="seo-desc">Google description (the grey text under the title on Google)</label><textarea id="seo-desc" rows="3" maxlength="170"></textarea>
 <p class="hint">This preview site is hidden from Google on purpose; these details apply when the real site goes live.</p>
 <div class="row"><button class="btn red" id="seo-save">Save</button><button class="btn ghost" data-close>Cancel</button></div></div></div>
 
+<div id="dlg" class="modal dlg" hidden><div class="mc"><h2 id="dlg-t"></h2><p id="dlg-x" class="dlgtext"></p><div id="dlg-f"></div><p id="dlg-e" class="msg err"></p><div class="row" id="dlg-b"></div></div></div>
 <script>window.DY_SHELL=true;</script><script src="../content.js"></script><script src="shell.js"></script>
 </body></html>
