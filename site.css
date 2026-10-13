@@ -129,3 +129,4 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
 .socials a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 @media (max-width:600px){.socials{gap:12px}.socials a{width:46px;height:46px}.socials a svg{width:21px;height:21px}}
 footer .mail .em .tag,footer .mail .tag{display:inline-block;width:auto;color:#111;font-size:10.5px;letter-spacing:.05em;margin-left:6px;vertical-align:middle}
+.btn.sold{background:#3a3a3f;color:#d0d0d6;cursor:default;text-decoration:line-through;text-decoration-thickness:2px}
