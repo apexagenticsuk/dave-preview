@@ -36,3 +36,14 @@ button{font-family:inherit;cursor:pointer}button.btn{border:0}.btn.ghost{border:
 .socrow{display:grid;grid-template-columns:140px 1fr 42px;gap:8px;margin:8px 0}.socrow select,.socrow input{padding:9px}.socrow button{background:#26262b;color:#ff8080;border:1px solid #3a3a40;border-radius:9px}
 @media(max-width:760px){.steps{grid-template-columns:1fr}.tb{padding:6px 8px}.logo{display:none}.seg{display:none}.pub{padding:9px 18px;font-size:16px}.tbb{padding:7px 9px;font-size:13px}}
 .pub.off{opacity:.55;box-shadow:none}
+.mc.wide{max-width:900px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px}
+.tile{background:#0f0f11;border:1px solid #3a3a40;border-radius:12px;padding:14px 12px;text-align:left;color:#fff;cursor:pointer;font:700 14px Inter,sans-serif;display:flex;flex-direction:column;gap:8px;min-height:92px}
+.tile:hover{border-color:var(--gold);background:#1a1a1e}.tile i{font-style:normal;font-size:24px;color:var(--gold)}
+.tile .sk{display:grid;gap:4px;height:46px}.tile .sk b{background:#2c2c31;border-radius:3px}.tile .sk b.r{background:var(--red)}.tile .sk b.g{background:var(--gold)}
+.prow{display:grid;grid-template-columns:60px minmax(120px,1fr) 120px auto;gap:8px;align-items:center;background:#0f0f11;border:1px solid var(--line);border-radius:12px;padding:8px;margin-top:8px}
+.prow .mv{display:flex;flex-direction:column;gap:2px}.prow .mv button,.prow .acts button{background:#26262b;color:#fff;border:1px solid #3a3a40;border-radius:8px;padding:6px 9px;font-weight:700;font-size:13px}
+.prow .acts{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.prow .acts .del{color:#ff8080}.prow input,.prow select{padding:8px;font-size:15px}
+.prow small{display:block;color:var(--mut);font-size:12px;margin-top:3px}
+.slug{display:flex;align-items:center;gap:4px;font-size:14px;color:var(--mut)}.slug input{flex:1}
+@media(max-width:760px){.prow{grid-template-columns:44px 1fr;}.prow .acts{grid-column:1/-1;justify-content:flex-start}.prow select{grid-column:2}}

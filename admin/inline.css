@@ -26,3 +26,27 @@
 .dy-dragging{opacity:.6;outline:2px solid #f6c343}
 .dy-add{display:block;width:100%;margin-top:14px;background:transparent;color:#f6c343;border:2px dashed #f6c343;border-radius:14px;padding:14px;font:800 16px Inter,sans-serif;cursor:pointer}
 @media(max-width:600px){.dy-2{grid-template-columns:1fr}}
+.dy-editing [data-bf]:hover,.dy-editing img[data-bi]:hover,.dy-editing .blk-video:hover{outline:2px dashed rgba(246,195,67,.9);outline-offset:3px;cursor:pointer}
+.dy-editing [data-bid]:hover{box-shadow:0 0 0 1px rgba(246,195,67,.35)}
+.dy-editing [data-bf]:empty:before{content:attr(data-ph);opacity:.45;font-style:italic}
+.dy-editing [data-bf]:empty{display:block;min-width:80px}
+.dy-editing a.btn[data-bf]:empty{display:inline-block}
+.dy-editing .blk-video iframe{pointer-events:none}
+.dy-editing .blk-divider.space{background:repeating-linear-gradient(45deg,transparent 0 8px,rgba(255,255,255,.04) 8px 16px)}
+.dy-editing [data-dy-nav]{cursor:pointer}
+.dy-addsec{position:relative;height:0;z-index:40;display:flex;justify-content:center}
+.dy-addsec button{position:absolute;top:-15px;background:#78aaff;color:#000;border:0;border-radius:999px;padding:6px 14px;font:800 13px Inter,sans-serif;cursor:pointer;opacity:.35;transition:opacity .15s;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+.dy-addsec button:hover,.dy-addsec:hover button{opacity:1}
+@media(hover:none){.dy-addsec button{opacity:.9}}
+.dy-emptypage{text-align:center;padding:90px 20px;color:#a9a9b0;font:16px Inter,sans-serif}.dy-emptypage h2{font:400 34px Anton,Impact,sans-serif;text-transform:uppercase;color:#fff;margin-bottom:8px}
+.dy-empty{color:#a9a9b0;font-style:italic}
+.dy-plus{position:absolute;z-index:9997;width:34px;height:34px;border-radius:50%;background:#f6c343;color:#111;border:2px solid #111;font:800 22px/1 Inter,sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.6)}
+.dy-bar .dy-addb{background:#f6c343;color:#111}.dy-bar .dy-del{color:#ff8080}.dy-bar .dy-drag{cursor:grab;touch-action:none}
+.dy-seg{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.dy-seg button{background:#26262b;color:#fff;border:1px solid #3a3a40;border-radius:9px;padding:8px 12px;font:700 13px Inter,sans-serif;cursor:pointer}.dy-seg button.on{background:#f6c343;color:#111;border-color:#f6c343}
+.dy-chk{display:flex;gap:8px;align-items:center;margin-top:12px;font-weight:700}
+.dy-items{display:grid;gap:6px;margin-top:6px;max-height:240px;overflow:auto}
+.dy-itm{display:flex;align-items:center;gap:6px;background:#0b0b0c;border:1px solid #2a2a2e;border-radius:8px;padding:4px}
+.dy-itm img{width:54px;height:40px;object-fit:cover;border-radius:5px}.dy-itm span{flex:1;font-size:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dy-itm img+button{margin-left:auto}.dy-itm button{background:#26262b;color:#fff;border:0;border-radius:6px;padding:5px 8px;cursor:pointer}
+.dy-addi{margin-top:8px;background:transparent;color:#f6c343;border:1px dashed #f6c343;border-radius:9px;padding:8px 12px;font:700 13px Inter,sans-serif;cursor:pointer}
+.dy-editing .bhero .txt{cursor:pointer}

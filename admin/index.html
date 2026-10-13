@@ -16,7 +16,7 @@
 <div id="app" hidden>
 <header class="tb">
   <div class="g"><span class="logo"><b>Dave</b> <i>Young</i></span><span id="demobadge" class="demob" hidden title="Demo mode: changes stay on this device and can't be published">DEMO</span>
-  <select id="page" aria-label="Page"><option value="index">Home</option><option value="live">Live</option><option value="about">About</option><option value="book">Book</option><option value="clips">Clips</option><option value="corporate">Corporate</option><option value="contact">Contact</option><option value="magician">The Unknown Magician</option><option value="shop">Shop</option></select></div>
+  <select id="page" aria-label="Page"></select><button id="pagesb" class="tbb">Pages</button></div>
   <div class="g"><div class="seg" role="group" aria-label="View"><button id="vdesk" class="on" title="Desktop view">🖥 Desktop</button><button id="vphone" title="Phone view">📱 Phone</button></div>
   <button id="undo" class="ib" title="Undo">↶</button><button id="redo" class="ib" title="Redo">↷</button></div>
   <div class="g"><span id="pill" class="pill"></span></div>
@@ -36,6 +36,8 @@
 <div><h3>Swap the poster or a photo</h3><p>Click any picture and choose <b>Replace picture</b>. Photos from your phone are shrunk automatically.</p></div>
 <div><h3>Move or hide a section</h3><p>Click inside a section and use <b>Section ▲ ▼</b> to move it, or <b>Hide</b>. Hidden sections stay faded in the editor so you can bring them back. For repeated things like testimonials, clips or shop items use <b>⧉ Copy</b> and <b>🗑</b>.</p></div>
 <div><h3>Check, then publish</h3><p><b>📱 Phone</b> shows how it looks on a mobile. <b>Preview</b> opens the site with your changes. When you're happy, tap the big red <b>Publish</b>. The real website updates in about a minute.</p></div>
+<div><h3>Add something new</h3><p>Click any heading or paragraph and tap the yellow <b>+</b> under it (or <b>+ Add below</b>) to add a heading, text, picture, button, video, gallery, quote, cards and more. Use the blue <b>+ Add section</b> lines between sections for ready-made layouts.</p></div>
+<div><h3>Add or change pages</h3><p>Tap <b>Pages</b> at the top. <b>+ New page</b> makes a new page from a ready-made layout and adds it to the menu. From there you can also rename, copy, delete, hide from the menu, change the menu order and the Google title and description.</p></div>
 <div><h3>Made a mistake?</h3><p>Use <b>↶ Undo</b>. Unpublished changes are kept even if you close the page. Every published version is saved, so your web person can always roll back.</p>
 <button class="btn ghost sm" id="discard">Throw away all unpublished changes</button></div>
 </div></div></div>
@@ -45,6 +47,30 @@
 <label>Main booking phone number</label><input id="mphone" inputmode="tel"><p class="hint">Updates the number on every page and every “Call” button.</p>
 <h3 style="margin-top:20px">Social media links</h3><p class="hint">Also editable by clicking the icons on any page.</p><div id="socs"></div><button class="btn gold sm" id="addsoc">+ Add a social link</button>
 <div class="row"><button class="btn red" data-close>Done</button></div></div></div>
+
+
+<div id="pickm" class="modal" hidden><div class="mc wide"><button class="x" data-close>✕</button>
+<h2 id="pickt">Add a block</h2><p class="hint" id="pickh">Pick what to add. Everything uses the site’s own fonts and colours.</p><div id="pickg" class="tiles"></div></div></div>
+
+<div id="pagesm" class="modal" hidden><div class="mc wide"><button class="x" data-close>✕</button>
+<h2>Pages &amp; menu</h2><p class="hint">The order here is the order in the menu. “Menu” shows the page in the top menu and footer, “Footer” only in the footer, “Hidden” nowhere (the page still exists).</p>
+<div id="plist"></div><div class="row"><button class="btn red" id="newpb">+ New page</button><button class="btn ghost" data-close>Done</button></div></div></div>
+
+<div id="newpm" class="modal" hidden><div class="mc"><button class="x" data-close>✕</button>
+<h2 id="newpt">New page</h2>
+<label for="np-title">Page title</label><input id="np-title" placeholder="e.g. Christmas Parties">
+<label for="np-label">Name in the menu</label><input id="np-label" placeholder="e.g. Parties">
+<label for="np-slug">Web address</label><div class="slug"><span id="np-base"></span><input id="np-slug" placeholder="christmas-parties"><span>.html</span></div><p class="hint">Made from the title automatically. Letters, numbers and dashes only.</p>
+<label for="np-tpl">Start from</label><select id="np-tpl"></select>
+<p id="np-msg" class="msg err"></p>
+<div class="row"><button class="btn red" id="np-go">Create page</button><button class="btn ghost" data-close>Cancel</button></div></div></div>
+
+<div id="seom" class="modal" hidden><div class="mc"><button class="x" data-close>✕</button>
+<h2>Search engine details</h2><p class="hint" id="seo-for"></p>
+<label for="seo-title">Title (shown in the browser tab and on Google)</label><input id="seo-title" maxlength="70">
+<label for="seo-desc">Description (the grey text under the title on Google)</label><textarea id="seo-desc" rows="3" maxlength="170"></textarea>
+<p class="hint">This preview site is hidden from Google on purpose; these details apply when the real site goes live.</p>
+<div class="row"><button class="btn red" id="seo-save">Save</button><button class="btn ghost" data-close>Cancel</button></div></div></div>
 
 <script>window.DY_SHELL=true;</script><script src="../content.js"></script><script src="shell.js"></script>
 </body></html>
