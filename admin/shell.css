@@ -95,3 +95,6 @@ button{font-family:inherit;cursor:pointer}button.btn{border:0}.btn.ghost{border:
   .side{position:fixed;left:0;right:0;bottom:0;width:auto;max-height:50vh;border-left:0;border-top:2px solid var(--gold);border-radius:16px 16px 0 0;z-index:25;box-shadow:0 -10px 30px rgba(0,0,0,.6)}
   .selbar{padding:5px 6px}.selbar button{padding:6px 8px;font-size:12.5px}.selbar .sg+.sg{border-left:0;padding-left:0}
 }
+
+.prow .mv .ph{display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:none;user-select:none;color:#f6c343;font-size:18px;padding:2px 6px}
+.tiles .tile{touch-action:manipulation;-webkit-touch-callout:none;user-select:none}

@@ -67,7 +67,13 @@ var pickCb=null;
 function pick(kind){return new Promise(function(ok){pickCb=ok;var g=$('#pickg');g.innerHTML='';var isSec=kind==='section',L=isSec?LIB.SECTIONS:LIB.BLOCKS;
   $('#pickt').textContent=isSec?'Add a section':'Add a block';$('#pickh').textContent=isSec?'Pick a ready-made layout. You can change all the words and pictures afterwards.':'Pick what to add. Everything uses the site’s own fonts and colours.';
   Object.keys(L).forEach(function(k){if(L[k].hidden)return;var t=document.createElement('button');t.type='button';t.className='tile';t.dataset.k=k;t.innerHTML=(isSec?'<span class="sk">'+(SK[k]||'<b></b>')+'</span>':'<i>'+L[k].icon+'</i>')+'<span>'+esc(L[k].label)+'</span>';
-    t.onclick=function(){$('#pickm').hidden=true;var cb=pickCb;pickCb=null;cb&&cb(k);};g.appendChild(t);});$('#pickm').hidden=false;});}
+    t.onclick=function(){$('#pickm').hidden=true;var cb=pickCb;pickCb=null;cb&&cb(k);};if(!isSec)pickDrag(t,k);g.appendChild(t);});$('#pickm').hidden=false;});}
+/* drag a block from the picker straight onto a spot on the page (mouse: just drag; touch: hold, then drag) */
+function pickDrag(t,k){t.oncontextmenu=function(e){e.preventDefault();};t.title='Click to add, or drag it onto the page';t.addEventListener('pointerdown',function(e){if(e.button>0)return;DYDrag.press(e,function(ev){var FI=null;try{FI=frame.contentWindow.DYI;}catch(_){}if(!FI)return;
+  $('#pickm').hidden=true;var off=function(){var r=frame.getBoundingClientRect();return {x:r.left+frame.clientLeft,y:r.top+frame.clientTop};};
+  DYDrag.begin({e:ev,doc:document,win:frame.contentWindow,off:off,label:'+ '+LIB.BLOCKS[k].label,
+    slots:function(lx,ly){var w=frame.contentWindow;if(lx<0||ly<0||lx>w.innerWidth||ly>w.innerHeight)return [];return FI.blockSlots();},
+    drop:function(d){var cb=pickCb;pickCb=null;FI.dropNew(k,d);cb&&cb(null);},cancel:function(){$('#pickm').hidden=false;toast('Drop it on the page where the yellow line shows.');}});});});}
 function closePick(){if(pickCb){var cb=pickCb;pickCb=null;cb(null);}}
 
 /* ---- draft, history, status ---- */
@@ -105,7 +111,7 @@ function start(){
 function slugify(s){return String(s||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,50);}
 function pagesModal(){var box=$('#plist');box.innerHTML='';var nav=navOf();
   nav.forEach(function(n,i){var cu=(c.custom||{})[n.key],ext=!!n.href,d=document.createElement('div');d.className='prow';
-    d.innerHTML='<div class="mv"><button data-a="up" title="Move up in the menu">▲</button><button data-a="down" title="Move down in the menu">▼</button></div>'+
+    d.innerHTML='<div class="mv"><span class="ph" title="Drag to change the menu order">⠿</span><button data-a="up" title="Move up in the menu">▲</button><button data-a="down" title="Move down in the menu">▼</button></div>'+
       '<div><input data-f="label" value="'+esc(n.label)+'" aria-label="Menu name"><small>'+(ext?'Link to '+esc(n.href):(cu?'Your page · '+esc(n.key)+'.html':'Built-in page · '+esc(n.key)+'.html'))+'</small></div>'+
       '<select data-f="show"><option value="menu">Menu</option><option value="footer">Footer only</option><option value="none">Hidden</option></select>'+
       '<div class="acts">'+(ext?'':'<button data-a="open">Open</button><button data-a="seo">Settings</button><button data-a="dup">Copy</button>')+(cu?'<button data-a="title">Rename</button><button data-a="del" class="del">Delete</button>':'')+'</div>';
@@ -120,6 +126,8 @@ function pagesModal(){var box=$('#plist');box.innerHTML='';var nav=navOf();
       if(a==='del')dialog({title:'Delete this page?',text:'“'+n.label+'” ('+n.key+'.html) will disappear from the website and the menu when you publish. You can undo this until then.',ok:'Delete page',danger:true}).then(function(r){if(!r.ok)return;
         DYE.change(function(x){delete x.custom[n.key];x.nav=ensureNav(x).filter(function(z){return z.key!==n.key;});delete x.pages[n.key];if(x.seo)delete x.seo[n.key];});if(page===n.key)setPage('index');else reload();pagesModal();toast('Page deleted.');});};
     d.querySelector('.mv').onclick=function(e){var a=e.target.dataset.a;if(!a)return;var j=i+(a==='up'?-1:1);if(j<0||j>=nav.length)return;DYE.change(function(x){var L=ensureNav(x);L.splice(j,0,L.splice(i,1)[0]);},{reload:true});pagesModal();};
+    d.querySelector('.ph').addEventListener('pointerdown',function(e){if(e.button>0)return;e.preventDefault();DYDrag.begin({e:e,doc:document,ghostFrom:d,slots:function(){return DYDrag.between([].slice.call(box.children),'y');},
+      drop:function(at){if(at===i||at===i+1)return;DYE.change(function(x){DYDrag.moveIdx(ensureNav(x),i,at);},{reload:true});pagesModal();toast('Menu order changed. ↶ Undo puts it back.');}});});
     box.appendChild(d);});
   $('#pagesm').hidden=false;}
 function navItem(k){return navOf().filter(function(n){return n.key===k;})[0];}
