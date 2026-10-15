@@ -1,3 +1,4 @@
+@font-face{font-family:'Anton Fb';src:local('Arial Narrow'),local('Arial Bold'),local('Arial');size-adjust:82%;ascent-override:115%;descent-override:30%;line-gap-override:0%}
 @font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:optional;src:url(assets/font_anton.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'Inter';font-style:normal;font-weight:400 800;font-display:optional;src:url(assets/font_inter.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 :root{--red:#d7141a;--red2:#a30d12;--gold:#f6c343;--bg:#0b0b0c;--panel:#151517;--line:#2a2a2e;--txt:#f3f3f3;--mut:#a9a9b0}
@@ -9,7 +10,7 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:1160px;margin:0 auto;padding:0 32px}
 header.top{position:relative;background:#000;border-bottom:3px solid var(--red)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
-.brand{font-family:Anton,Impact,sans-serif;font-size:34px;line-height:1;letter-spacing:.01em;text-transform:uppercase}
+.brand{font-family:Anton,'Anton Fb',Impact,sans-serif;font-size:34px;line-height:1;letter-spacing:.01em;text-transform:uppercase}
 .brand .d{color:#fff}.brand .y{color:var(--red)}
 .brand small{display:block;font-family:Inter;font-style:italic;font-weight:700;font-size:12px;color:var(--gold);letter-spacing:.08em;text-transform:none;margin-top:4px}
 nav.main{display:flex;gap:26px;align-items:center;font-weight:600;font-size:15px}
@@ -26,12 +27,12 @@ nav.main a.cur{color:var(--gold)}
 .ctabar p{font-weight:700;font-size:19px}
 .ctabar .acts{display:flex;gap:12px}
 section{padding:64px 0}
-h2.sec{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:46px;line-height:1.05;text-transform:uppercase;letter-spacing:.01em}
+h2.sec{font-family:Anton,'Anton Fb',Impact,sans-serif;font-weight:400;font-size:46px;line-height:1.05;text-transform:uppercase;letter-spacing:.01em}
 h2.sec .r{color:var(--red)} h2.sec .g{color:var(--gold)}
 .lead{color:var(--mut);font-size:17px;margin-top:10px;max-width:720px}
 .shows{margin-top:30px;border-top:1px solid var(--line)}
 .show{display:grid;grid-template-columns:150px 1fr 240px;align-items:center;gap:24px;padding:20px 6px;border-bottom:1px solid var(--line)}
-.date{font-family:Anton,Impact,sans-serif}.date .dm{display:flex;align-items:baseline;gap:8px}
+.date{font-family:Anton,'Anton Fb',Impact,sans-serif}.date .dm{display:flex;align-items:baseline;gap:8px}
 .date .dd{font-size:46px;line-height:1;color:#fff}.date .mm{font-size:22px;color:var(--red);text-transform:uppercase}
 .date .dow{display:block;font-family:Inter;font-weight:700;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
 .venue b{display:block;font-size:20px;font-weight:800}
@@ -49,7 +50,7 @@ h2.sec .r{color:var(--red)} h2.sec .g{color:var(--gold)}
 .ticks li:before{content:"★";position:absolute;left:0;color:var(--gold)}
 .credits{background:#000;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:46px 0}
 .credits .wrap{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:36px;align-items:start}
-.credits .big30{font-family:Anton,Impact,sans-serif;font-size:84px;line-height:.9;color:var(--red)}
+.credits .big30{font-family:Anton,'Anton Fb',Impact,sans-serif;font-size:84px;line-height:.9;color:var(--red)}
 .credits .big30 small{display:block;font-size:26px;color:#fff;letter-spacing:.02em}
 .credits h4{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:10px}
 .credits ul{list-style:none;display:grid;gap:6px;font-weight:600;font-size:17px}
@@ -74,12 +75,12 @@ footer .small{width:100%;color:#77777e;font-size:13px;border-top:1px solid #1f1f
 .bhero{position:relative;background:#000}
 .bhero img{display:block;width:100%;height:330px;object-fit:cover;object-position:center 30%;opacity:.55}
 .bhero .txt{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center}
-.bhero h1{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:64px;line-height:1;text-transform:uppercase}
+.bhero h1{font-family:Anton,'Anton Fb',Impact,sans-serif;font-weight:400;font-size:64px;line-height:1;text-transform:uppercase}
 .bhero h1 .r{color:var(--red)}
 .bhero p{font-size:19px;margin-top:12px;max-width:600px;font-weight:500}
 .types{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:-56px;position:relative;z-index:3}
 .type{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--red);border-radius:10px;padding:22px}
-.type h3{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:26px;text-transform:uppercase}
+.type h3{font-family:Anton,'Anton Fb',Impact,sans-serif;font-weight:400;font-size:26px;text-transform:uppercase}
 .type p{color:#cfcfd4;font-size:15px;margin-top:6px}
 .two{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:start}
 .reel{aspect-ratio:16/9;border-radius:10px;background:repeating-linear-gradient(45deg,#18181b 0 18px,#1d1d21 18px 36px);border:2px dashed #444;position:relative;display:flex;align-items:flex-end;justify-content:center}
