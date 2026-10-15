@@ -140,13 +140,13 @@ footer .mail .em a{color:var(--mut);text-decoration:underline;font-weight:600}
 /* ---- v3: hero dates, next show, ctabar, stat band, live hero, picker, shop grid ---- */
 html{scrollbar-gutter:stable}
 .hdates{padding-top:6px;padding-bottom:30px}
-.hd-t{font:900 12px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin:18px 0 12px}
+.hd-t{font:900 12px Inter,'Inter Fb',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin:18px 0 12px}
 .dchips{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 .dchip{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:linear-gradient(180deg,#1b1b1f,#0e0e10);border:1px solid #2c2c31;border-top:3px solid var(--red);text-align:center;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;min-width:0}
 .dchip:hover,.dchip:focus-visible{transform:translateY(-3px);border-color:var(--gold);box-shadow:var(--glow)}
 .dchip.next{border-color:var(--gold);border-top-color:var(--gold)}
 .dc-date{display:flex;justify-content:center;align-items:baseline;gap:6px;font-family:Anton,'Anton Fb',Impact,sans-serif;text-transform:uppercase;line-height:1}
-.dc-date .dow{font:800 11px Inter,sans-serif;letter-spacing:.12em;color:var(--mut)}
+.dc-date .dow{font:800 11px Inter,'Inter Fb',sans-serif;letter-spacing:.12em;color:var(--mut)}
 .dc-date .dd{font-size:28px;color:#fff}.dc-date .ord{font-size:.45em;vertical-align:super;color:var(--gold)}
 .dc-date .mm{font-size:17px;color:var(--red)}
 .dc-v{display:flex;flex-direction:column;align-items:center;min-width:0}.dc-v b{font-size:14.5px;line-height:1.2;overflow-wrap:anywhere}.dc-v small{color:var(--mut);font-size:12.5px;margin-top:2px}
@@ -162,8 +162,8 @@ html{scrollbar-gutter:stable}
 @media (max-width:600px){.ctabar .acts{flex:1 1 100%;flex-direction:column}.ctabar .btn{display:block;text-align:center}}
 .nextshow{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-top:26px;padding:24px 28px;border-radius:22px;background:linear-gradient(160deg,#1f1f23,#0f0f11);border:1px solid var(--gold);box-shadow:var(--glow)}
 .nx-date{font-family:Anton,'Anton Fb',Impact,sans-serif;text-align:center;line-height:1;min-width:92px;padding:12px 14px;border-radius:16px;background:#000;border:1px solid #2c2c31}
-.nx-date .dow{display:block;font:700 12px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.nx-date .dd{display:block;font-size:56px;color:#fff;margin-top:2px}.nx-date .ord{font-size:.4em;vertical-align:super;color:var(--gold)}.nx-date .mm{display:block;font-size:22px;color:var(--red);text-transform:uppercase}
-.nx-i{display:flex;flex-direction:column;gap:4px;min-width:0}.nx-k{font:900 11px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.nx-i b{font-size:clamp(22px,3vw,32px);line-height:1.15}.nx-i span:last-child{color:var(--mut)}
+.nx-date .dow{display:block;font:700 12px Inter,'Inter Fb',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.nx-date .dd{display:block;font-size:56px;color:#fff;margin-top:2px}.nx-date .ord{font-size:.4em;vertical-align:super;color:var(--gold)}.nx-date .mm{display:block;font-size:22px;color:var(--red);text-transform:uppercase}
+.nx-i{display:flex;flex-direction:column;gap:4px;min-width:0}.nx-k{font:900 11px Inter,'Inter Fb',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.nx-i b{font-size:clamp(22px,3vw,32px);line-height:1.15}.nx-i span:last-child{color:var(--mut)}
 .seeall{margin-top:18px}
 @media (max-width:700px){.nextshow{grid-template-columns:auto 1fr;padding:18px}.nx-a{grid-column:1/-1}.nx-a .btn{display:block;text-align:center}}
 .credits.stat{padding:clamp(34px,5vw,64px) 0}.credits.stat .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px 48px}
@@ -205,7 +205,7 @@ main.pgm{min-height:70vh}
 #live{padding-bottom:26px}#live+.svcs{padding-top:40px}#live .seeall{margin-top:14px}
 :where(img[width][height]){height:auto}
 .aboutt .big30{font-family:Anton,'Anton Fb',Impact,sans-serif;font-size:clamp(76px,12vw,150px);line-height:.9;background:linear-gradient(180deg,var(--gold),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px}
-.aboutt .big30 small{display:block;-webkit-text-fill-color:#fff;color:#fff;font:700 clamp(13px,1.5vw,17px)/1.3 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
+.aboutt .big30 small{display:block;-webkit-text-fill-color:#fff;color:#fff;font:700 clamp(13px,1.5vw,17px)/1.3 Inter,'Inter Fb',sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
 .aboutt .btnrow{gap:10px}
 /* v3.2 richer cards at tablet/phone: horizontal feature cards on tablet, pill links, gold accent */
 .svc .go{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:auto;padding:9px 16px;border-radius:999px;background:rgba(246,195,67,.12);border:1px solid rgba(246,195,67,.4);font-size:14px;max-width:100%}
