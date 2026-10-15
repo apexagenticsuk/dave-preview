@@ -279,7 +279,7 @@ D.addEventListener('click',function(e){var t=e.target;if(Date.now()-(window.__dy
   if(editing&&editing.contains(t))return;
   var nv=t.closest('[data-dy-nav]');if(nv){navPanel(nv);return;}
   var row=t.closest('[data-cms=shows] .show');if(row){showPanel(row,[].slice.call(row.parentNode.querySelectorAll('.show')).indexOf(row));return;}
-  var cm=t.closest('[data-dy-cms]');if(cm){finishEdit();clearSel();DYE.openShared(cm.getAttribute('data-dy-cms'));return;}
+  var cm=t.closest('[data-dy-cms]');if(cm){finishEdit();clearSel();DYE.toast('Opening Shared content: '+(CMSLAB[cm.getAttribute('data-cms')]||'this list')+' appear on more than one page, so you edit them once, here.');DYE.openShared(cm.getAttribute('data-dy-cms'));return;}
   if(t.closest('[data-dy-soc]')){finishEdit();var sb=blockOf(t);if(sb)select(sb);DYE.openSocials();return;}
   var vb=t.closest('.blk-video');if(vb){finishEdit();select(vb);optsPanel(vb.dataset.bid);return;}
   var img=t.closest('img[data-bi],img[data-dy-i]');if(img){imgPanel(img);return;}

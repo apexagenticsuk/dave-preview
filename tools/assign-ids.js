@@ -20,7 +20,7 @@ for(const pg of pages){await p.goto(`http://localhost:${port}/${pg}.html`);
    if(sc==='page'&&!el.matches('[data-cms]')&&ch.length>=2&&!secs.has(el)){const sig=ch[0].tagName+'.'+ch[0].className;let same=true;for(let j=1;j<ch.length;j++)if(ch[j].tagName+'.'+ch[j].className!==sig){same=false;break;}
      if(same&&!/^(I|BR|SOURCE|OPTION)$/.test(ch[0].tagName))add(el,'L'+(c.L++));}
   });
-  return [...document.querySelectorAll('*')].map(el=>[el.tagName.toLowerCase(),(ids.get(el)||[]).join(' ')]);});
+  return [...document.querySelectorAll('*')].filter(el=>!el.hasAttribute('data-gen')).map(el=>[el.tagName.toLowerCase(),(ids.get(el)||[]).join(' ')]);});
  let src=fs.readFileSync(`${dir}/${pg}.html`,'utf8');if(src.includes('data-dy="'))throw new Error(pg+' already has ids');
  let k=0,bad=0;src=src.replace(/<([a-zA-Z][a-zA-Z0-9-]*)(?=[\s>\/])/g,(m,tag)=>{const e=list[k++];if(!e||e[0]!==tag.toLowerCase()){bad++;return m;}return e[1]?`${m} data-dy="${e[1]}"`:m;});
  if(bad||k!==list.length)throw new Error(`${pg}: tag mismatch bad=${bad} k=${k} list=${list.length}`);

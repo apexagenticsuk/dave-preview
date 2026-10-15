@@ -33,6 +33,9 @@ const dt2=p.locator('#sharedm details.shrow[open] .shdate input[type=text]').fir
 ok(M+': typed date 10/12/2026 is accepted',await p.evaluate(()=>DYE.state().content.shows.some(s=>s.venue==='Ball Alley edited'&&s.date==='2026-12-10')));
 await dt2.fill('not a date');await dt2.dispatchEvent('change');
 ok(M+': nonsense date is refused with a message',await p.evaluate(()=>DYE.state().content.shows.some(s=>s.venue==='Ball Alley edited'&&s.date==='2026-12-10')&&/couldn/i.test(document.querySelector('#sharedm .shmsg.err').textContent)));
+await dt2.fill('FRI 4th Dec');await dt2.dispatchEvent('change');await ready();
+ok(M+': “FRI 4th Dec” is accepted (weekday ignored)',await p.evaluate(()=>DYE.state().content.shows.some(s=>s.venue==='Ball Alley edited'&&/^\d{4}-12-04$/.test(s.date))));
+ok(M+': date error message shows an example',await p.evaluate(()=>{const f=document.querySelector('#sharedm .shdate input[type=text]');return /Fri 4th Dec/.test(f.placeholder);}));
 ok(M+': date field also has a calendar picker',await p.evaluate(()=>!!document.querySelector('#sharedm .shdate input[type=date]')));
 await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
 for(let i=0;i<8&&await p.evaluate(()=>!document.querySelector('#undo').disabled);i++){await p.click('#undo');await p.waitForTimeout(200);}await ready();
