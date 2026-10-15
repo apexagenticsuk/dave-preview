@@ -58,7 +58,7 @@ Pages mark where a collection appears with a placeholder, e.g. `<div data-cms="t
 
 ## v3 notes (October 2026)
 
-- **Hero**: `assets/banner_hero.webp` is Dave's banner artwork without the baked-in date strip. Dates under it are HTML (`<div class="dchips" data-cms="showrail" data-view="strip">`), so editing a show in Shared content updates them. Alt text carries no dates.
+- **Hero**: `assets/banner_live*.webp` is Dave's current banner from daveyounglive.com, uncropped (dates are baked into the artwork). Dates under it are HTML (`<div class="dchips" data-cms="showrail" data-view="strip">`), so editing a show in Shared content updates them. Alt text carries no dates; if the banner is replaced, re-export the three widths and og image.
 - **One home per topic**: Home = teaser (Next show card via `data-cms="nextshow"` + link to Live). Live = the only full dates/tickets list and the only place the tour poster appears. About = the only full reviews (`testimonials data-place="all"`) and credits. Book = hub and enquiry; Corporate = clients, pitch and reel. Other pages carry only short pointers. `tests/dupes.js` fails on repeated images, items or regions across pages.
 - **siteUrl**: top-level `content.json` key; JSON-LD `url` values are derived from it by `siteBase(c)` in `content.js` (prerender bakes them).
 - **Reveal-on-scroll** has fallbacks (no IntersectionObserver, tall windows, reduced motion, timers) so content is never left hidden.

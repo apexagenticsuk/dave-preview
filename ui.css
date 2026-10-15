@@ -31,7 +31,7 @@ section{padding:clamp(48px,7vw,92px) 0}
 .hero.full:before{display:block;content:"";position:absolute;inset:-50px;background:var(--hero,none) center/cover no-repeat;filter:blur(38px) saturate(1.3) brightness(.5);z-index:-2;transform:scale(1.1)}
 .hero.full:after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(transparent,var(--bg));z-index:-1;pointer-events:none}
 .hero.full>a{display:block}
-.hero.full img{width:min(100%,1220px,max(640px,calc((100vh - 290px) * 2.12)));max-width:100%;height:auto;margin:0 auto;border-radius:clamp(0px,1vw,14px);box-shadow:0 30px 90px rgba(0,0,0,.7)}
+.hero.full img{width:min(100%,1220px,max(640px,calc((100vh - 250px) * 1.5)));max-width:100%;height:auto;margin:0 auto;border-radius:clamp(0px,1vw,14px);box-shadow:0 30px 90px rgba(0,0,0,.7)}
 .ctabar{position:relative;background:linear-gradient(90deg,#5a0709,var(--red) 50%,#5a0709);border-top:1px solid rgba(255,255,255,.18)}
 .ctabar p{font-family:Anton,'Anton Fb',Impact,sans-serif;font-weight:400;font-size:clamp(20px,2.4vw,30px);letter-spacing:.03em;text-transform:uppercase}
 /* dates rail + list */

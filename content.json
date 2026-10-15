@@ -710,15 +710,19 @@
   ],
   "siteUrl": "https://apexagenticsuk.github.io/dave-preview/",
   "dims": {
-    "assets/banner_hero.webp": [
+    "assets/banner_live.webp": [
       1537,
-      724
+      1023
     ],
-    "assets/banner_hero_800.webp": [
-      800,
-      377
+    "assets/banner_live_1100.webp": [
+      1100,
+      732
     ],
-    "assets/banner_xmass26.jpg": [
+    "assets/banner_live_700.webp": [
+      700,
+      466
+    ],
+    "assets/banner_live_og.jpg": [
       1200,
       799
     ],
