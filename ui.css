@@ -201,3 +201,5 @@ main.pgm{min-height:70vh}
 .closer{text-align:center;padding:clamp(48px,7vw,86px) 0;background:radial-gradient(700px 260px at 50% 0,rgba(215,25,32,.35),transparent 70%),#000;border-top:1px solid #1d1d20}
 .closer .lead{margin:10px auto 22px;max-width:520px}.closer .btnrow{justify-content:center}
 .closer .kicker{justify-content:center}
+/* v3.2 tighten home rhythm */
+#live{padding-bottom:26px}#live+.svcs{padding-top:40px}#live .seeall{margin-top:14px}
