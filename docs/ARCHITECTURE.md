@@ -33,7 +33,7 @@ New keys:
 - `clips[]`: `id`, `provider`, `vid`, `title`, `cap`, `thumb`, `place` (clips | featured | reel | archive | trailer)
 - `offers[]`: `key`, `img{src,alt}`, `href`
 
-Pages mark where a collection appears with a placeholder, e.g. `<div data-cms="testimonials" data-place="corporate">`; single strings use `data-bind="contact.email"` (text) and `data-bind-href`. `content.js` fills them at runtime; `tools/prerender.js` bakes the same output into the HTML so the pages work without script and for first paint.
+Pages mark where a collection appears with a placeholder, e.g. `<div data-cms="testimonials" data-place="corporate">`; single strings use `data-cms="contact"` (phone, `emails[]`, org, base, weddings link). `content.js` fills them at runtime; `tools/prerender.js` bakes the same output into the HTML so the pages work without script and for first paint.
 
 ## What moves where (duplicates removed)
 - Christmas party pitch ("Boring office Christmas parties…"): was on Home, Book, Corporate. Now only on Book (`#xmas`); Home and Corporate link to it via the services cards.
@@ -52,3 +52,6 @@ Pages mark where a collection appears with a placeholder, e.g. `<div data-cms="t
 
 ## Tests (`tests/`)
 `snap.js` (render, noindex, console), `drag.js` and `fix.js` (editor), `dupes.js` (same text on more than one page), `links.js` (links and images resolve), `shared.js` (shared content edits appear everywhere).
+
+## Build tools
+`tools/rebuild.sh` strips old ids, runs `tools/prerender.js` (bakes shared collections into the HTML) and `tools/assign-ids.js` (stable `data-dy` ids). Run it after changing a page or `content.json` by hand. The baked copy is only a first-paint/no-script fallback: `content.js` re-renders from `content.json` at load, so editor edits to shared content show everywhere without a rebuild; the baked HTML catches up on the next rebuild.
