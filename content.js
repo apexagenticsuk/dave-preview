@@ -166,7 +166,7 @@ function apply(c,R,res){
     all.forEach(function(x){if(ord.indexOf(x)<0)ord.splice(all.indexOf(x),0,x);});ord.forEach(function(id){document.body.insertBefore(R.by.page[id],foot);});}
   (P.hidden||[]).forEach(function(id){var el=R.by.page[id];if(el){if(EDITING)el.classList.add('dy-hidden');else el.style.display='none';}});
   document.querySelectorAll('[data-cms="shows"]').forEach(function(el){el.innerHTML=(c.shows||[]).map(showHTML).join('');});
-  document.querySelectorAll('[data-cms="socials"]').forEach(function(el){el.innerHTML=socialHTML(c.socials);});
+  document.querySelectorAll('[data-cms="socials"]').forEach(function(el){el.innerHTML=socialHTML(c[el.getAttribute('data-set')||'socials']);});
   buildNav(c);seo(c);heroBg();
   var ac=ACCENTS[(c.theme||{}).accent];if(ac&&(c.theme||{}).accent!=='red'){var ds=document.documentElement.style;ds.setProperty('--red',ac[0]);ds.setProperty('--red2',ac[1]);ds.setProperty('--red3',ac[2]);ds.setProperty('--strip',ac[3]);}
   var ct=c.contact||{},OLD='087 261 6317',OLDI='+353 (0)87 261 6317',OLDT='tel:+353872616317';

@@ -94,5 +94,23 @@
     }
   ],
   "site": {},
-  "pages": {}
+  "pages": {},
+  "contactSocials": [
+    {
+      "network": "facebook",
+      "url": "http://www.facebook.com/young1productions"
+    },
+    {
+      "network": "vimeo",
+      "url": "https://vimeo.com/channels/daveyoung"
+    },
+    {
+      "network": "instagram",
+      "url": "http://instagram.com/daveyoungcomedian"
+    },
+    {
+      "network": "x",
+      "url": "http://www.twitter.com/daveyounglive"
+    }
+  ]
 }
