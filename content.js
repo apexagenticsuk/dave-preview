@@ -84,6 +84,47 @@ function clean(html){var t=document.createElement('template');t.innerHTML=String
     walk(k);}else if(k.nodeType!==3)k.remove();});})(t.content);return t.innerHTML;}
 window.DY_clean=clean;
 
+
+/* ---------- shared collections (single source: content.json) ---------- */
+function ATTR(el,n,d){var v=el.getAttribute('data-'+n);return v==null||v===''?d:v;}
+function railHTML(s,i){var dt=new Date((s.date||'')+'T12:00:00Z'),ok=!isNaN(dt),d=ok?dt.getUTCDate():'?';
+  var act=s.soldOut?'<span class="rbtn sold">Sold out</span>':s.ticketUrl?'<a class="rbtn" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a>':s.phone?'<a class="rbtn alt" href="tel:'+esc(telOf(s.phone))+'">Call '+esc(s.phone)+'</a>':'<span class="rbtn sold">Tickets soon</span>';
+  return '<article class="rcard"><div class="rdate"><span class="dow">'+(ok?DOW[dt.getUTCDay()]:'')+'</span><span class="dd">'+d+(ok?'<sup class="ord">'+ORD(d)+'</sup>':'')+'</span><span class="mm">'+(ok?MON[dt.getUTCMonth()]:'')+'</span></div><div class="rinfo"><b>'+esc(s.venue)+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+'</span></div>'+act+'</article>';}
+function tcardHTML(t){var who=t.who?'<cite>'+clean(t.who)+'</cite>':'';return '<blockquote class="tcard'+(t.title?'':' short')+'">'+(t.title?'<b>'+clean(t.title)+'</b>':'')+'<p>'+clean(t.text)+'</p>'+who+'</blockquote>';}
+function clipHTML(k,lite){var url=k.provider==='vimeo'?'https://vimeo.com/'+k.vid:'https://www.youtube.com/watch?v='+k.vid;var th=esc(RES(k.thumb||''));
+  if(lite&&k.provider!=='vimeo')return '<div class="lite" data-yt="'+esc(k.vid)+'" data-title="'+esc(k.title)+'" style="--bg:url(\''+th+'\')"><button type="button" class="litebtn" aria-label="Play video: '+esc(k.title)+'"><span class="play" aria-hidden="true"></span></button><span class="lab">'+clean(k.title)+'</span></div>';
+  return '<a class="clip" href="'+url+'" target="_blank" rel="noopener"><div class="th"><img src="'+th+'" alt="" loading="lazy" width="480" height="360"><span class="play"></span>'+(k.provider==='vimeo'?'<span class="vmb">Vimeo</span>':'')+'</div><p>'+clean(k.title)+'</p>'+(k.cap?'<span class="cap">'+clean(k.cap)+'</span>':'')+'</a>';}
+function svcHTML(s){var ext=/^https?:/.test(s.url||'');return '<a class="svc" href="'+esc(safeUrl(s.url||'#'))+'"'+(ext?' target="_blank" rel="noopener"':'')+'><img src="'+esc(RES((s.img||{}).src||''))+'" alt="'+esc((s.img||{}).alt||'')+'" loading="lazy"><div class="svb"><h3>'+clean(s.title)+'</h3><p>'+clean(s.text)+'</p><span class="go">'+esc(s.cta||'Find out more')+(ext?' ↗':' →')+'</span></div></a>';}
+function creditsHTML(list,view){return (list||[]).map(function(g){var its=(g.items||[]).filter(function(x){return view!=='home'||x.home;});if(!its.length)return '';return '<div class="cg"><h4>'+esc(g.label)+'</h4><ul>'+its.map(function(x){return '<li>'+clean(x.t)+'</li>';}).join('')+'</ul></div>';}).join('');}
+function contactHTML(ct,view){var ems=(ct.emails||[]).filter(Boolean),tel='tel:'+telOf(ct.phone);
+  var mails=ems.map(function(m){return '<a href="mailto:'+esc(m)+'">'+esc(m)+'</a>';});
+  if(view==='foot')return '<span>Bookings &amp; enquiries</span><a href="'+esc(tel)+'">'+esc(ct.phone)+'</a><em class="em">'+mails.join(' · ')+'</em>';
+  return '<div class="crow"><span>Booking</span><a href="'+esc(tel)+'">'+esc(ct.phone)+'</a></div><div class="crow"><span>Email</span><b>'+mails.join('<br>')+'</b></div>'+(ct.base?'<div class="crow"><span>Based in</span><b>'+esc(ct.base)+'</b></div>':'')+(ct.weddingsUrl?'<div class="crow"><span>Weddings</span><a href="'+esc(safeUrl(ct.weddingsUrl))+'" target="_blank" rel="noopener">'+esc(String(ct.weddingsUrl).replace(/^https?:\/\//,''))+'</a></div>':'');}
+function shared(c,root){root=root||document;
+  root.querySelectorAll('[data-cms]').forEach(function(el){var k=el.getAttribute('data-cms'),v=ATTR(el,'view',''),h=null;
+    if(k==='shows')h=(c.shows||[]).map(showHTML).join('');
+    else if(k==='showrail')h=(c.shows||[]).map(railHTML).join('');
+    else if(k==='socials')h=socialHTML(c[ATTR(el,'set','socials')]);
+    else if(k==='testimonials'){var pl=ATTR(el,'place','');h=(c.testimonials||[]).filter(function(t){return t.place===pl;}).map(tcardHTML).join('');}
+    else if(k==='clips'){var pc=ATTR(el,'place','clips'),lim=+ATTR(el,'limit',0);var L=(c.clips||[]).filter(function(x){return pc==='featured'?x.featured:x.place===pc;});if(lim)L=L.slice(0,lim);h=L.map(function(x){return clipHTML(x,v==='lite');}).join('');}
+    else if(k==='services'){var ks=ATTR(el,'keys','').split(',').filter(Boolean);h=(c.services||[]).filter(function(s){return !ks.length||ks.indexOf(s.key)>-1;}).map(svcHTML).join('');}
+    else if(k==='clients'){var cl=c.clients||{};h=v==='roll'?'<img src="'+esc(RES((cl.roll||{}).src||''))+'" alt="'+esc((cl.roll||{}).alt||'')+'" loading="lazy">':(cl.tiles||[]).filter(function(x,i){return v!=='strip'||i<+ATTR(el,'limit',12);}).map(function(x){return '<div class="lg"><img src="'+esc(RES(x.src))+'" alt="'+esc(x.name)+'" title="'+esc(x.name)+'" loading="lazy"></div>';}).join('');}
+    else if(k==='credits')h=creditsHTML(c.credits,v);
+    else if(k==='offer'){var of=(c.offers||[]).filter(function(o){return o.key===ATTR(el,'key','win');})[0];h=of?'<a class="win" href="'+esc(safeUrl(of.href))+'"><img src="'+esc(RES((of.img||{}).src||''))+'" alt="'+esc((of.img||{}).alt||'')+'" width="1603" height="735" loading="lazy"></a>':'';}
+    else if(k==='contact')h=contactHTML(c.contact||{},v);
+    if(h!==null)el.innerHTML=h;});
+  markNext(c,root);}
+function markNext(c,root){var today=new Date().toISOString().slice(0,10),sh=c.shows||[],nx=-1;
+  sh.forEach(function(x,i){if(nx<0&&x.date&&x.date>=today)nx=i;});
+  (root||document).querySelectorAll('[data-cms="shows"],[data-cms="showrail"]').forEach(function(box){[].slice.call(box.children).forEach(function(r,i){var d=sh[i]&&sh[i].date;r.classList.toggle('next',i===nx);r.classList.toggle('past',!!d&&d<today);var o=r.querySelector('.nxt');if(o&&i!==nx)o.remove();if(i===nx&&!o){var t=document.createElement('span');t.className='nxt';t.textContent='Next show';r.appendChild(t);}});});}
+function ldJSON(c){var sh=(c.shows||[]).filter(function(s){return s.date;}),ct=c.contact||{};
+  var ev=sh.map(function(s){var m=String(s.time||'').match(/(\d{1,2})(?::(\d\d))?\s*(am|pm)/i),when=s.date;if(m){var hh=+m[1]%12+(/pm/i.test(m[3])?12:0);when+='T'+(hh<10?'0':'')+hh+':'+(m[2]||'00')+':00';}
+    var o={'@type':'Event',name:'Dave Young Unwrapped – Christmas Show',startDate:when,eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',eventStatus:s.soldOut?'https://schema.org/EventScheduled':'https://schema.org/EventScheduled',location:{'@type':'Place',name:s.venue,address:{'@type':'PostalAddress',addressLocality:s.town,addressCountry:'IE'}},performer:{'@type':'Person',name:'Dave Young'},organizer:{'@type':'Organization',name:ct.org||'Young1 Productions'}};
+    if(s.ticketUrl)o.offers={'@type':'Offer',url:s.ticketUrl,availability:s.soldOut?'https://schema.org/SoldOut':'https://schema.org/InStock'};return o;});
+  var graph=[{'@type':'Person',name:'Dave Young',jobTitle:'Comedian',url:location.origin+location.pathname.replace(/[^\/]*$/,''),sameAs:(c.socials||[]).map(function(x){return x.url;}).filter(Boolean)}].concat(ev);
+  return JSON.stringify({'@context':'https://schema.org','@graph':graph});}
+function ldApply(c){if(!/^(index|live)$/.test(PAGE)||EDITING||PREV)return;var s=document.getElementById('dy-ld');if(!s){s=document.createElement('script');s.type='application/ld+json';s.id='dy-ld';document.head.appendChild(s);}s.textContent=ldJSON(c);}
+
 /* ---------- blocks ---------- */
 function F(tag,cls,path,val,ph){val=val||'';if(!val&&!EDITING)return '';return '<'+tag+(cls?' class="'+cls+'"':'')+' data-bf="'+path+'"'+(ph?' data-ph="'+esc(ph)+'"':'')+'>'+clean(val)+'</'+tag+'>';}
 function IM(path,img,cls){img=img||{};return '<img'+(cls?' class="'+cls+'"':'')+' data-bi="'+path+'" src="'+esc(RES(img.src||'assets/portrait.jpg'))+'" alt="'+esc(img.alt||'')+'" loading="lazy">';}
@@ -165,8 +206,7 @@ function apply(c,R,res){
   if(P.order||Object.keys(R.newSecs).length){var all=R.sections.map(function(s){return R.secId.get(s);});ord=ord.filter(function(x){return all.indexOf(x)>-1;});
     all.forEach(function(x){if(ord.indexOf(x)<0)ord.splice(all.indexOf(x),0,x);});ord.forEach(function(id){document.body.insertBefore(R.by.page[id],foot);});}
   (P.hidden||[]).forEach(function(id){var el=R.by.page[id];if(el){if(EDITING)el.classList.add('dy-hidden');else el.style.display='none';}});
-  document.querySelectorAll('[data-cms="shows"]').forEach(function(el){el.innerHTML=(c.shows||[]).map(showHTML).join('');});
-  document.querySelectorAll('[data-cms="socials"]').forEach(function(el){el.innerHTML=socialHTML(c[el.getAttribute('data-set')||'socials']);});
+  window.DY_C=c;shared(c);ldApply(c);
   buildNav(c);seo(c);heroBg();
   var ac=ACCENTS[(c.theme||{}).accent];if(ac&&(c.theme||{}).accent!=='red'){var ds=document.documentElement.style;ds.setProperty('--red',ac[0]);ds.setProperty('--red2',ac[1]);ds.setProperty('--red3',ac[2]);ds.setProperty('--strip',ac[3]);}
   var ct=c.contact||{},OLD='087 261 6317',OLDI='+353 (0)87 261 6317',OLDT='tel:+353872616317';
@@ -175,7 +215,7 @@ function apply(c,R,res){
     var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),t;while((t=w.nextNode())){if(t.nodeValue.indexOf(OLDI)>-1)t.nodeValue=t.nodeValue.split(OLDI).join(intl);if(t.nodeValue.indexOf(OLD)>-1)t.nodeValue=t.nodeValue.split(OLD).join(ct.phone);}}
   if(file==='page'&&!(c.custom||{})[PAGE]&&!EDITING){var nf=document.createElement('section');nf.innerHTML='<div class="wrap"><h1 class="sec">Page not found</h1><p class="lead"><a class="ul" href="index.html">Back to the home page</a></p></div>';document.body.insertBefore(nf,foot);}
 }
-window.DY={heroBg:heroBg,showHTML:showHTML,socialHTML:socialHTML,telOf:telOf,esc:esc,blockHTML:blockHTML,ytId:ytId,PAGE:PAGE};
+window.DY={shared:shared,heroBg:heroBg,showHTML:showHTML,socialHTML:socialHTML,telOf:telOf,esc:esc,blockHTML:blockHTML,ytId:ytId,PAGE:PAGE};
 
 if(SHELL){var R=index();var st=SHELL.state();apply(st.content,R,SHELL.resolve);window.DY.R=R;
   var l=document.createElement('link');l.rel='stylesheet';l.href='admin/inline.css';document.head.appendChild(l);

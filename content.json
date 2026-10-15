@@ -1,11 +1,18 @@
 {
-  "version": "2026-10-15T00:00:00Z",
+  "version": "2026-10-15T18:00:00Z",
   "_help": "Edited by the visual editor at /admin/. 'pages' and 'site' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
   "theme": {
     "accent": "red"
   },
   "contact": {
-    "phone": "087 261 6317"
+    "phone": "087 261 6317",
+    "emails": [
+      "young1productions@gmail.com",
+      "info@daveyounglive.com"
+    ],
+    "org": "Young1 Productions",
+    "base": "Co. Wicklow",
+    "weddingsUrl": "https://theweddingcomedian.ie"
   },
   "shows": [
     {
@@ -111,6 +118,593 @@
     {
       "network": "x",
       "url": "http://www.twitter.com/daveyounglive"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "place": "home",
+      "title": "Amazing!",
+      "text": "“The funniest comedian I have ever seen, Dave had us laughing all night, he made our show.”",
+      "who": "Miriam O’Callaghan"
+    },
+    {
+      "id": "t2",
+      "place": "home",
+      "title": "",
+      "text": "“He’s Hilarious”",
+      "who": "Westlife"
+    },
+    {
+      "id": "t3",
+      "place": "home",
+      "title": "",
+      "text": "“Laugh out loud funny”",
+      "who": "Evening Herald"
+    },
+    {
+      "id": "t4",
+      "place": "home",
+      "title": "",
+      "text": "“Never saw him”",
+      "who": "Stevie Wonder"
+    },
+    {
+      "id": "t5",
+      "place": "about",
+      "title": "Funny Man!",
+      "text": "“Great to have Dave on the show, he always delivers!”",
+      "who": "Brendan O’Connor"
+    },
+    {
+      "id": "t6",
+      "place": "about",
+      "title": "Wow, what a performance!",
+      "text": "“Dave is simply tour de force!”",
+      "who": "Pat Kenny"
+    },
+    {
+      "id": "t7",
+      "place": "about",
+      "title": "",
+      "text": "“True gent, very good at his work!”",
+      "who": "Marcia Cross"
+    },
+    {
+      "id": "t8",
+      "place": "book",
+      "title": "He’s The One!",
+      "text": "“There’s only one man to make everyone laugh at any wedding, and that’s Dave Young!”",
+      "who": "Franc, from RTÉ’s Brides of Franc"
+    },
+    {
+      "id": "t9",
+      "place": "book",
+      "title": "Our Wedding Bash",
+      "text": "“At first I was very hesitant about booking a comedy act. I carefully asked around for someone with great interaction who could captivate and hold an audience. When 9 in 10 people recommended Dave I looked into his portfolio. I booked him within 5 minutes and it was the best investment of the whole day. He really delivered from start to finish… We wish you every success on your journey and hope to work with you in the near future.”",
+      "who": "Martin &amp; Ruth Byrne"
+    },
+    {
+      "id": "t10",
+      "place": "book",
+      "title": "Dave Young wins Best Wedding Entertainment",
+      "text": "“Professional and very very funny are just two ways of describing Dave Young and we are proud to award Dave winner of The Best Entertainer 2014. We sincerely congratulate Dave and wish him the very best for the future.”",
+      "who": "Keith Malone, M.D. of Mrs2Be"
+    },
+    {
+      "id": "t11",
+      "place": "corporate",
+      "title": "Naturally Hilarious!",
+      "text": "“Dave Young had us in stitches from the moment he arrived to the moment he danced off!”",
+      "who": "Alan Hughes"
+    },
+    {
+      "id": "t12",
+      "place": "corporate",
+      "title": "Gyproc Big Night Out",
+      "text": "“Sorry for late response, I needed a few days off after your performance! The shock factor! Hahaha I’m just kidding, it was a brilliant show so again thanks very much. Everybody was full of praise so can’t say better than that… I will definitely be checking out future dates as I think I’m overdue a night out with the girls… I have added the page on Facebook so it is giving me updates there in the live feeds.”",
+      "who": "Elaine Butler"
+    },
+    {
+      "id": "t13",
+      "place": "corporate",
+      "title": "Bold",
+      "text": "“We all had a ball, best night EVER! You were great, the MD had such a laugh with you on stage, didn’t think he’d get up!! Can’t wait to go see you again ;-) Thank you so much x”",
+      "who": "Jennifer Swanson"
+    },
+    {
+      "id": "t14",
+      "place": "corporate",
+      "title": "Xmas Show!",
+      "text": "“Been to see your Xmas shows as we have done every Christmas the last 10 years and our group love every minute of your show. There are traditions for everyone at Christmas, you’re one of ours. Couldn’t have a festive season without a full comedy-packed show from you (you’re our guilty pleasure). Will be booking Christmas this year, see ya there xxx”",
+      "who": "Channel O’Reilly"
+    },
+    {
+      "id": "t15",
+      "place": "magician",
+      "title": "",
+      "text": "“He’s Virtually Hilarious”",
+      "who": "Westlife"
+    },
+    {
+      "id": "t16",
+      "place": "magician",
+      "title": "",
+      "text": "“He’s promised to hypnotise me and give me a good feed!”",
+      "who": "Ryan Tubridy"
+    }
+  ],
+  "clips": [
+    {
+      "id": "c1",
+      "provider": "youtube",
+      "vid": "AM0VQBR10wU",
+      "title": "Dave Young: Laugh Harder",
+      "cap": "Welcome to DaveTube! Browse &amp; enjoy!",
+      "thumb": "assets/yt_AM0VQBR10wU.jpg",
+      "place": "clips",
+      "featured": true
+    },
+    {
+      "id": "c2",
+      "provider": "youtube",
+      "vid": "PFz5GcQkKrA",
+      "title": "“Springroll”",
+      "cap": "The truth why the Garth Brooks concerts were cancelled in Ireland",
+      "thumb": "assets/yt_PFz5GcQkKrA.jpg",
+      "place": "clips",
+      "featured": true
+    },
+    {
+      "id": "c3",
+      "provider": "vimeo",
+      "vid": "101860983",
+      "title": "“One For My Baby”",
+      "cap": "A slightly different side of Dave…",
+      "thumb": "assets/vm_101860983.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c4",
+      "provider": "youtube",
+      "vid": "0ADxHpZeuc8",
+      "title": "The Late Late Show",
+      "cap": "A humorous look at Ireland’s economy going “down the loo”",
+      "thumb": "assets/yt_0ADxHpZeuc8.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c5",
+      "provider": "vimeo",
+      "vid": "90889483",
+      "title": "The Miriam Show",
+      "cap": "Saturday Night with Miriam TV show",
+      "thumb": "assets/vm_90889483.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c6",
+      "provider": "youtube",
+      "vid": "1ouOVgKL3hA",
+      "title": "The Saturday Night Show",
+      "cap": "Almost anyone can be in a boyband… Almost!",
+      "thumb": "assets/yt_1ouOVgKL3hA.jpg",
+      "place": "clips",
+      "featured": true
+    },
+    {
+      "id": "c7",
+      "provider": "youtube",
+      "vid": "esRsdz9acDU",
+      "title": "Next year’s Eurovision?",
+      "cap": "Well, you never know!",
+      "thumb": "assets/yt_esRsdz9acDU.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c8",
+      "provider": "youtube",
+      "vid": "ZaVLjM8jfvE",
+      "title": "“That Word…”",
+      "cap": "Dave tells baby Lewis all about that word! A must see!",
+      "thumb": "assets/yt_ZaVLjM8jfvE.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c9",
+      "provider": "youtube",
+      "vid": "QFy3xutjPfs",
+      "title": "World Cup",
+      "cap": "We may not be in the World Cup this time, but we do keep our balls clean just in case!",
+      "thumb": "assets/yt_QFy3xutjPfs.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c10",
+      "provider": "youtube",
+      "vid": "a01n7iBN0-g",
+      "title": "The Box!",
+      "cap": "Dave Young’s send-up of magician David Blaine. Instead of starving in a glass box over the river Thames and being rushed to hospital, he ate and drank like a king over the river Liffey, raised thousands for the homeless and was rushed to the pub!",
+      "thumb": "assets/yt_a01n7iBN0-g.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c11",
+      "provider": "youtube",
+      "vid": "_IsjacLppAg",
+      "title": "Brides of Franc",
+      "cap": "Dave washes the wedding guests on the show!",
+      "thumb": "assets/yt__IsjacLppAg.jpg",
+      "place": "clips",
+      "featured": true
+    },
+    {
+      "id": "c12",
+      "provider": "youtube",
+      "vid": "5oR4PzvxBV0",
+      "title": "Dave doesn’t do ads…",
+      "cap": "…but if he did!",
+      "thumb": "assets/yt_5oR4PzvxBV0.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c13",
+      "provider": "youtube",
+      "vid": "VkX0qsI4dRY",
+      "title": "A Royal Story",
+      "cap": "Seriously funny! Enjoy!",
+      "thumb": "assets/yt_VkX0qsI4dRY.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c14",
+      "provider": "youtube",
+      "vid": "ghgLjrkeQxo",
+      "title": "Young at Heart I",
+      "cap": "In part one Dave finds out what keeps people young at heart, and is met with some very interesting reactions! Enjoy the fun…",
+      "thumb": "assets/yt_ghgLjrkeQxo.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c15",
+      "provider": "youtube",
+      "vid": "M_dL6NDuHUI",
+      "title": "Young at Heart II",
+      "cap": "In part two Dave meets a very special guest, in a very wet interview! Enjoy the fun…",
+      "thumb": "assets/yt_M_dL6NDuHUI.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c16",
+      "provider": "youtube",
+      "vid": "GfYTNskMC-E",
+      "title": "Young at Heart III",
+      "cap": "In part three Dave meets some of the funniest kids you never met, and they even teach him a new language! Enjoy the fun…",
+      "thumb": "assets/yt_GfYTNskMC-E.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c17",
+      "provider": "youtube",
+      "vid": "a_log35JPqk",
+      "title": "Young at Heart IV",
+      "cap": "In part four Dave turns a shopping centre into a swimming pool, and shock into laughter! Enjoy the fun…",
+      "thumb": "assets/yt_a_log35JPqk.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c18",
+      "provider": "youtube",
+      "vid": "Dgql0XlzjBs",
+      "title": "“Oliver!”",
+      "cap": "Dave Young stars as Fagin in the hit musical “Oliver!”",
+      "thumb": "assets/yt_Dgql0XlzjBs.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c19",
+      "provider": "youtube",
+      "vid": "KJqWIUoETfE",
+      "title": "I Dreamed a Dream…",
+      "cap": "Dave Young dreamed a dream he was the new Pope. Well, they did say they wanted someone Young! Enjoy… and God bless you!",
+      "thumb": "assets/yt_KJqWIUoETfE.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c20",
+      "provider": "youtube",
+      "vid": "Tbh_Un2L20A",
+      "title": "A Pantomime",
+      "cap": "Dave comes with a health warning and sometimes has to be sedated for the safety of his audience… Southern Comfort usually does the trick!",
+      "thumb": "assets/yt_Tbh_Un2L20A.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c21",
+      "provider": "youtube",
+      "vid": "gtPu61npsk4",
+      "title": "Jeremy Kyle",
+      "cap": "When you think about it, that show really is pretty much this! Dare to laugh!",
+      "thumb": "assets/yt_gtPu61npsk4.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c22",
+      "provider": "youtube",
+      "vid": "fY-O3SS2QzA",
+      "title": "Rainman",
+      "cap": "Well, it was a dry evening up till the end, then the weather changed… enjoy!",
+      "thumb": "assets/yt_fY-O3SS2QzA.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c23",
+      "provider": "youtube",
+      "vid": "7v-Y3R7GhYY",
+      "title": "TV Bites",
+      "cap": "Laughs from the past!",
+      "thumb": "assets/yt_7v-Y3R7GhYY.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c24",
+      "provider": "youtube",
+      "vid": "5PQGU2LuYhY",
+      "title": "Celebrity ICA Bootcamp",
+      "cap": "Best bits from start to the final",
+      "thumb": "assets/yt_5PQGU2LuYhY.jpg",
+      "place": "clips",
+      "featured": false
+    },
+    {
+      "id": "c25",
+      "provider": "youtube",
+      "vid": "eU0FoLZ-1d0",
+      "title": "Dave Young, corporate comedian",
+      "cap": "",
+      "thumb": "assets/yt_eU0FoLZ-1d0.jpg",
+      "place": "reel",
+      "featured": false
+    },
+    {
+      "id": "c26",
+      "provider": "youtube",
+      "vid": "5ovBtg0HpQM",
+      "title": "Dave Young Unwrapped – Christmas Show",
+      "cap": "",
+      "thumb": "assets/yt_5ovBtg0HpQM.webp",
+      "place": "trailer",
+      "featured": false
+    }
+  ],
+  "services": [
+    {
+      "key": "corporate",
+      "title": "Corporate events",
+      "text": "Stage act, comedian, after-dinner or motivational speaker. Your company, products and in-jokes worked into the night.",
+      "img": {
+        "src": "assets/poster_dave_young.jpg",
+        "alt": "Dave Young, corporate comedian"
+      },
+      "url": "corporate.html",
+      "cta": "Corporate comedian"
+    },
+    {
+      "key": "xmas",
+      "title": "Christmas parties",
+      "text": "Now booking Christmas 2026. A show built around your team.",
+      "img": {
+        "src": "assets/christmas25.jpg",
+        "alt": "The Xmas Party Comedian"
+      },
+      "url": "book.html#xmas",
+      "cta": "Christmas parties"
+    },
+    {
+      "key": "weddings",
+      "title": "Weddings",
+      "text": "Usually after the meal and before the band. Your stories, your family and the best man become part of the show.",
+      "img": {
+        "src": "assets/wedding_comedian.jpg",
+        "alt": "The Wedding Comedian, Dave Young"
+      },
+      "url": "https://theweddingcomedian.ie",
+      "cta": "theweddingcomedian.ie"
+    }
+  ],
+  "clients": {
+    "tiles": [
+      {
+        "name": "eir",
+        "src": "assets/logo_eir.png"
+      },
+      {
+        "name": "Facebook",
+        "src": "assets/logo_facebook.png"
+      },
+      {
+        "name": "Citibank",
+        "src": "assets/logo_citibank.png"
+      },
+      {
+        "name": "Ulster Bank",
+        "src": "assets/logo_ulsterbank.png"
+      },
+      {
+        "name": "Samsung",
+        "src": "assets/logo_samsung.png"
+      },
+      {
+        "name": "RTÉ",
+        "src": "assets/logo_rte.png"
+      },
+      {
+        "name": "Dell",
+        "src": "assets/logo_dell.png"
+      },
+      {
+        "name": "IBM",
+        "src": "assets/logo_ibm.png"
+      },
+      {
+        "name": "O2",
+        "src": "assets/logo_o2.png"
+      },
+      {
+        "name": "VHI",
+        "src": "assets/logo_vhi.png"
+      },
+      {
+        "name": "Electric Ireland",
+        "src": "assets/logo_electricireland.png"
+      },
+      {
+        "name": "AIB",
+        "src": "assets/logo_aib.png"
+      }
+    ],
+    "roll": {
+      "src": "assets/clients_corporate.jpg",
+      "alt": "Client logos: eir, Facebook, Citibank, Ulster Bank, Samsung, Dell, IBM, VHI, RTÉ, Electric Ireland, AIB, Google, Microsoft, Aviva, Virgin, O2, HP, Johnson & Johnson, Irish Cancer Society, Diageo, Barnardos, La Sala, BBC, Western Union, Groupon, Aer Lingus, Vodafone"
+    }
+  },
+  "credits": [
+    {
+      "key": "tv",
+      "label": "On TV",
+      "items": [
+        {
+          "t": "The Late Late Show",
+          "home": 1
+        },
+        {
+          "t": "The Saturday Night Show",
+          "home": 1
+        },
+        {
+          "t": "The Miriam Show",
+          "home": 1
+        },
+        {
+          "t": "The Breakfast Show (TV3)",
+          "home": 1
+        },
+        {
+          "t": "The Morning Show",
+          "home": false
+        },
+        {
+          "t": "Celebrity ICA Bootcamp (finalist)",
+          "home": false
+        },
+        {
+          "t": "Dave Young’s Young at Heart TV show",
+          "home": false
+        },
+        {
+          "t": "Brides of Franc",
+          "home": false
+        }
+      ]
+    },
+    {
+      "key": "film",
+      "label": "In the films",
+      "items": [
+        {
+          "t": "The Commitments",
+          "home": 1
+        },
+        {
+          "t": "The Van",
+          "home": 1
+        },
+        {
+          "t": "The Snapper",
+          "home": 1
+        },
+        {
+          "t": "Braveheart",
+          "home": 1
+        },
+        {
+          "t": "Michael Collins",
+          "home": 1
+        },
+        {
+          "t": "When Harvey Met Bob",
+          "home": 1
+        }
+      ]
+    },
+    {
+      "key": "stage",
+      "label": "On stage",
+      "items": [
+        {
+          "t": "Fagin in “Oliver!”, Tivoli Theatre",
+          "home": false
+        },
+        {
+          "t": "“The Rat Pack”, Olympia Theatre, Cork & Belfast",
+          "home": false
+        },
+        {
+          "t": "Meteor Music Awards, 3Arena (guest star)",
+          "home": false
+        },
+        {
+          "t": "Marbella Ball, Spain (annual guest star)",
+          "home": false
+        }
+      ]
+    },
+    {
+      "key": "awards",
+      "label": "Awards",
+      "items": [
+        {
+          "t": "Performing Arts Award for Outstanding Contribution to Comedy",
+          "home": false
+        },
+        {
+          "t": "Mrs2Be Best Entertainer 2014",
+          "home": false
+        },
+        {
+          "t": "Brides’ Choice Awards 2014, winner",
+          "home": false
+        }
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "key": "win",
+      "img": {
+        "src": "assets/win_tickets.webp",
+        "alt": "WIN Tickets to see Dave Young Live! Simply answer the following question: What’s the name of Dave’s latest show? Click here to email us your answer (along with your name and contact number)!"
+      },
+      "href": "mailto:info@daveyounglive.com?subject=Dave%20Young%20Competition"
     }
   ]
 }
