@@ -708,5 +708,231 @@
       "href": "mailto:info@daveyounglive.com?subject=Dave%20Young%20Competition"
     }
   ],
-  "siteUrl": "https://apexagenticsuk.github.io/dave-preview/"
+  "siteUrl": "https://apexagenticsuk.github.io/dave-preview/",
+  "dims": {
+    "assets/banner_hero.webp": [
+      1537,
+      724
+    ],
+    "assets/banner_hero_800.webp": [
+      800,
+      377
+    ],
+    "assets/banner_xmass26.jpg": [
+      1200,
+      799
+    ],
+    "assets/bio_dave_collage.png": [
+      500,
+      1480
+    ],
+    "assets/bio_face_1.jpg": [
+      744,
+      740
+    ],
+    "assets/bio_face_2.jpg": [
+      744,
+      740
+    ],
+    "assets/bio_face_3.jpg": [
+      736,
+      772
+    ],
+    "assets/celeb_billy_connolly.jpg": [
+      319,
+      199
+    ],
+    "assets/celeb_ruby_wax.jpg": [
+      900,
+      675
+    ],
+    "assets/celeb_westlife.jpg": [
+      900,
+      900
+    ],
+    "assets/christmas25.jpg": [
+      700,
+      984
+    ],
+    "assets/clients_corporate.jpg": [
+      779,
+      307
+    ],
+    "assets/contact_banner.webp": [
+      900,
+      450
+    ],
+    "assets/dave_banner_danger.jpg": [
+      1600,
+      609
+    ],
+    "assets/dave_tall.webp": [
+      700,
+      2072
+    ],
+    "assets/gallery_1.jpg": [
+      615,
+      612
+    ],
+    "assets/gallery_2.jpg": [
+      900,
+      675
+    ],
+    "assets/gallery_3.jpg": [
+      900,
+      675
+    ],
+    "assets/gallery_4.jpg": [
+      900,
+      675
+    ],
+    "assets/gallery_5.jpg": [
+      720,
+      960
+    ],
+    "assets/gallery_6.jpg": [
+      496,
+      437
+    ],
+    "assets/logo_aib.png": [
+      400,
+      517
+    ],
+    "assets/logo_citibank.png": [
+      400,
+      108
+    ],
+    "assets/logo_dell.png": [
+      400,
+      138
+    ],
+    "assets/logo_eir.png": [
+      300,
+      201
+    ],
+    "assets/logo_electricireland.png": [
+      251,
+      201
+    ],
+    "assets/logo_facebook.png": [
+      400,
+      225
+    ],
+    "assets/logo_ibm.png": [
+      400,
+      160
+    ],
+    "assets/logo_o2.png": [
+      256,
+      253
+    ],
+    "assets/logo_right.jpg": [
+      800,
+      569
+    ],
+    "assets/logo_rte.png": [
+      300,
+      159
+    ],
+    "assets/logo_samsung.png": [
+      400,
+      177
+    ],
+    "assets/logo_ulsterbank.png": [
+      400,
+      121
+    ],
+    "assets/logo_vhi.png": [
+      290,
+      159
+    ],
+    "assets/magician_1.jpg": [
+      550,
+      750
+    ],
+    "assets/magician_2.jpg": [
+      900,
+      1059
+    ],
+    "assets/magician_3.jpg": [
+      900,
+      594
+    ],
+    "assets/marquee_dates.webp": [
+      691,
+      720
+    ],
+    "assets/news_hardware_show_2017.jpg": [
+      900,
+      900
+    ],
+    "assets/photo_live_at.jpg": [
+      460,
+      276
+    ],
+    "assets/portrait_tour.jpg": [
+      640,
+      961
+    ],
+    "assets/poster_dave_young.jpg": [
+      700,
+      993
+    ],
+    "assets/shop_cd_seriously_frank.jpg": [
+      204,
+      200
+    ],
+    "assets/shop_cd_shush.jpg": [
+      204,
+      195
+    ],
+    "assets/shop_cd_wired_for_fun.jpg": [
+      362,
+      371
+    ],
+    "assets/shop_dvd_all_hushed_up.jpg": [
+      600,
+      603
+    ],
+    "assets/shop_dvd_live.jpg": [
+      600,
+      619
+    ],
+    "assets/shop_dvd_no_cutbacks.jpg": [
+      600,
+      622
+    ],
+    "assets/shop_dvd_seriously_funny.jpg": [
+      600,
+      618
+    ],
+    "assets/shop_dvd_up_till_now.jpg": [
+      900,
+      928
+    ],
+    "assets/shop_promo.webp": [
+      800,
+      824
+    ],
+    "assets/social_links_header.webp": [
+      1200,
+      480
+    ],
+    "assets/vm_101860983.jpg": [
+      640,
+      360
+    ],
+    "assets/vm_90889483.jpg": [
+      640,
+      360
+    ],
+    "assets/wedding_comedian.jpg": [
+      900,
+      619
+    ],
+    "assets/win_tickets.webp": [
+      1200,
+      550
+    ]
+  }
 }

@@ -57,6 +57,7 @@ var EDIT=QS.has('edit'),PREV=QS.get('preview')==='1',PAGE=file;
 if(file==='page'&&QS.get('p'))PAGE=QS.get('p');if((EDIT||PREV)&&QS.get('as'))PAGE=QS.get('as');
 var SHELL=null;try{if(window.parent!==window&&window.parent.DYE)SHELL=window.parent.DYE;}catch(e){}
 if(EDIT&&!SHELL){location.replace('admin/?page='+encodeURIComponent(PAGE));return;}
+var DIMS={};function AD(h){return String(h).replace(/<img\b([^>]*?)\ssrc="([^"]+)"([^>]*)>/g,function(m,a,s,b){if(/\swidth=/.test(a+b))return m;var d=DIMS[s];return d?'<img'+a+' src="'+s+'"'+b+' width="'+d[0]+'" height="'+d[1]+'">':m;});}
 var EDITING=!!SHELL,RES=function(s){return s;};
 function ORD(n){return (n%100>=11&&n%100<=13)?'th':({1:'st',2:'nd',3:'rd'}[n%10]||'th');}
 var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -117,7 +118,7 @@ function shared(c,root){root=root||document;
     else if(k==='credits')h=creditsHTML(c.credits,v);
     else if(k==='offer'){var of=(c.offers||[]).filter(function(o){return o.key===ATTR(el,'key','win');})[0];h=of?'<a class="win" href="'+esc(safeUrl(of.href))+'"><img src="'+esc(RES((of.img||{}).src||''))+'" alt="'+esc((of.img||{}).alt||'')+'" width="1603" height="735" loading="lazy"></a>':'';}
     else if(k==='contact')h=contactHTML(c.contact||{},v);
-    if(h!==null)el.innerHTML=h;});
+    if(h!==null)el.innerHTML=AD(h);});
   markNext(c,root);}
 function markNext(c,root){var today=new Date().toISOString().slice(0,10),sh=c.shows||[],nx=-1;
   sh.forEach(function(x,i){if(nx<0&&x.date&&x.date>=today)nx=i;});
@@ -160,7 +161,7 @@ function blockHTML(b,group){var t=b.type,h='',cls='blk blk-'+t,tag='div';
   default:return '';}
   return '<'+tag+' class="'+cls+'" data-bid="'+esc(b.id)+'" data-bgroup="'+esc(group)+'">'+h+'</'+tag+'>';}
 function secEl(id,s){var t=document.createElement('template'),inner=(s.blocks||[]).map(function(b){return blockHTML(b,'sec:'+id);}).join('');
-  t.innerHTML=s.bare?'<div class="blk-bare" data-nsec="'+esc(id)+'">'+inner+'</div>':'<section class="blk-sec'+(s.bg&&s.bg!=='plain'?' bg-'+s.bg:'')+'" data-nsec="'+esc(id)+'"><div class="wrap">'+inner+(EDITING&&!inner?'<p class="dy-empty">Empty section</p>':'')+'</div></section>';return t.content.firstChild;}
+  t.innerHTML=AD(s.bare?'<div class="blk-bare" data-nsec="'+esc(id)+'">'+inner+'</div>':'<section class="blk-sec'+(s.bg&&s.bg!=='plain'?' bg-'+s.bg:'')+'" data-nsec="'+esc(id)+'"><div class="wrap">'+inner+(EDITING&&!inner?'<p class="dy-empty">Empty section</p>':'')+'</div></section>');return t.content.firstChild;}
 
 /* ---------- stable ids from data-dy ---------- */
 function index(){
@@ -188,6 +189,7 @@ function buildNav(c){var items=c.nav;if(!items)return;var cur=PAGE;
 function seo(c){var s=(c.seo||{})[PAGE],cu=(c.custom||{})[PAGE];var title=(s&&s.title)||(cu&&cu.title?cu.title+' | Dave Young':'');if(title)document.title=title;
   if(s&&s.description!=null&&s.description!==''){var m=document.querySelector('meta[name=description]');if(!m){m=document.createElement('meta');m.name='description';document.head.appendChild(m);}m.content=s.description;}}
 function apply(c,R,res){
+  DIMS=c.dims||{};
   RES=res||function(s){return s;};
   var P=scopeEdits(c,'page'),lists=P.lists||{};
   Object.keys(lists).forEach(function(L){var par=R.by.page[L],items=R.items[L];if(!par||!items)return;
@@ -204,7 +206,7 @@ function apply(c,R,res){
     Object.keys(E.style||{}).forEach(function(id){var el=R.by[sc][id],v=E.style[id];if(!el||BSTY.indexOf(v)<0)return;if(!el.dataset.dyOs)el.dataset.dyOs=BSTY.filter(function(k){return el.classList.contains(k);})[0]||'red';BSTY.forEach(function(k){el.classList.remove(k);});el.classList.add(v);});});
   /* blocks added inside existing sections */
   Object.keys(P.ins||{}).forEach(function(an){var el=R.by.page[an];var L=P.ins[an]||[];if(!el||!el.parentNode||!L.length)return;
-    var html=L.map(function(b){return blockHTML(b,'ins:'+an);}).join(''),t=document.createElement('template');
+    var html=AD(L.map(function(b){return blockHTML(b,'ins:'+an);}).join('')),t=document.createElement('template');
     var par=el.parentElement;t.innerHTML=(par===document.body||par.matches('body>main')||R.secId.has(par))?'<div class="wrap blk-ins">'+html+'</div>':html;el.after(t.content);});
   /* new sections */
   var foot=document.querySelector('body>footer');R.newSecs={};

@@ -203,3 +203,4 @@ main.pgm{min-height:70vh}
 .closer .kicker{justify-content:center}
 /* v3.2 tighten home rhythm */
 #live{padding-bottom:26px}#live+.svcs{padding-top:40px}#live .seeall{margin-top:14px}
+:where(img[width][height]){height:auto}
