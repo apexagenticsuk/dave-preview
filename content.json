@@ -91,14 +91,6 @@
     {
       "network": "youtube",
       "url": "https://www.youtube.com/channel/UC69YekDNHcfEC4mzChaOf6A"
-    },
-    {
-      "network": "x",
-      "url": "http://www.twitter.com/daveyounglive"
-    },
-    {
-      "network": "vimeo",
-      "url": "https://vimeo.com/channels/daveyoung"
     }
   ],
   "site": {},

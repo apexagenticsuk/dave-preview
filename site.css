@@ -25,7 +25,7 @@ a.ul{text-decoration:underline;color:var(--gold)}
 .vid{width:100%;max-width:520px;aspect-ratio:1/1;border-radius:10px;background:#000;display:block;margin-left:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 .clients{background:#0f0f11;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .logos{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:26px}
-.lg{background:#fff;border-radius:8px;height:84px;display:flex;align-items:center;justify-content:center;padding:12px}
+.lg{background:#0b0b0d;border:1px solid #2a2a2e;border-radius:8px;height:84px;display:flex;align-items:center;justify-content:center;padding:12px}
 .lg img{max-width:100%;max-height:100%;object-fit:contain}
 .shopg{display:grid;grid-template-columns:420px 1fr;gap:48px;align-items:center}
 .shopg img{width:100%;display:block}
@@ -40,7 +40,7 @@ a.ul{text-decoration:underline;color:var(--gold)}
 .tcard p{font-style:italic;color:#e8e8e8;font-size:15.5px}
 .tcard cite{display:block;font-style:normal;color:var(--mut);font-size:13px;margin-top:10px;font-weight:700}
 .tlogos{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px;align-items:center}
-.tlogos img{height:56px;width:auto;background:#fff;border-radius:6px;padding:6px;object-fit:contain}
+.tlogos img{height:56px;width:auto;background:#0b0b0d;border:1px solid #2a2a2e;border-radius:6px;padding:6px;object-fit:contain}
 .posters{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-top:28px}
 .posters img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;display:block}
 .clientsimg{margin-top:24px;background:#000;border-radius:10px;padding:10px;text-align:center}
@@ -188,3 +188,4 @@ footer .mail .em .tag,footer .mail .tag{display:inline-block;width:auto;color:#1
 .corpnote{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(assets/bg_black_diamond.webp) center/cover;padding:30px;border-radius:14px}
 .clients{background:linear-gradient(rgba(0,0,0,.55),#000 85%),url(assets/bg_stage_mist.webp) top center/cover}
 .aboutimg img{max-width:300px;max-height:none;object-fit:initial}
+.lg img[src$="logo_citibank.png"],.lg img[src$="logo_vhi.png"]{filter:brightness(0) invert(1)}
