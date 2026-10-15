@@ -16,7 +16,6 @@ Status: preview, `noindex, nofollow` on every page, `robots.txt` disallows all.
 | `book.html` Book | Weddings, Christmas parties, corporate: how booking works, enquiry | services, testimonials (book), contact |
 | `corporate.html` Corporate | Corporate comedian pitch, client roll, reel | clients (full), clips (reel), testimonials (corporate), contact |
 | `clips.html` Clips | All videos | clips (all) |
-| `shop.html` Shop | DVDs and CDs | page content only |
 | `contact.html` Contact | Contact details, socials | contact, contactSocials, socials |
 | `magician.html` Unknown Magician | Separate act | contact |
 | `page.html?p=slug` | Pages created in the editor | blocks from the editor |
@@ -65,3 +64,5 @@ Pages mark where a collection appears with a placeholder, e.g. `<div data-cms="t
 - **Fonts** are self-hosted latin subsets (`assets/font_anton.woff2`, `assets/font_inter.woff2`, `@font-face` at the top of `style.css`, preloaded in each page head). No third-party font requests.
 - **Editor**: Move up/Move down buttons on every section; Undo/Redo labelled; Publish sits apart from Preview; Shared content rows stay open across changes (`OPEN` state in `admin/shared.js`); date field takes typed text (`DYE.parseDate`) plus a calendar picker. `tests/editor2.js` covers these.
 - `page.html` has an empty `<main class="pgm">` that custom-page sections are appended into.
+
+- **Shop removed (October 2026)**: `shop.html`, its images, nav/footer links and the Home shop teaser were removed in one commit. Restore with `git revert` of that commit.

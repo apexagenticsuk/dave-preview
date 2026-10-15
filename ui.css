@@ -137,7 +137,7 @@ footer .mail .em a{color:var(--mut);text-decoration:underline;font-weight:600}
 .aboutimg img{width:clamp(150px,20vw,240px);max-width:100%;height:auto;display:block;border-radius:14px}
 @media (max-width:760px){.aboutg{grid-template-columns:1fr}.aboutimg img{width:180px;margin:0 auto}}
 
-/* ---- v3: hero dates, next show, ctabar, stat band, live hero, picker, shop grid ---- */
+/* ---- v3: hero dates, next show, ctabar, stat band, live hero, picker ---- */
 html{scrollbar-gutter:stable}
 .hdates{padding-top:6px;padding-bottom:30px}
 .hd-t{font:900 12px Inter,'Inter Fb',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin:18px 0 12px}
@@ -181,8 +181,6 @@ html{scrollbar-gutter:stable}
 .pick{padding-top:34px}.pickrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
 .pk{display:flex;flex-direction:column;gap:4px;padding:18px 22px;border-radius:16px;background:linear-gradient(160deg,#1c1c20,#101012);border:1px solid #2c2c31;transition:transform .3s var(--ease),border-color .3s}.pk:hover{transform:translateY(-3px);border-color:var(--gold)}.pk b{font-size:20px}.pk span{color:var(--mut);font-size:14.5px}
 @media (max-width:700px){.pickrow{grid-template-columns:1fr}}
-.prods{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}.prods>.prod{flex:1 1 100%;min-width:0}
-@media (min-width:900px){.prods>.prod{flex:0 1 calc(33.333% - 14px);grid-template-columns:1fr;align-content:start}.prods>.prod img{max-height:300px;object-fit:contain;background:#000}}
 @media (max-width:600px){.ctabar .acts .btn:not(.call){display:none}.ctabar .acts{flex-direction:row}}
 .cta-clips{padding:clamp(34px,5vw,56px) 0;background:linear-gradient(90deg,rgba(215,25,32,.14),transparent 70%)}
 
@@ -190,7 +188,7 @@ html{scrollbar-gutter:stable}
 .rdate .mm,.dc-date .mm,.nx-date .mm{color:#ff5459}
 .tagband p .r,.tagband .r{color:#fff;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px}
 .nxt,.show .nxt,.dc-v .nxt{color:#111!important}
-section.party img,section.shopt img{height:auto}
+section.party img{height:auto}
 main.pgm{min-height:70vh}
 .opt .q{color:#ff5459}
 #xmas img,.clientsimg img{height:auto}

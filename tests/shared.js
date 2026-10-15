@@ -28,7 +28,7 @@ ok(M+': ...and shows it on the Magician page',/SHARED EDIT ONE/.test(await F().e
 // 4 contact email changes the footer on every page
 await p.evaluate(()=>DYE.openShared('contact'));await p.waitForSelector('#sharedm:not([hidden])');
 const ems=p.locator('#sharedm .shbody input[type=text]').nth(1);await ems.fill('hello@example.ie, two@example.ie');await ems.dispatchEvent('change');await ready();
-for(const pg of ['book','contact','about','shop']){await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);await go(pg);
+for(const pg of ['book','contact','about','corporate']){await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);await go(pg);
  ok(M+': new emails in the footer of '+pg,await F().evaluate(()=>[...document.querySelectorAll('footer .mail a[href^=mailto]')].map(a=>a.textContent).join()==='hello@example.ie,two@example.ie'));}
 ok(M+': contact card on Contact page shows both emails',await (async()=>{await go('contact');return F().evaluate(()=>[...document.querySelectorAll('[data-cms=contact][data-view=card] a[href^=mailto]')].map(a=>a.textContent).join()==='hello@example.ie,two@example.ie');})());
 // 5 show date: Home dates cards and Live list both change

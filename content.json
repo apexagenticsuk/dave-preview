@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-15T20:00:00Z",
+  "version": "2026-10-15T23:00:00Z",
   "_help": "Edited by the visual editor at /admin/. 'pages' and 'site' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
   "theme": {
     "accent": "red"
@@ -881,42 +881,6 @@
     "assets/poster_dave_young.jpg": [
       700,
       993
-    ],
-    "assets/shop_cd_seriously_frank.jpg": [
-      204,
-      200
-    ],
-    "assets/shop_cd_shush.jpg": [
-      204,
-      195
-    ],
-    "assets/shop_cd_wired_for_fun.jpg": [
-      362,
-      371
-    ],
-    "assets/shop_dvd_all_hushed_up.jpg": [
-      600,
-      603
-    ],
-    "assets/shop_dvd_live.jpg": [
-      600,
-      619
-    ],
-    "assets/shop_dvd_no_cutbacks.jpg": [
-      600,
-      622
-    ],
-    "assets/shop_dvd_seriously_funny.jpg": [
-      600,
-      618
-    ],
-    "assets/shop_dvd_up_till_now.jpg": [
-      900,
-      928
-    ],
-    "assets/shop_promo.webp": [
-      800,
-      824
     ],
     "assets/social_links_header.webp": [
       1200,

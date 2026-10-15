@@ -1,6 +1,6 @@
 const {chromium}=require(process.env.PW||'playwright');
 const base=process.argv[2]||'http://localhost:8765';
-const pages=(process.argv[3]||'index,live,about,book,clips,corporate,contact,magician,shop').split(',');
+const pages=(process.argv[3]||'index,live,about,book,clips,corporate,contact,magician').split(',');
 const norm=s=>s.replace(/\s+/g,' ').trim().toLowerCase();
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});const seen={};
 for(const pg of pages){const p=await b.newPage();await p.goto(`${base}/${pg}.html`,{waitUntil:'networkidle'});

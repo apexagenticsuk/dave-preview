@@ -5,8 +5,8 @@ var ICONS={"instagram": {"title": "Instagram", "color": "#E4405F", "svg": "<svg 
 window.DY_ICONS=ICONS;
 var ACCENTS={red:['#d7141a','#a30d12','#7d0a0e','#c8102e'],green:['#1d8a3c','#12602a','#0b3d1a','#1d8a3c'],purple:['#7b2cbf','#561d88','#33104f','#7b2cbf'],blue:['#1f6fe0','#154ea0','#0b2f66','#1f6fe0']};
 window.DY_ACCENTS=ACCENTS;
-var BUILTIN=['index','live','about','book','clips','corporate','contact','magician','shop'];
-var DEFAULT_NAV=[{key:'index',label:'Home',show:'menu'},{key:'live',label:'Live',show:'menu'},{key:'book',label:'Book Dave',show:'menu'},{key:'corporate',label:'Corporate',show:'menu'},{key:'clips',label:'Clips',show:'menu'},{key:'about',label:'About',show:'menu'},{key:'shop',label:'Shop',show:'menu'},{key:'weddings',label:'Weddings',href:'https://theweddingcomedian.ie',show:'menu'},{key:'contact',label:'Contact',show:'menu'},{key:'magician',label:'The Unknown Magician',show:'footer'}];
+var BUILTIN=['index','live','about','book','clips','corporate','contact','magician'];
+var DEFAULT_NAV=[{key:'index',label:'Home',show:'menu'},{key:'live',label:'Live',show:'menu'},{key:'book',label:'Book Dave',show:'menu'},{key:'corporate',label:'Corporate',show:'menu'},{key:'clips',label:'Clips',show:'menu'},{key:'about',label:'About',show:'menu'},{key:'weddings',label:'Weddings',href:'https://theweddingcomedian.ie',show:'menu'},{key:'contact',label:'Contact',show:'menu'},{key:'magician',label:'The Unknown Magician',show:'footer'}];
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function uid(p){return (p||'b')+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
 

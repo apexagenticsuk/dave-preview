@@ -27,8 +27,6 @@ a.ul{text-decoration:underline;color:var(--gold)}
 .logos{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:26px}
 .lg{background:#0b0b0d;border:1px solid #2a2a2e;border-radius:8px;height:84px;display:flex;align-items:center;justify-content:center;padding:12px}
 .lg img{max-width:100%;max-height:100%;object-fit:contain}
-.shopg{display:grid;grid-template-columns:420px 1fr;gap:48px;align-items:center}
-.shopg img{width:100%;display:block}
 .warn{margin-top:14px;font-family:Anton,'Anton Fb',Impact,sans-serif;font-size:24px;text-transform:uppercase;color:var(--gold)}
 .sq{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px;text-align:center}
 .sq p{font-size:22px;font-style:italic;color:#eee}.sq cite{display:block;font-style:normal;font-size:14px;color:var(--mut);font-weight:600;margin-top:4px}
@@ -65,15 +63,7 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
 .faces{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}.faces img{width:100%;border-radius:8px;display:block}
 .news{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin-top:22px}
 .news img{width:100%;border-radius:8px;display:block}.news h3{font-size:22px;margin:4px 0 8px}
-/* shop */
 .freebar{background:var(--gold);color:#111}.freebar .wrap{display:flex;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px;font-weight:800;flex-wrap:wrap}
-.prods{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:22px}
-.prod{display:grid;grid-template-columns:170px 1fr;gap:20px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;align-items:start}
-.prod img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:6px;display:block}
-.prod h3{font-size:19px}.price{display:inline-block;margin-top:6px;font-weight:800;color:var(--gold);font-size:18px}
-.prod p{font-size:14px;color:#cfcfd4;margin-top:8px}.prod .tracks{font-size:13px;color:var(--mut)}
-.prod .btn{margin-top:14px}
-.bhero.photo.shop img{right:6%}
 /* contact */
 .crow{display:grid;grid-template-columns:100px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center}
 .crow span{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);font-weight:700}
@@ -96,7 +86,7 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
 @media (max-width:600px){
  .mnav.open{display:grid;background:#000;border-top:1px solid #222}.mnav a{padding:14px 18px;border-bottom:1px solid #222;font-weight:700}.mnav a.cur{color:var(--gold)}
  body{padding-bottom:84px}
- .aboutg,.shopg,.bio{grid-template-columns:1fr;gap:24px}
+ .aboutg,.bio{grid-template-columns:1fr;gap:24px}
  .vid{margin:0 auto}
  .logos{grid-template-columns:repeat(3,1fr);gap:10px}.lg{height:64px;padding:8px}
  .sq{grid-template-columns:1fr;gap:12px}.sq p{font-size:18px}
@@ -106,9 +96,6 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
  .cr4{grid-template-columns:1fr 1fr!important}
  .gal,.faces{grid-template-columns:1fr 1fr;gap:10px}
  .news{grid-template-columns:1fr}
- .prods{grid-template-columns:1fr}
- .prod{grid-template-columns:110px 1fr;gap:14px;padding:14px}
- .prod .btn{display:block;text-align:center}
  .enq{grid-template-columns:1fr}
  .enq .btn{display:block;text-align:center;width:100%}
  .bio aside{max-width:240px;margin:0 auto}
@@ -120,7 +107,6 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
 .crow b,.crow a,footer .mail .em{overflow-wrap:anywhere;min-width:0}
 .bhero h1{overflow-wrap:break-word}
 @media (max-width:600px){.freebar .wrap{flex-direction:column;gap:2px}.bhero h1{font-size:36px}}
-.prod .pi{min-width:0}.prod p,.prod h3{overflow-wrap:anywhere}
 /* social brand icons (Simple Icons, CC0) */
 .socials{flex-wrap:wrap;gap:10px}
 .socials a{width:44px;height:44px;border-radius:50%;background:#1d1d20;border:1px solid #34343a;display:flex;align-items:center;justify-content:center;color:#f3f3f3;transition:background .15s,border-color .15s,color .15s,transform .15s}

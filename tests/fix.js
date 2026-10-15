@@ -52,13 +52,13 @@ let tipSeen=false;await drag(ctr(h),{x:fb.x+fb.width/2,y:fb.y+90},{hold:2500,mid
 console.log('DBG',tipSeen,JSON.stringify((await st(p)).pages.index)===before,await p.evaluate(()=>document.querySelector('#toast').textContent));ok(M+' 2: poster banner refuses with a red line + message',tipSeen&&JSON.stringify((await st(p)).pages.index)===before&&/poster/i.test(await p.evaluate(()=>document.querySelector('#toast').textContent)));
 await center(p,'[data-nsec="nA"]');if(!mobile){let r=await nb(p,'[data-nsec="nA"] [data-bid]',1);await p.mouse.move(r.x+30,r.y+10);}
 h=await nb(p,'[data-nsec="nA"] [data-bid] > .dy-dh.blk',1);
-const party=await F(p).evaluate(()=>{const s=document.querySelector('section.shopt');return [...(document.querySelector('body>main')||document.body).children].filter(e=>e.classList.contains('dy-sec')).indexOf(s);});
+const party=await F(p).evaluate(()=>{const s=document.querySelector('section.aboutt');return [...(document.querySelector('body>main')||document.body).children].filter(e=>e.classList.contains('dy-sec')).indexOf(s);});
 // put the party section right under A so both are on screen
 await p.evaluate(i=>{window.DYE.change(c=>{const P=c.pages.index;const o=P.order.filter(x=>x!=='nA');const pid=o[i>2?i-1:i];o.splice(o.indexOf(pid),0,'nA');P.order=o;},{reload:true});},party);await ready(p);
 await center(p,'[data-nsec="nA"]');if(!mobile){let r=await nb(p,'[data-nsec="nA"] [data-bid]',1);await p.mouse.move(r.x+30,r.y+10);}
-h=await nb(p,'[data-nsec="nA"] [data-bid] > .dy-dh.blk',1);let pr=await nb(p,'section.shopt img');
+h=await nb(p,'[data-nsec="nA"] [data-bid] > .dy-dh.blk',1);let pr=await nb(p,'section.aboutt img');
 await drag(ctr(h),{x:pr.x+pr.width/2,y:Math.min(pr.y+pr.height/2,fb.y+fb.height-90)},{mid:line(p)});await ready(p);c=await st(p);
-ok(M+' 2: block dropped on the image (shop teaser) section lands in it',Object.values(c.pages.index.ins||{}).flat().length===1&&c.pages.index.secs.nA.blocks.length===1);await undo(p);
+ok(M+' 2: block dropped on the image (Home bio teaser) section lands in it',Object.values(c.pages.index.ins||{}).flat().length===1&&c.pages.index.secs.nA.blocks.length===1);await undo(p);
 // 3 FAQ handle sits on the right, away from the open/close arrow; FAQ reorder works
 await center(p,'.blk-faq');if(!mobile){let r=await nb(p,'.blk-faq > details',0);await p.mouse.move(r.x+r.width/2,r.y+10);await p.waitForTimeout(150);}else{await F(p).tap('.blk-faq details:nth-child(2) p').catch(()=>{});await center(p,'.blk-faq');}
 const geo=await F(p).evaluate(()=>{const d=document.querySelector('.blk-faq > details'),h=d.querySelector('.dy-dh.itm').getBoundingClientRect(),r=d.getBoundingClientRect();return h.left>r.left+r.width/2;});ok(M+' 3: FAQ handle away from the arrow (right side)',geo);

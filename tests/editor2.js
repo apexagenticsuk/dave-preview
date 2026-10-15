@@ -54,7 +54,7 @@ ok(M+': Move up is disabled on the first section',await first.isDisabled());
 // no text selection / sideways scroll
 ok(M+': no text selection while editing (outside typing)',await F().evaluate(()=>getComputedStyle(document.body).userSelect==='none'));
 // browse all pages + Shared tabs
-for(const pg of ['live','about','book','corporate','contact','clips','shop','magician']){await go(pg);
+for(const pg of ['live','about','book','corporate','contact','clips','magician']){await go(pg);
  ok(M+': no sideways scroll in the editor on '+pg,await F().evaluate(()=>{const d=document.documentElement;return d.scrollWidth<=d.clientWidth+1;}));}
 for(const k of ['shows','testimonials','clips','services','clients','credits','offers','contact']){await p.evaluate(x=>DYE.openShared(x),k);await p.evaluate(()=>document.querySelectorAll('#sharedm details.shrow').forEach(d=>d.open=true));await p.waitForTimeout(250);}
 ok(M+': no console errors or failed requests',errs.length===0,JSON.stringify(errs.slice(0,4)));
