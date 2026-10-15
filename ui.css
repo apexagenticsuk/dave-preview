@@ -207,3 +207,13 @@ main.pgm{min-height:70vh}
 .aboutt .big30{font-family:Anton,'Anton Fb',Impact,sans-serif;font-size:clamp(76px,12vw,150px);line-height:.9;background:linear-gradient(180deg,var(--gold),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px}
 .aboutt .big30 small{display:block;-webkit-text-fill-color:#fff;color:#fff;font:700 clamp(13px,1.5vw,17px)/1.3 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
 .aboutt .btnrow{gap:10px}
+/* v3.2 richer cards at tablet/phone: horizontal feature cards on tablet, pill links, gold accent */
+.svc .go{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:auto;padding:9px 16px;border-radius:999px;background:rgba(246,195,67,.12);border:1px solid rgba(246,195,67,.4);font-size:14px;max-width:100%}
+.svc .svb{display:flex;flex-direction:column;flex:1;gap:0}
+@media (min-width:601px) and (max-width:900px){
+ .svcg{grid-template-columns:1fr;gap:20px}
+ .svc{display:grid;grid-template-columns:44% 1fr;min-height:250px}
+ .svc{grid-auto-rows:minmax(260px,auto)}.svc img{height:0;min-height:100%;object-position:center 18%}
+ .svc .svb{padding:26px 28px;justify-content:center;gap:2px}.svc .svb h3{font-size:28px}.svc .svb p{font-size:16px;line-height:1.55;margin:8px 0 18px}.svc .go{margin-top:0}
+}
+@media (max-width:600px){.svc .svb{padding:22px 22px 24px}.svc .svb h3{font-size:26px}.svc img{height:220px}.svcg{gap:18px}.svc{border-top:3px solid var(--gold)}}
