@@ -194,3 +194,5 @@ section.party img,section.shopt img{height:auto}
 main.pgm{min-height:70vh}
 .opt .q{color:#ff5459}
 #xmas img,.clientsimg img{height:auto}
+/* v3.2 ctabar collapses on phones: headline + call button only */
+@media (max-width:600px){.ctabar .wrap{flex-direction:row;flex-wrap:wrap;justify-content:center;text-align:center;gap:10px;padding-top:16px;padding-bottom:18px}.ctabar p{flex:0 0 100%;font-size:21px;line-height:1.15}.ctabar .acts{flex:0 0 auto;justify-content:center}.ctabar .btn.call{padding:11px 22px}}
