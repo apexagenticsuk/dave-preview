@@ -27,6 +27,8 @@ D.querySelectorAll(NAVSEL).forEach(function(a){a.setAttribute('data-dy-nav','');
 function secs(){return [].slice.call(D.body.children).filter(function(e){return R.secId.has(e);});}
 secs().forEach(function(s){s.classList.add('dy-sec');if(s.classList.contains('dy-hidden'))s.appendChild(mk('div','dy-hidlab','Hidden section · click it, then “Show”'));});
 D.querySelectorAll('[data-cms="socials"]').forEach(function(s){s.setAttribute('data-dy-soc','');});
+var CMSLAB={showrail:'Show dates',testimonials:'Testimonials',clips:'Videos',services:'Ways to book',clients:'Client logos',credits:'Credits',offer:'Competition graphic',contact:'Contact details'},CMSKEY={showrail:'shows',offer:'offers'};
+D.querySelectorAll('[data-cms]').forEach(function(s){var k=s.getAttribute('data-cms');if(CMSLAB[k]){s.setAttribute('data-dy-cms',CMSKEY[k]||k);s.setAttribute('data-dy-label','Shared: '+CMSLAB[k]+'. Click to edit everywhere');}});
 D.querySelectorAll('.blk-video').forEach(function(v){v.appendChild(mk('div','dy-vidcover','<span>▶ Video · click to select, then “Change video”</span>'));});
 function isNew(s){return !!(s&&s.hasAttribute('data-nsec'));}
 /* + Add section insert points: inside the top of the next section (never over the header/menu) */
@@ -277,6 +279,7 @@ D.addEventListener('click',function(e){var t=e.target;if(Date.now()-(window.__dy
   if(editing&&editing.contains(t))return;
   var nv=t.closest('[data-dy-nav]');if(nv){navPanel(nv);return;}
   var row=t.closest('[data-cms=shows] .show');if(row){showPanel(row,[].slice.call(row.parentNode.querySelectorAll('.show')).indexOf(row));return;}
+  var cm=t.closest('[data-dy-cms]');if(cm){finishEdit();clearSel();DYE.openShared(cm.getAttribute('data-dy-cms'));return;}
   if(t.closest('[data-dy-soc]')){finishEdit();var sb=blockOf(t);if(sb)select(sb);DYE.openSocials();return;}
   var vb=t.closest('.blk-video');if(vb){finishEdit();select(vb);optsPanel(vb.dataset.bid);return;}
   var img=t.closest('img[data-bi],img[data-dy-i]');if(img){imgPanel(img);return;}

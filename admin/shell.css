@@ -100,3 +100,11 @@ button{font-family:inherit;cursor:pointer}button.btn{border:0}.btn.ghost{border:
 .tiles .tile{touch-action:manipulation;-webkit-touch-callout:none;user-select:none}
 @media(max-width:760px){.selbar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}.selbar .sg{flex-wrap:nowrap;flex:none}.selbar .sh{white-space:nowrap}}
 #pagesm .pbar{position:sticky;bottom:-30px;z-index:2;background:var(--panel);padding:10px 0 12px;margin-bottom:-12px;border-top:1px solid var(--line)}
+
+.shtabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.shtab{background:#0f0f11;color:#fff;border:1px solid #3a3a40;border-radius:999px;padding:7px 13px;font:700 13px Inter,sans-serif;cursor:pointer}.shtab.on{background:var(--gold);color:#111;border-color:var(--gold)}
+.shbody .hint{margin:4px 0 10px}.shrow{background:#0f0f11;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px}
+.shrow>summary{cursor:pointer;font-weight:700;padding:4px 0}.shf{display:grid;gap:4px;margin:10px 0;font-size:13px;color:var(--mut)}.shf input[type=text],.shf input[type=url],.shf input[type=date],.shf select,.shf textarea{padding:9px;background:#18181b;border:1px solid #3a3a40;border-radius:8px;color:#fff;font:15px Inter,sans-serif;width:100%}
+.shf.chk{display:flex;align-items:center;gap:8px;color:#fff}.shimg{display:grid;grid-template-columns:64px 1fr auto;gap:8px;align-items:center}.shimg img{width:64px;height:48px;object-fit:cover;border-radius:6px;background:#000}.shimg img[hidden]{display:block;visibility:hidden}
+.shtools{display:flex;gap:6px;margin-top:6px}.shtools button{background:#26262b;color:#fff;border:1px solid #3a3a40;border-radius:8px;padding:6px 10px;font-weight:700;font-size:13px;cursor:pointer}.shtools [data-del]{color:#ff8080;margin-left:auto}
+@media(max-width:760px){.tbb .wide{display:none}}
+@media(max-width:760px){header.tb{max-width:100vw;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}header.tb::-webkit-scrollbar{display:none}}
