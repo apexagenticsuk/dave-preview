@@ -191,3 +191,6 @@ html{scrollbar-gutter:stable}
 .tagband p .r,.tagband .r{color:#fff;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px}
 .nxt,.show .nxt,.dc-v .nxt{color:#111!important}
 section.party img,section.shopt img{height:auto}
+main.pgm{min-height:70vh}
+.opt .q{color:#ff5459}
+#xmas img,.clientsimg img{height:auto}

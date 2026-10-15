@@ -220,7 +220,7 @@ function apply(c,R,res){
   if(ct.phone&&ct.phone!==OLD){var nt='tel:'+telOf(ct.phone),intl=telOf(ct.phone).replace(/^\+353(\d\d)(\d{3})(\d+)$/,'+353 (0)$1 $2 $3');
     document.querySelectorAll('a[href="'+OLDT+'"]').forEach(function(a){a.setAttribute('href',nt);});
     var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),t;while((t=w.nextNode())){if(t.nodeValue.indexOf(OLDI)>-1)t.nodeValue=t.nodeValue.split(OLDI).join(intl);if(t.nodeValue.indexOf(OLD)>-1)t.nodeValue=t.nodeValue.split(OLD).join(ct.phone);}}
-  if(file==='page'&&!(c.custom||{})[PAGE]&&!EDITING){var nf=document.createElement('section');nf.innerHTML='<div class="wrap"><h1 class="sec">Page not found</h1><p class="lead"><a class="ul" href="index.html">Back to the home page</a></p></div>';document.body.insertBefore(nf,foot);}
+  if(file==='page'&&!(c.custom||{})[PAGE]&&!EDITING){var nf=document.createElement('section');nf.innerHTML='<div class="wrap"><h1 class="sec">Page not found</h1><p class="lead"><a class="ul" href="index.html">Back to the home page</a></p></div>';var mm=document.querySelector('body>main');if(mm)mm.appendChild(nf);else document.body.insertBefore(nf,foot);}
 }
 window.DY={shared:shared,heroBg:heroBg,showHTML:showHTML,socialHTML:socialHTML,telOf:telOf,esc:esc,blockHTML:blockHTML,ytId:ytId,PAGE:PAGE};
 

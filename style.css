@@ -87,7 +87,7 @@ footer .small{width:100%;color:#77777e;font-size:13px;border-top:1px solid #1f1f
 .reel .play:before{left:31px;top:24px;border-left-width:26px;border-top-width:16px;border-bottom-width:16px}
 .reel .lab{margin-bottom:18px;background:rgba(0,0,0,.6);padding:6px 12px;border-radius:6px;font-size:13px;color:#ddd;font-weight:600}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
-.card h3{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:14px}
+.card h3,.card h2.ch{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:14px}
 .opts{display:grid;gap:10px}
 .opt{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px solid #2f2f34;border-radius:8px;background:#0f0f11}
 .opt b{font-size:16px}.opt span{display:block;color:var(--mut);font-size:13px}
