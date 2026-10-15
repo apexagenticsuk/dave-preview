@@ -24,7 +24,7 @@ D.body.classList.add('dy-editing');
 var NAVSEL='nav.main a:not(.btn), #mnav a, footer .flinks a';
 R.ids.forEach(function(o,el){if(!el.isConnected||el.closest(NAVSEL))return;if(o.t)el.setAttribute('data-dy-t','');if(o.i)el.setAttribute('data-dy-i','');});
 D.querySelectorAll(NAVSEL).forEach(function(a){a.setAttribute('data-dy-nav','');a.title='Click to see options for this menu link';});
-function secs(){return [].slice.call(D.body.children).filter(function(e){return R.secId.has(e);});}
+function secs(){return [].slice.call((D.querySelector('body>main')||D.body).children).filter(function(e){return R.secId.has(e);});}
 secs().forEach(function(s){s.classList.add('dy-sec');if(s.classList.contains('dy-hidden'))s.appendChild(mk('div','dy-hidlab','Hidden section · click it, then “Show”'));});
 D.querySelectorAll('[data-cms="socials"]').forEach(function(s){s.setAttribute('data-dy-soc','');});
 var CMSLAB={showrail:'Show dates',testimonials:'Testimonials',clips:'Videos',services:'Ways to book',clients:'Client logos',credits:'Credits',offer:'Competition graphic',contact:'Contact details'},CMSKEY={showrail:'shows',offer:'offers'};
@@ -34,7 +34,7 @@ function isNew(s){return !!(s&&s.hasAttribute('data-nsec'));}
 /* + Add section insert points: inside the top of the next section (never over the header/menu) */
 function addSecBars(){var list=secs(),foot=D.querySelector('body>footer');
   for(var i=0;i<=list.length;i++){(function(at){var b=mk('div','dy-addsec'+(at===list.length?' last':''),'<button title="Add a new section here">+ Add section here</button>');b.querySelector('button').onclick=function(e){e.stopPropagation();addSection(at);};
-    if(at<list.length)list[at].before(b);else if(foot)foot.before(b);else D.body.appendChild(b);})(i);}
+    if(at<list.length)list[at].before(b);else if(D.querySelector('body>main'))D.querySelector('body>main').appendChild(b);else if(foot)foot.before(b);else D.body.appendChild(b);})(i);}
   if(!list.length){var em=mk('div','dy-emptypage','<h2>This page is empty</h2><p>Tap <b>+ Add section here</b> to start building it from ready-made layouts.</p>');if(foot)foot.before(em);}}
 addSecBars();
 
@@ -42,7 +42,7 @@ addSecBars();
 var SB=DYE.selbar(),plus=mk('button','dy-plus','+'),sel=null,editing=null;plus.title='Add a block below';plus.hidden=true;D.body.appendChild(plus);
 function clearSel(){D.querySelectorAll('.dy-secsel').forEach(function(x){x.classList.remove('dy-secsel');});if(sel)sel.classList.remove('dy-sel');sel=null;plus.hidden=true;SB.hidden=true;SB.innerHTML='';}
 function select(el,target){if(sel)sel.classList.remove('dy-sel');D.querySelectorAll('.dy-secsel').forEach(function(x){x.classList.remove('dy-secsel');});sel=el;el.classList.add('dy-sel');var ss=sectionOf(el);if(ss)ss.classList.add('dy-secsel');buildBar(target||el);}
-function sectionOf(el){for(var p=el;p&&p!==D.body;p=p.parentElement)if(R.secId.has(p)&&p.parentElement===D.body)return p;return null;}
+function sectionOf(el){for(var p=el;p&&p!==D.body;p=p.parentElement)if(R.secId.has(p)&&(p.parentElement===D.body||p.parentElement.matches('body>main')))return p;return null;}
 function itemOf(el){for(var p=el;p&&p!==D.body;p=p.parentElement)if(R.listOf.has(p)&&p.isConnected&&!p.closest('[data-cms],[data-bid]'))return p;return null;}
 function linkOf(el){var a=el.closest('a');if(!a||a.closest('[data-dy-nav]'))return null;if(a.hasAttribute('data-bl'))return a;return R.ids.get(a)&&R.ids.get(a).a?a:null;}
 function blockOf(el){return el.closest('[data-bid]');}

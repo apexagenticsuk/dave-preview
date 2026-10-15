@@ -20,7 +20,7 @@ async function hover(p,sel,i=0){const r=await box(p,sel,i);await p.mouse.move(r.
 
 /* ===== desktop, mouse ===== */
 let p=await open(false);
-const order0=(await F(p).evaluate(()=>[...document.body.children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0])));
+const order0=(await F(p).evaluate(()=>[...(document.querySelector('body>main')||document.body).children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0])));
 // 1 section drag: 2nd section below the 4th
 const PI=await F(p).evaluate(()=>{const S=[...document.querySelectorAll('.dy-sec')];for(let i=1;i<S.length-1;i++){const a=S[i].getBoundingClientRect(),b=S[i+1].getBoundingClientRect();if(b.bottom-a.top<640)return i;}return 1;});
 await F(p).evaluate(i=>{const s=document.querySelectorAll('.dy-sec')[i];scrollTo({top:s.getBoundingClientRect().top+scrollY-30,behavior:'instant'});},PI);await p.waitForTimeout(200);
@@ -49,7 +49,7 @@ await undo(p);c=await st(p);ok('undo picker drop',!Object.values((c.pages.index|
 await p.evaluate(()=>{const L=window.DY_LIB;window.DYE.change(c=>{const P=c.pages.index=c.pages.index||{};P.secs=P.secs||{};
  P.secs.nA={blocks:[L.makeBlock(['heading','Section A']),L.makeBlock('text')]};P.secs.nB={blocks:[L.makeBlock(['heading','Section B']),L.makeBlock('text')]};
  const C=L.makeSection('cards');const Q=L.makeBlock('quotes');Q.items.forEach((q,i)=>q.who='Person '+(i+1));C.blocks.push(Q,L.makeBlock('gallery'));P.secs.nC=C;
- const o=[...document.querySelector('#frame').contentDocument.body.children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0]);o.splice(3,0,'nA','nB','nC');P.order=o;},{reload:true});});
+ const o=[...(document.querySelector('#frame').contentDocument.querySelector('body>main')||document.querySelector('#frame').contentDocument.body).children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0]);o.splice(3,0,'nA','nB','nC');P.order=o;},{reload:true});});
 await ready(p);
 const nb=async(sel,i=0)=>(await F(p).$$(sel))[i].boundingBox();
 const types=c=>k=>c.pages.index.secs[k].blocks.map(x=>x.type).join();
@@ -84,13 +84,13 @@ ok('desktop editor: no JS errors',!p.errs.length,JSON.stringify(p.errs));await p
 
 /* ===== phone, touch ===== */
 p=await open(true);
-const mo0=(await F(p).evaluate(()=>[...document.body.children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0])));
+const mo0=(await F(p).evaluate(()=>[...(document.querySelector('body>main')||document.body).children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0])));
 await F(p).evaluate(()=>document.querySelectorAll('.dy-sec > .dy-dh.sec')[2].scrollIntoView({block:'center',behavior:'instant'}));await p.waitForTimeout(200);
 h=await (await F(p).$$('.dy-sec >.dy-dh.sec'))[2].boundingBox();await tdrag(p,ctr(h),{x:200,y:ctr(h).y-260},0,12);await ready(p);
 c=await st(p);ok('touch: drag section with handle (no scroll fight)',c.pages.index&&c.pages.index.order&&c.pages.index.order.join()!==mo0.join());
 await undo(p);
 // touch: block + items need content
-await p.evaluate(()=>{const L=window.DY_LIB;window.DYE.change(c=>{const P=c.pages.index=c.pages.index||{};P.secs={nA:L.makeSection('gallery')};P.secs.nA.blocks.push(L.makeBlock('text'));const o=[...document.querySelector('#frame').contentDocument.body.children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0]);o.splice(2,0,'nA');P.order=o;},{reload:true});});await ready(p);
+await p.evaluate(()=>{const L=window.DY_LIB;window.DYE.change(c=>{const P=c.pages.index=c.pages.index||{};P.secs={nA:L.makeSection('gallery')};P.secs.nA.blocks.push(L.makeBlock('text'));const o=[...(document.querySelector('#frame').contentDocument.querySelector('body>main')||document.querySelector('#frame').contentDocument.body).children].filter(e=>e.classList.contains('dy-sec')).map(e=>e.getAttribute('data-dy').split(' ')[0]);o.splice(2,0,'nA');P.order=o;},{reload:true});});await ready(p);
 const nbm=async(sel,i=0)=>(await F(p).$$(sel))[i].boundingBox();
 await F(p).evaluate(()=>document.querySelectorAll('[data-nsec="nA"] [data-bid]')[2].scrollIntoView({block:'end',behavior:'instant'}));await p.waitForTimeout(200);
 h=await nbm('[data-nsec="nA"] [data-bid] > .dy-dh.blk',2);first=await nbm('[data-nsec="nA"] [data-bid]',1);

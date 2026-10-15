@@ -6,7 +6,7 @@ await p.route('**/content.js',r=>r.abort());
 for(const pg of pages){await p.goto(`http://localhost:${port}/${pg}.html`);
  const list=await p.evaluate(()=>{const n={site:{t:0,i:0,a:0,L:0,e:0},page:{t:0,i:0,a:0,L:0,e:0}},ids=new Map(),blocks=new Set(),secs=new Set();let s=0;
   const add=(el,id)=>{if(!ids.has(el))ids.set(el,[]);ids.get(el).push(id);};
-  [...document.body.children].forEach(e=>{if(e.matches('header,footer,.proto,.sticky,script,nav'))return;add(e,'s'+(s++));secs.add(e);});
+  [...((document.querySelector('body>main')||document.body).children)].forEach(e=>{if(e.matches('header,footer,.proto,.sticky,script,nav'))return;add(e,'s'+(s++));secs.add(e);});
   const inBlock=el=>{for(let q=el.parentElement;q;q=q.parentElement)if(blocks.has(q))return true;return false;};
   document.body.querySelectorAll('*').forEach(el=>{
    if(el.closest('svg')||el.closest('.proto,script,style')||(el.closest('[data-cms]')&&!el.matches('[data-cms]')))return;
