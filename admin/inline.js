@@ -308,6 +308,11 @@ function keep(){try{sessionStorage.setItem('dy-keep','1');}catch(e){}}
 function secPick(lx,ly){var z=DG.halves(secs(),lx,ly);if(z){z.x1=0;z.x2=window.innerWidth;}return z;}
 function dropSec(s,at){var o=secOrder(),id=R.secId.get(s),i=o.indexOf(id);if(!DG.moveIdx(o,i,at))return;keep();DYE.change(function(c){E(c,'page').order=o;},{reload:true,focus:id});DYE.toast('Section moved. ↶ Undo puts it back.');}
 secs().forEach(function(s){handle(s,'sec','Drag to move this section','⠿ Drag',function(e){DG.begin({e:e,doc:D,label:'Moving: '+textLabel(s,'Section'),pick:secPick,drop:function(at){dropSec(s,at);}});});});
+secs().forEach(function(s,i,all){var w=mk('div','dy-mv dy-ui'),up=mk('button','','▲ Move up'),dn=mk('button','','▼ Move down');up.type=dn.type='button';up.title='Move this section up';dn.title='Move this section down';
+  up.setAttribute('aria-label','Move this section up');dn.setAttribute('aria-label','Move this section down');up.disabled=i===0;dn.disabled=i===all.length-1;
+  [up,dn].forEach(function(b){b.addEventListener('pointerdown',function(e){e.stopPropagation();});});
+  up.onclick=function(e){e.preventDefault();e.stopPropagation();finishEdit(true);moveSec(s,-1);};dn.onclick=function(e){e.preventDefault();e.stopPropagation();finishEdit(true);moveSec(s,1);};
+  w.appendChild(up);w.appendChild(dn);s.appendChild(w);});
 /* blocks: within a section, between sections, into empty sections and into built sections (after their content).
    The section under the pointer decides where the block goes, so a drop always lands where you let go. */
 function listFor(P,g){var k=g.slice(4);if(g.indexOf('sec:')===0){P.secs[k].blocks=P.secs[k].blocks||[];return P.secs[k].blocks;}P.ins=P.ins||{};P.ins[k]=P.ins[k]||[];return P.ins[k];}

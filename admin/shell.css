@@ -107,4 +107,20 @@ button{font-family:inherit;cursor:pointer}button.btn{border:0}.btn.ghost{border:
 .shf.chk{display:flex;align-items:center;gap:8px;color:#fff}.shimg{display:grid;grid-template-columns:64px 1fr auto;gap:8px;align-items:center}.shimg img{width:64px;height:48px;object-fit:cover;border-radius:6px;background:#000}.shimg img[hidden]{display:block;visibility:hidden}
 .shtools{display:flex;gap:6px;margin-top:6px}.shtools button{background:#26262b;color:#fff;border:1px solid #3a3a40;border-radius:8px;padding:6px 10px;font-weight:700;font-size:13px;cursor:pointer}.shtools [data-del]{color:#ff8080;margin-left:auto}
 @media(max-width:760px){.tbb .wide{display:none}}
-@media(max-width:760px){header.tb{max-width:100vw;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}header.tb::-webkit-scrollbar{display:none}}
+@media(max-width:760px){header.tb{max-width:100vw}}
+
+/* v3 toolbar: words on Undo/Redo, Publish set apart from Preview */
+.ib{font-size:14px;padding:8px 12px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.tb .pubg{margin-left:auto;padding-left:22px;border-left:1px solid #3a3a40;gap:12px}
+.tb{row-gap:6px}
+@media(max-width:760px){.tb .pubg{margin-left:0;padding-left:10px}.ib{padding:7px 9px;font-size:13px}}
+
+@media(max-width:1560px){.logo{display:none}.seg .sl{display:none}.seg button{padding:8px 12px;font-size:15px}}
+@media(max-width:760px){.tb{gap:6px;padding:6px 8px}.tb .g:not(.tools),.tb .pubg{display:contents;border:0;padding:0}
+ .tb #pill{display:none}.tb .tbb,.tb .ib{padding:6px 8px;font-size:12.5px}.tb .ib{padding:6px 7px}.tb select{font-size:13px;padding:6px 8px;max-width:92px}
+ #demobadge{order:0}#page{order:1}#undo{order:2}#redo{order:3}#publish{order:4;padding:7px 14px;font-size:14px}
+ .tb .tools{order:5;flex:1 1 100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}.tb .tools::-webkit-scrollbar{display:none}.tb .tools .tbb{flex:none}}
+@media(min-width:761px){.tb{gap:6px 10px}.tb .g{gap:6px}.tb .pubg{padding-left:14px;gap:8px}.pub{padding:8px 20px;font-size:16px}.pill{font-size:12px;padding:5px 9px}.tbb{padding:8px 10px}}
+@media(min-width:761px){#page{max-width:150px}.pill{max-width:150px;overflow:hidden;text-overflow:ellipsis}}
+@media(min-width:761px){.tbb{padding:8px 9px;font-size:13.5px}.ib{padding:8px 10px;font-size:13.5px}}
+@media(max-width:760px){#demobadge{font-size:10px;padding:3px 5px}.tb select{max-width:80px}#publish{padding:7px 11px!important}.tb .ib{padding:6px 6px;font-size:12px}}

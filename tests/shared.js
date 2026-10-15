@@ -2,7 +2,7 @@ const {chromium}=require('playwright');
 const BASE=process.argv[2]||'http://localhost:8765';
 const res=[];const ok=(n,c,x)=>{res.push([n,!!c]);console.log((c?'PASS ':'FAIL ')+n+(x?' '+x:''));};
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
-for(const mobile of [false,true]){const M=mobile?'phone':'desktop';
+for(const mobile of (process.env.ONLY==='phone'?[true]:process.env.ONLY==='desktop'?[false]:[false,true])){const M=mobile?'phone':'desktop';
 const ctx=await b.newContext(mobile?{viewport:{width:390,height:844},isMobile:true,hasTouch:true}:{viewport:{width:1400,height:900}});
 await ctx.addInitScript(()=>{try{if(!sessionStorage.getItem('x')){localStorage.clear();localStorage.setItem('dy-mode','demo');sessionStorage.setItem('x','1');}}catch(e){}});
 const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/favicon|404|compute-pressure/.test(m.text()))errs.push(m.text());});
@@ -34,7 +34,7 @@ ok(M+': contact card on Contact page shows both emails',await (async()=>{await g
 // 5 show date: Home dates cards and Live list both change
 await p.evaluate(()=>DYE.openShared('shows'));await p.waitForSelector('#sharedm:not([hidden])');
 await p.evaluate(()=>document.querySelector('#sharedm details.shrow').open=true);
-const ve=p.locator('#sharedm details.shrow').first().locator('input[type=text]').first();await ve.fill('Test Venue Lucan');await ve.dispatchEvent('change');await ready();
+const ve=p.locator('#sharedm details.shrow').first().locator('label.shf:has(span:text-is("Venue")) input').first();await ve.fill('Test Venue Lucan');await ve.dispatchEvent('change');await ready();
 await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
 ok(M+': venue edit on Live list',/Test Venue Lucan/.test(await F().evaluate(()=>document.body.innerText))||true);
 await go('live');ok(M+': venue edit shows on Live',/Test Venue Lucan/.test(await F().evaluate(()=>document.querySelector('[data-cms=shows]').innerText)));
