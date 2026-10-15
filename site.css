@@ -174,6 +174,17 @@ footer .mail .em .tag,footer .mail .tag{display:inline-block;width:auto;color:#1
 .tagband{background:var(--red);padding:26px 0;text-align:center}.tagband p{font-family:Anton,Impact,sans-serif;font-size:clamp(20px,3.4vw,34px);letter-spacing:.04em;text-transform:uppercase;color:#fff}.tagband .r{color:var(--gold)}
 @media (max-width:900px){.livehead{grid-template-columns:1fr;gap:18px}.marq{width:min(300px,80%)}}
 .party p.bookline{font-size:15px;color:#cfcfd4}
-.aboutimg img{display:block;width:100%;max-width:380px;max-height:520px;object-fit:cover;object-position:top;border-radius:14px;margin-left:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}@media (max-width:900px){.aboutimg img{margin:0 auto;max-width:300px}}
+.aboutimg img{display:block;width:100%;max-width:380px;border-radius:14px;margin-left:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}@media (max-width:900px){.aboutimg img{margin:0 auto;max-width:300px}}
 .date .dd .ord{font-family:Inter,sans-serif;font-weight:800;font-size:.38em;vertical-align:top;position:relative;top:.2em;margin-left:1px;color:var(--red);text-transform:lowercase}
 .opt .tag.ask,.tag.ask{background:#2a2a30;color:#cfcfd4;font-weight:600;letter-spacing:.02em;font-size:11px}
+/* his sitewide banner, shown uncropped (full 1537x1023 file incl. date strip and ribbon) */
+.hero.full{height:auto;overflow:visible;background:#000;padding:0}
+.hero.full:before{display:none}
+.hero.full img{display:block;position:static;width:100%;max-width:1100px;height:auto;margin:0 auto;object-fit:initial}
+.socban{background:#000;padding:0}.sbi{position:relative;width:100%;max-width:885px;margin:0 auto}.sbi img{display:block;width:100%;height:auto}.sbi .hot{position:absolute;display:block}
+.win{display:block;max-width:520px;margin:28px auto 0}.win img{display:block;width:100%;height:auto;border-radius:10px;transition:transform .2s}.win:hover img{transform:scale(1.02)}
+.vidwrap{max-width:860px;margin:28px auto 0;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 20px 60px rgba(0,0,0,.6)}.vidwrap iframe{width:100%;height:100%;border:0;display:block}
+.fbanner{width:100%;display:flex;justify-content:center}.fbanner img{display:block;width:100%;max-width:380px;height:auto}
+.corpnote{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(assets/bg_black_diamond.webp) center/cover;padding:30px;border-radius:14px}
+.clients{background:linear-gradient(rgba(0,0,0,.55),#000 85%),url(assets/bg_stage_mist.webp) top center/cover}
+.aboutimg img{max-width:300px;max-height:none;object-fit:initial}
