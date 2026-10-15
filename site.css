@@ -174,3 +174,4 @@ footer .mail .em .tag,footer .mail .tag{display:inline-block;width:auto;color:#1
 .tagband{background:var(--red);padding:26px 0;text-align:center}.tagband p{font-family:Anton,Impact,sans-serif;font-size:clamp(20px,3.4vw,34px);letter-spacing:.04em;text-transform:uppercase;color:#fff}.tagband .r{color:var(--gold)}
 @media (max-width:900px){.livehead{grid-template-columns:1fr;gap:18px}.marq{width:min(300px,80%)}}
 .party p.bookline{font-size:15px;color:#cfcfd4}
+.aboutimg img{display:block;width:100%;max-width:380px;max-height:520px;object-fit:cover;object-position:top;border-radius:14px;margin-left:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}@media (max-width:900px){.aboutimg img{margin:0 auto;max-width:300px}}
