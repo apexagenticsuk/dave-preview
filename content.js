@@ -43,7 +43,8 @@ var SECTIONS={
  dates:{label:'Show dates',blocks:[['heading','Live <span class="g">dates</span>'],'shows']},
  cta:{label:'Call-to-action band',bg:'red',blocks:['cta']},
  faq:{label:'FAQ',blocks:[['heading','Questions'],'faq']},
- blank:{label:'Heading + text',blocks:['heading','text']}
+ blank:{label:'Heading + text',blocks:['heading','text']},
+ empty:{label:'Blank section',blocks:[]}
 };
 var PAGE_TEMPLATES={blank:{label:'Blank (heading + text)',secs:['blank']},standard:{label:'Standard: banner, text + image, booking band',secs:['hero','textImage','cta']},gallery:{label:'Gallery page',secs:['hero','gallery','cta']},faq:{label:'FAQ page',secs:['hero','faq','cta']},dates:{label:'Show dates page',secs:['hero','dates','cta']},cards:{label:'Services (cards) page',secs:['hero','cards','testimonials','cta']}};
 function makeBlock(k){var d=k,txt=null;if(Array.isArray(k)){d=k[0];txt=k[1];}var b=BLOCKS[d].make();if(txt)b.text=txt;b.id=uid('b');return b;}

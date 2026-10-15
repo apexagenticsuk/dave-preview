@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": "2026-10-15T00:00:00Z",
   "_help": "Edited by the visual editor at /admin/. 'pages' and 'site' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
   "theme": {
     "accent": "red"

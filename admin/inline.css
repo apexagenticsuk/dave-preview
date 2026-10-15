@@ -47,3 +47,7 @@
 .dy-sec:hover>.dy-dh.sec,[data-bid]:hover>.dy-dh.blk,.dy-ihost:hover>.dy-dh.itm,.dy-secsel .dy-dh,.dy-sel>.dy-dh{opacity:1;pointer-events:auto}
 @media(hover:none){.dy-dh.sec,.dy-dh.blk{opacity:.9;pointer-events:auto}}
 .dy-editing nav.main a:not(.btn){-webkit-touch-callout:none}
+.dy-dh.itm.r{left:auto;right:4px}
+.dy-editing nav.main a.dy-navh{position:relative}
+.dy-dh.nav{top:-17px;left:50%;transform:translateX(-50%);min-width:22px;height:16px;font-size:11px;border-radius:5px;padding:0 4px;opacity:.85;pointer-events:auto}
+.dy-editing nav.main a.dy-navh:hover>.dy-dh.nav{opacity:1}
