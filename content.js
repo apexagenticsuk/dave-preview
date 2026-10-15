@@ -58,12 +58,13 @@ if(file==='page'&&QS.get('p'))PAGE=QS.get('p');if((EDIT||PREV)&&QS.get('as'))PAG
 var SHELL=null;try{if(window.parent!==window&&window.parent.DYE)SHELL=window.parent.DYE;}catch(e){}
 if(EDIT&&!SHELL){location.replace('admin/?page='+encodeURIComponent(PAGE));return;}
 var EDITING=!!SHELL,RES=function(s){return s;};
+function ORD(n){return (n%100>=11&&n%100<=13)?'th':({1:'st',2:'nd',3:'rd'}[n%10]||'th');}
 var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function telOf(p){var d=String(p||'').replace(/[^\d+]/g,'');if(/^08\d{7,8}$/.test(d))return '+353'+d.slice(1);return d;}
 function safeUrl(u){u=String(u||'');return /^\s*(javascript|data):/i.test(u)?'#':u;}
 function showHTML(s){
   var dt=new Date((s.date||'')+'T12:00:00Z'),ok=!isNaN(dt);
-  var h='<div class="show"><div class="date"><span class="dow">'+(ok?DOW[dt.getUTCDay()]:'')+'</span><div class="dm"><span class="dd">'+(ok?dt.getUTCDate():'?')+'</span><span class="mm">'+(ok?MON[dt.getUTCMonth()]:'')+'</span></div></div>\n';
+  var h='<div class="show"><div class="date"><span class="dow">'+(ok?DOW[dt.getUTCDay()]:'')+'</span><div class="dm"><span class="dd">'+(ok?dt.getUTCDate()+'<sup class="ord">'+ORD(dt.getUTCDate())+'</sup>':'?')+'</span><span class="mm">'+(ok?MON[dt.getUTCMonth()]:'')+'</span></div></div>\n';
   h+='<div class="venue"><b>'+esc(s.venue)+(s.note?' <span class="tag">'+esc(s.note)+'</span>':'')+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+'</span></div>\n<div class="act">';
   if(s.soldOut) h+='<span class="btn sold">Sold out</span><span class="via">'+esc(s.ticketSite||'Thanks everyone!')+'</span>';
   else if(s.ticketUrl) h+='<a class="btn red" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a><span class="via">'+esc(s.ticketSite||'Tickets')+'</span>';

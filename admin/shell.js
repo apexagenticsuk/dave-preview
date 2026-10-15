@@ -110,7 +110,7 @@ function start(){
   var p=$('#pill');p.textContent='Loading…';
   (mode==='live'?gh('/contents/content.json?ref='+BRANCH).then(function(j){return JSON.parse(fromb64utf8(j.content));}):fetch('../content.json',{cache:'no-store'}).then(function(r){return r.json();}))
   .then(function(pub){base=norm(pub);var d=null;try{d=JSON.parse(localStorage.getItem(DK())||'null');}catch(e){}
-    /* a draft made from an older website version would bring back old text (e.g. DATE TBC): drop it */
+    /* a draft made from an older website version would bring back old text (an old date placeholder): drop it */
     if(d&&d.content&&String(d.base)!==String(base.version)){localStorage.removeItem(DK());d=null;setTimeout(function(){toast('The website was updated since your last visit, so older unpublished changes on this device were cleared.',7000);},300);}
     c=d&&d.content?norm(d.content):clone(base);uploads=d&&d.uploads||{};hist=[JSON.stringify(base)];pos=0;if(JSON.stringify(c)!==hist[0]){hist.push(JSON.stringify(c));pos=1;}
     var q=new URLSearchParams(location.search).get('page');page=q&&exists(q)?q:'index';
