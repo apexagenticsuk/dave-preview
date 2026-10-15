@@ -185,3 +185,9 @@ html{scrollbar-gutter:stable}
 @media (min-width:900px){.prods>.prod{flex:0 1 calc(33.333% - 14px);grid-template-columns:1fr;align-content:start}.prods>.prod img{max-height:300px;object-fit:contain;background:#000}}
 @media (max-width:600px){.ctabar .acts .btn:not(.call){display:none}.ctabar .acts{flex-direction:row}}
 .cta-clips{padding:clamp(34px,5vw,56px) 0;background:linear-gradient(90deg,rgba(215,25,32,.14),transparent 70%)}
+
+/* v3.1 contrast + a11y */
+.rdate .mm,.dc-date .mm,.nx-date .mm{color:#ff5459}
+.tagband p .r,.tagband .r{color:#fff;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px}
+.nxt,.show .nxt,.dc-v .nxt{color:#111!important}
+section.party img,section.shopt img{height:auto}

@@ -68,7 +68,7 @@ function showHTML(s){
   h+='<div class="venue"><b>'+esc(s.venue)+(s.note?' <span class="tag">'+esc(s.note)+'</span>':'')+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+'</span></div>\n<div class="act">';
   if(s.soldOut) h+='<span class="btn sold">Sold out</span><span class="via">'+esc(s.ticketSite||'Thanks everyone!')+'</span>';
   else if(s.ticketUrl) h+='<a class="btn red" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a><span class="via">'+esc(s.ticketSite||'Tickets')+'</span>';
-  else if(s.phone) h+='<a class="btn gold" href="tel:'+esc(telOf(s.phone))+'" aria-label="Call '+esc(s.phone)+' to book">Call to book</a><span class="via">'+esc(s.phone)+'</span>';
+  else if(s.phone) h+='<a class="btn gold" href="tel:'+esc(telOf(s.phone))+'" aria-label="Call to book '+esc(s.phone)+'">Call to book</a><span class="via">'+esc(s.phone)+'</span>';
   else h+='<span class="btn sold">Tickets soon</span><span class="via">On sale soon</span>';
   return h+'</div></div>';
 }
@@ -88,7 +88,7 @@ window.DY_clean=clean;
 /* ---------- shared collections (single source: content.json) ---------- */
 function ATTR(el,n,d){var v=el.getAttribute('data-'+n);return v==null||v===''?d:v;}
 function dateParts(s){var dt=new Date((s.date||'')+'T12:00:00Z'),ok=!isNaN(dt);return {ok:ok,dow:ok?DOW[dt.getUTCDay()]:'',d:ok?dt.getUTCDate():'?',mon:ok?MON[dt.getUTCMonth()]:''};}
-function actHTML(s,cls){var big=cls==='btn red';return s.soldOut?'<span class="'+(big?'btn':cls)+' sold">Sold out</span>':s.ticketUrl?'<a class="'+cls+'" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a>':s.phone?'<a class="'+(big?'btn gold':cls+' alt')+'" href="tel:'+esc(telOf(s.phone))+'" aria-label="Call '+esc(s.phone)+' to book">Call to book</a>':'<span class="'+(big?'btn':cls)+' sold">Tickets soon</span>';}
+function actHTML(s,cls){var big=cls==='btn red';return s.soldOut?'<span class="'+(big?'btn':cls)+' sold">Sold out</span>':s.ticketUrl?'<a class="'+cls+'" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a>':s.phone?'<a class="'+(big?'btn gold':cls+' alt')+'" href="tel:'+esc(telOf(s.phone))+'" aria-label="Call to book '+esc(s.phone)+'">Call to book</a>':'<span class="'+(big?'btn':cls)+' sold">Tickets soon</span>';}
 function railHTML(s,i,view){var p=dateParts(s),ord=p.ok?'<sup class="ord">'+ORD(p.d)+'</sup>':'';
   if(view==='strip')return '<a class="dchip" href="live.html#dates"><span class="dc-date"><span class="dow">'+p.dow+'</span><span class="dd">'+p.d+ord+'</span><span class="mm">'+p.mon+'</span></span><span class="dc-v"><b>'+esc(s.venue)+'</b><small>'+esc(s.town)+'</small></span></a>';
   return '<article class="rcard"><div class="rdate"><span class="dow">'+p.dow+'</span><span class="dd">'+p.d+ord+'</span><span class="mm">'+p.mon+'</span></div><div class="rinfo"><b>'+esc(s.venue)+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+(!s.time&&!s.ticketUrl&&s.phone?' · '+esc(s.phone):'')+'</span></div>'+actHTML(s,'rbtn')+'</article>';}
