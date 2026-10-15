@@ -163,3 +163,14 @@ footer .mail .em .tag,footer .mail .tag{display:inline-block;width:auto;color:#1
 .blk-hero.bhero.photo:before{background:linear-gradient(90deg,rgba(0,0,0,.85) 0,rgba(0,0,0,.45) 60%,rgba(0,0,0,.2))}
 @media (max-width:600px){.blk-hero.bhero.photo img{right:0;opacity:.45}}
 .xmasl{margin:14px 0 18px}.xmasl li{padding-left:0}.xmasl li:before{content:none}
+.livehead{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:center}
+.marq{display:block;justify-self:center;transition:transform .2s}.marq:hover{transform:scale(1.03) rotate(-1deg)}
+.marq img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.55))}
+.livehead+.shows{margin-top:26px}
+.xpitch{background:linear-gradient(180deg,#0b0b0d,#17090b)}.xpitch .wrap{max-width:860px}.xpitch p{margin-top:12px;color:#dcdce0}.xpitch p.big{color:#f1f1f1}
+.strong{font-family:Anton,Impact,sans-serif;font-size:22px;letter-spacing:.03em;text-transform:uppercase;color:var(--gold)!important}
+.corpnote{max-width:860px;margin:34px auto 0}.corpnote p{margin-top:12px;color:#dcdce0}
+.bookline{margin-top:14px}
+.tagband{background:var(--red);padding:26px 0;text-align:center}.tagband p{font-family:Anton,Impact,sans-serif;font-size:clamp(20px,3.4vw,34px);letter-spacing:.04em;text-transform:uppercase;color:#fff}.tagband .r{color:var(--gold)}
+@media (max-width:900px){.livehead{grid-template-columns:1fr;gap:18px}.marq{width:min(300px,80%)}}
+.party p.bookline{font-size:15px;color:#cfcfd4}
