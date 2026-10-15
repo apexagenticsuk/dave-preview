@@ -204,3 +204,6 @@ main.pgm{min-height:70vh}
 /* v3.2 tighten home rhythm */
 #live{padding-bottom:26px}#live+.svcs{padding-top:40px}#live .seeall{margin-top:14px}
 :where(img[width][height]){height:auto}
+.aboutt .big30{font-family:Anton,'Anton Fb',Impact,sans-serif;font-size:clamp(76px,12vw,150px);line-height:.9;background:linear-gradient(180deg,var(--gold),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px}
+.aboutt .big30 small{display:block;-webkit-text-fill-color:#fff;color:#fff;font:700 clamp(13px,1.5vw,17px)/1.3 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
+.aboutt .btnrow{gap:10px}

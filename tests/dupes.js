@@ -10,9 +10,16 @@ const blocks=await p.evaluate(()=>{const out=[];document.querySelectorAll('main 
  const t=e.innerText&&e.innerText.trim();if(t&&t.length>=28)out.push(t);});return out;});
 for(const t of new Set(blocks.map(norm)))(seen[t]=seen[t]||[]).push(pg);await p.close();}
 const shared={};
+// (4) a topic (Christmas parties, 30 years, the bio blurb) is told in ONE place: body text outside pointer cards/buttons may mention it on one page only
+const TOPICS={'Christmas parties':/christmas part(y|ies)|xmas part/i,'30 years':/\b30 years\b/i,'bio blurb':/professionally unhinged|agent of chaos/i,'weddings pitch':/best man become part/i};
+const topicPages={};
+for(const pg of pages){const p=await b.newPage();await p.goto(`${base}/${pg}.html`,{waitUntil:'networkidle'});
+ const txt=await p.evaluate(()=>[...document.querySelectorAll('main p, main h1, main h2, main h3, main .big30, main .lead')].filter(e=>!e.closest('.svc,.pk,.btn,.ctabar,.tcard,.pickrow,.chip,.chips,.enq,.opts,.seeall')&&!e.querySelector('.btn')).map(e=>e.innerText.replace(/\s+/g,' ')));
+ for(const [k,re] of Object.entries(TOPICS))if(txt.some(t=>re.test(t)))(topicPages[k]=topicPages[k]||[]).push(pg);await p.close();}
+let topicBad=0;for(const [k,ps] of Object.entries(topicPages))if(ps.length>1){topicBad++;console.log('TOPIC REPEATED',k,'on',ps.join('+'));}
 // extra checks: (1) the same image used twice on one page, (2) collection items (reviews, credits, service cards, date rows) repeated across pages,
 // (3) the same collection region rendered with identical text on two pages
-let extra=0;const items={},regions={};
+let extra=topicBad;const items={},regions={};
 for(const pg of pages){const p=await b.newPage();await p.goto(`${base}/${pg}.html`,{waitUntil:'networkidle'});
  const d=await p.evaluate(()=>{const n=s=>s.replace(/\s+/g,' ').trim().toLowerCase();const imgs={};
   document.querySelectorAll('main img').forEach(i=>{if(i.closest('.lg,.logos,footer,.socials,.faces,.gal'))return;const k=(i.getAttribute('src')||'').replace(/\?.*/,'');if(k)imgs[k]=(imgs[k]||0)+1;});
