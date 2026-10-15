@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-15T18:00:00Z",
+  "version": "2026-10-15T20:00:00Z",
   "_help": "Edited by the visual editor at /admin/. 'pages' and 'site' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
   "theme": {
     "accent": "red"
@@ -31,7 +31,7 @@
       "venue": "The Ball Alley",
       "note": "",
       "town": "Kildare Town",
-      "time": "Call to book",
+      "time": "",
       "ticketUrl": "",
       "ticketSite": "",
       "phone": "045 531 012",
@@ -105,7 +105,7 @@
   "contactSocials": [
     {
       "network": "facebook",
-      "url": "http://www.facebook.com/young1productions"
+      "url": "https://www.facebook.com/young1productions"
     },
     {
       "network": "vimeo",
@@ -113,108 +113,108 @@
     },
     {
       "network": "instagram",
-      "url": "http://instagram.com/daveyoungcomedian"
+      "url": "https://instagram.com/daveyoungcomedian"
     },
     {
       "network": "x",
-      "url": "http://www.twitter.com/daveyounglive"
+      "url": "https://www.twitter.com/daveyounglive"
     }
   ],
   "testimonials": [
     {
       "id": "t1",
-      "place": "home",
+      "place": "all",
       "title": "Amazing!",
       "text": "“The funniest comedian I have ever seen, Dave had us laughing all night, he made our show.”",
       "who": "Miriam O’Callaghan"
     },
     {
       "id": "t2",
-      "place": "home",
+      "place": "all",
       "title": "",
       "text": "“He’s Hilarious”",
       "who": "Westlife"
     },
     {
       "id": "t3",
-      "place": "home",
+      "place": "all",
       "title": "",
       "text": "“Laugh out loud funny”",
       "who": "Evening Herald"
     },
     {
       "id": "t4",
-      "place": "home",
+      "place": "all",
       "title": "",
       "text": "“Never saw him”",
       "who": "Stevie Wonder"
     },
     {
       "id": "t5",
-      "place": "about",
+      "place": "all",
       "title": "Funny Man!",
       "text": "“Great to have Dave on the show, he always delivers!”",
       "who": "Brendan O’Connor"
     },
     {
       "id": "t6",
-      "place": "about",
+      "place": "all",
       "title": "Wow, what a performance!",
       "text": "“Dave is simply tour de force!”",
       "who": "Pat Kenny"
     },
     {
       "id": "t7",
-      "place": "about",
+      "place": "all",
       "title": "",
       "text": "“True gent, very good at his work!”",
       "who": "Marcia Cross"
     },
     {
       "id": "t8",
-      "place": "book",
+      "place": "all",
       "title": "He’s The One!",
       "text": "“There’s only one man to make everyone laugh at any wedding, and that’s Dave Young!”",
       "who": "Franc, from RTÉ’s Brides of Franc"
     },
     {
       "id": "t9",
-      "place": "book",
+      "place": "all",
       "title": "Our Wedding Bash",
       "text": "“At first I was very hesitant about booking a comedy act. I carefully asked around for someone with great interaction who could captivate and hold an audience. When 9 in 10 people recommended Dave I looked into his portfolio. I booked him within 5 minutes and it was the best investment of the whole day. He really delivered from start to finish… We wish you every success on your journey and hope to work with you in the near future.”",
       "who": "Martin &amp; Ruth Byrne"
     },
     {
       "id": "t10",
-      "place": "book",
+      "place": "all",
       "title": "Dave Young wins Best Wedding Entertainment",
       "text": "“Professional and very very funny are just two ways of describing Dave Young and we are proud to award Dave winner of The Best Entertainer 2014. We sincerely congratulate Dave and wish him the very best for the future.”",
       "who": "Keith Malone, M.D. of Mrs2Be"
     },
     {
       "id": "t11",
-      "place": "corporate",
+      "place": "all",
       "title": "Naturally Hilarious!",
       "text": "“Dave Young had us in stitches from the moment he arrived to the moment he danced off!”",
       "who": "Alan Hughes"
     },
     {
       "id": "t12",
-      "place": "corporate",
+      "place": "all",
       "title": "Gyproc Big Night Out",
       "text": "“Sorry for late response, I needed a few days off after your performance! The shock factor! Hahaha I’m just kidding, it was a brilliant show so again thanks very much. Everybody was full of praise so can’t say better than that… I will definitely be checking out future dates as I think I’m overdue a night out with the girls… I have added the page on Facebook so it is giving me updates there in the live feeds.”",
       "who": "Elaine Butler"
     },
     {
       "id": "t13",
-      "place": "corporate",
+      "place": "all",
       "title": "Bold",
       "text": "“We all had a ball, best night EVER! You were great, the MD had such a laugh with you on stage, didn’t think he’d get up!! Can’t wait to go see you again ;-) Thank you so much x”",
       "who": "Jennifer Swanson"
     },
     {
       "id": "t14",
-      "place": "corporate",
+      "place": "all",
       "title": "Xmas Show!",
       "text": "“Been to see your Xmas shows as we have done every Christmas the last 10 years and our group love every minute of your show. There are traditions for everyone at Christmas, you’re one of ours. Couldn’t have a festive season without a full comedy-packed show from you (you’re our guilty pleasure). Will be booking Christmas this year, see ya there xxx”",
       "who": "Channel O’Reilly"
@@ -493,7 +493,8 @@
       "cap": "",
       "thumb": "assets/yt_5ovBtg0HpQM.webp",
       "place": "trailer",
-      "featured": false
+      "featured": false,
+      "nothumb": true
     }
   ],
   "services": [
@@ -706,5 +707,6 @@
       },
       "href": "mailto:info@daveyounglive.com?subject=Dave%20Young%20Competition"
     }
-  ]
+  ],
+  "siteUrl": "https://apexagenticsuk.github.io/dave-preview/"
 }

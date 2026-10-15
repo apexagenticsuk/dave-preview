@@ -68,7 +68,7 @@ function showHTML(s){
   h+='<div class="venue"><b>'+esc(s.venue)+(s.note?' <span class="tag">'+esc(s.note)+'</span>':'')+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+'</span></div>\n<div class="act">';
   if(s.soldOut) h+='<span class="btn sold">Sold out</span><span class="via">'+esc(s.ticketSite||'Thanks everyone!')+'</span>';
   else if(s.ticketUrl) h+='<a class="btn red" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a><span class="via">'+esc(s.ticketSite||'Tickets')+'</span>';
-  else if(s.phone) h+='<a class="btn gold" href="tel:'+esc(telOf(s.phone))+'">Call '+esc(s.phone)+'</a><span class="via">Phone booking</span>';
+  else if(s.phone) h+='<a class="btn gold" href="tel:'+esc(telOf(s.phone))+'" aria-label="Call '+esc(s.phone)+' to book">Call to book</a><span class="via">'+esc(s.phone)+'</span>';
   else h+='<span class="btn sold">Tickets soon</span><span class="via">On sale soon</span>';
   return h+'</div></div>';
 }
@@ -87,12 +87,16 @@ window.DY_clean=clean;
 
 /* ---------- shared collections (single source: content.json) ---------- */
 function ATTR(el,n,d){var v=el.getAttribute('data-'+n);return v==null||v===''?d:v;}
-function railHTML(s,i){var dt=new Date((s.date||'')+'T12:00:00Z'),ok=!isNaN(dt),d=ok?dt.getUTCDate():'?';
-  var act=s.soldOut?'<span class="rbtn sold">Sold out</span>':s.ticketUrl?'<a class="rbtn" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a>':s.phone?'<a class="rbtn alt" href="tel:'+esc(telOf(s.phone))+'">Call '+esc(s.phone)+'</a>':'<span class="rbtn sold">Tickets soon</span>';
-  return '<article class="rcard"><div class="rdate"><span class="dow">'+(ok?DOW[dt.getUTCDay()]:'')+'</span><span class="dd">'+d+(ok?'<sup class="ord">'+ORD(d)+'</sup>':'')+'</span><span class="mm">'+(ok?MON[dt.getUTCMonth()]:'')+'</span></div><div class="rinfo"><b>'+esc(s.venue)+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+'</span></div>'+act+'</article>';}
+function dateParts(s){var dt=new Date((s.date||'')+'T12:00:00Z'),ok=!isNaN(dt);return {ok:ok,dow:ok?DOW[dt.getUTCDay()]:'',d:ok?dt.getUTCDate():'?',mon:ok?MON[dt.getUTCMonth()]:''};}
+function actHTML(s,cls){var big=cls==='btn red';return s.soldOut?'<span class="'+(big?'btn':cls)+' sold">Sold out</span>':s.ticketUrl?'<a class="'+cls+'" href="'+esc(safeUrl(s.ticketUrl))+'" target="_blank" rel="noopener">Buy tickets</a>':s.phone?'<a class="'+(big?'btn gold':cls+' alt')+'" href="tel:'+esc(telOf(s.phone))+'" aria-label="Call '+esc(s.phone)+' to book">Call to book</a>':'<span class="'+(big?'btn':cls)+' sold">Tickets soon</span>';}
+function railHTML(s,i,view){var p=dateParts(s),ord=p.ok?'<sup class="ord">'+ORD(p.d)+'</sup>':'';
+  if(view==='strip')return '<a class="dchip" href="live.html#dates"><span class="dc-date"><span class="dow">'+p.dow+'</span><span class="dd">'+p.d+ord+'</span><span class="mm">'+p.mon+'</span></span><span class="dc-v"><b>'+esc(s.venue)+'</b><small>'+esc(s.town)+'</small></span></a>';
+  return '<article class="rcard"><div class="rdate"><span class="dow">'+p.dow+'</span><span class="dd">'+p.d+ord+'</span><span class="mm">'+p.mon+'</span></div><div class="rinfo"><b>'+esc(s.venue)+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+(!s.time&&!s.ticketUrl&&s.phone?' · '+esc(s.phone):'')+'</span></div>'+actHTML(s,'rbtn')+'</article>';}
+function nextHTML(c){var today=new Date().toISOString().slice(0,10),sh=(c.shows||[]).filter(function(x){return x.date;}),s=sh.filter(function(x){return x.date>=today;})[0]||sh[0];if(!s)return '';var p=dateParts(s);
+  return '<div class="nx-date"><span class="dow">'+p.dow+'</span><span class="dd">'+p.d+(p.ok?'<sup class="ord">'+ORD(p.d)+'</sup>':'')+'</span><span class="mm">'+p.mon+'</span></div><div class="nx-i"><span class="nx-k">Next show</span><b>'+esc(s.venue)+'</b><span>'+esc(s.town)+(s.time?' · '+esc(s.time):'')+(!s.time&&!s.ticketUrl&&s.phone?' · '+esc(s.phone):'')+'</span></div><div class="nx-a">'+actHTML(s,'btn red')+'</div>';}
 function tcardHTML(t){var who=t.who?'<cite>'+clean(t.who)+'</cite>':'';return '<blockquote class="tcard'+(t.title?'':' short')+'">'+(t.title?'<b>'+clean(t.title)+'</b>':'')+'<p>'+clean(t.text)+'</p>'+who+'</blockquote>';}
 function clipHTML(k,lite){var url=k.provider==='vimeo'?'https://vimeo.com/'+k.vid:'https://www.youtube.com/watch?v='+k.vid;var th=esc(RES(k.thumb||''));
-  if(lite&&k.provider!=='vimeo')return '<div class="lite" data-yt="'+esc(k.vid)+'" data-title="'+esc(k.title)+'" style="--bg:url(\''+th+'\')"><button type="button" class="litebtn" aria-label="Play video: '+esc(k.title)+'"><span class="play" aria-hidden="true"></span></button><span class="lab">'+clean(k.title)+'</span></div>';
+  if(lite&&k.provider!=='vimeo')return '<div class="lite'+(k.nothumb?' nothumb':'')+'" data-yt="'+esc(k.vid)+'" data-title="'+esc(k.title)+'"'+(k.nothumb?'':' style="--bg:url(\''+th+'\')"')+'><button type="button" class="litebtn" aria-label="Play video: '+esc(k.title)+'"><span class="play" aria-hidden="true"></span></button><span class="lab">'+clean(k.title)+'</span></div>';
   return '<a class="clip" href="'+url+'" target="_blank" rel="noopener"><div class="th"><img src="'+th+'" alt="" loading="lazy" width="480" height="360"><span class="play"></span>'+(k.provider==='vimeo'?'<span class="vmb">Vimeo</span>':'')+'</div><p>'+clean(k.title)+'</p>'+(k.cap?'<span class="cap">'+clean(k.cap)+'</span>':'')+'</a>';}
 function svcHTML(s){var ext=/^https?:/.test(s.url||'');return '<a class="svc" href="'+esc(safeUrl(s.url||'#'))+'"'+(ext?' target="_blank" rel="noopener"':'')+'><img src="'+esc(RES((s.img||{}).src||''))+'" alt="'+esc((s.img||{}).alt||'')+'" loading="lazy"><div class="svb"><h3 aria-level="2">'+clean(s.title)+'</h3><p>'+clean(s.text)+'</p><span class="go">'+esc(s.cta||'Find out more')+(ext?' ↗':' →')+'</span></div></a>';}
 function creditsHTML(list,view){return (list||[]).map(function(g){var its=(g.items||[]).filter(function(x){return view!=='home'||x.home;});if(!its.length)return '';return '<div class="cg"><h4 aria-level="2">'+esc(g.label)+'</h4><ul>'+its.map(function(x){return '<li>'+clean(x.t)+'</li>';}).join('')+'</ul></div>';}).join('');}
@@ -103,9 +107,10 @@ function contactHTML(ct,view){var ems=(ct.emails||[]).filter(Boolean),tel='tel:'
 function shared(c,root){root=root||document;
   root.querySelectorAll('[data-cms]').forEach(function(el){var k=el.getAttribute('data-cms'),v=ATTR(el,'view',''),h=null;
     if(k==='shows')h=(c.shows||[]).map(showHTML).join('');
-    else if(k==='showrail')h=(c.shows||[]).map(railHTML).join('');
+    else if(k==='showrail')h=(c.shows||[]).map(function(s,i){return railHTML(s,i,v);}).join('');
+    else if(k==='nextshow')h=nextHTML(c);
     else if(k==='socials')h=socialHTML(c[ATTR(el,'set','socials')]);
-    else if(k==='testimonials'){var pl=ATTR(el,'place','');h=(c.testimonials||[]).filter(function(t){return t.place===pl;}).map(tcardHTML).join('');}
+    else if(k==='testimonials'){var pl=ATTR(el,'place','');h=(c.testimonials||[]).filter(function(t){return pl==='all'?t.place!=='magician':t.place===pl;}).map(tcardHTML).join('');}
     else if(k==='clips'){var pc=ATTR(el,'place','clips'),lim=+ATTR(el,'limit',0);var L=(c.clips||[]).filter(function(x){return pc==='featured'?x.featured:x.place===pc;});if(lim)L=L.slice(0,lim);h=L.map(function(x){return clipHTML(x,v==='lite');}).join('');}
     else if(k==='services'){var ks=ATTR(el,'keys','').split(',').filter(Boolean);h=(c.services||[]).filter(function(s){return !ks.length||ks.indexOf(s.key)>-1;}).map(svcHTML).join('');}
     else if(k==='clients'){var cl=c.clients||{};h=v==='roll'?'<img src="'+esc(RES((cl.roll||{}).src||''))+'" alt="'+esc((cl.roll||{}).alt||'')+'" loading="lazy">':(cl.tiles||[]).filter(function(x,i){return v!=='strip'||i<+ATTR(el,'limit',12);}).map(function(x){return '<div class="lg"><img src="'+esc(RES(x.src))+'" alt="'+esc(x.name)+'" title="'+esc(x.name)+'" loading="lazy"></div>';}).join('');}
@@ -116,12 +121,14 @@ function shared(c,root){root=root||document;
   markNext(c,root);}
 function markNext(c,root){var today=new Date().toISOString().slice(0,10),sh=c.shows||[],nx=-1;
   sh.forEach(function(x,i){if(nx<0&&x.date&&x.date>=today)nx=i;});
-  (root||document).querySelectorAll('[data-cms="shows"],[data-cms="showrail"]').forEach(function(box){[].slice.call(box.children).forEach(function(r,i){var d=sh[i]&&sh[i].date;r.classList.toggle('next',i===nx);r.classList.toggle('past',!!d&&d<today);var o=r.querySelector('.nxt');if(o&&i!==nx)o.remove();if(i===nx&&!o){var t=document.createElement('span');t.className='nxt';t.textContent='Next show';r.appendChild(t);}});});}
+  (root||document).querySelectorAll('[data-cms="shows"],[data-cms="showrail"]').forEach(function(box){[].slice.call(box.children).forEach(function(r,i){var d=sh[i]&&sh[i].date;r.classList.toggle('next',i===nx);r.classList.toggle('past',!!d&&d<today);var o=r.querySelector('.nxt');if(o&&i!==nx)o.remove();
+    if(i===nx&&!o){var t=document.createElement('span');t.className='nxt';t.textContent='Next show';var host=r.querySelector('.rinfo,.venue,.dc-v')||r;host.insertBefore(t,host.firstChild);}});});}
+function siteBase(c){var u=c.siteUrl||(location.origin+location.pathname.replace(/[^\/]*$/,''));return u.replace(/\/?$/,'/');}
 function ldJSON(c){var sh=(c.shows||[]).filter(function(s){return s.date;}),ct=c.contact||{};
   var ev=sh.map(function(s){var m=String(s.time||'').match(/(\d{1,2})(?::(\d\d))?\s*(am|pm)/i),when=s.date;if(m){var hh=+m[1]%12+(/pm/i.test(m[3])?12:0);when+='T'+(hh<10?'0':'')+hh+':'+(m[2]||'00')+':00';}
-    var o={'@type':'Event',name:'Dave Young Unwrapped – Christmas Show',startDate:when,eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',eventStatus:s.soldOut?'https://schema.org/EventScheduled':'https://schema.org/EventScheduled',location:{'@type':'Place',name:s.venue,address:{'@type':'PostalAddress',addressLocality:s.town,addressCountry:'IE'}},performer:{'@type':'Person',name:'Dave Young'},organizer:{'@type':'Organization',name:ct.org||'Young1 Productions'}};
+    var o={'@type':'Event',name:'Dave Young Unwrapped – Christmas Show',startDate:when,eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',eventStatus:s.soldOut?'https://schema.org/EventScheduled':'https://schema.org/EventScheduled',location:{'@type':'Place',name:s.venue,address:{'@type':'PostalAddress',addressLocality:s.town,addressCountry:'IE'}},url:siteBase(c)+'live.html',performer:{'@type':'Person',name:'Dave Young'},organizer:{'@type':'Organization',name:ct.org||'Young1 Productions'}};
     if(s.ticketUrl)o.offers={'@type':'Offer',url:s.ticketUrl,availability:s.soldOut?'https://schema.org/SoldOut':'https://schema.org/InStock'};return o;});
-  var graph=[{'@type':'Person',name:'Dave Young',jobTitle:'Comedian',url:location.origin+location.pathname.replace(/[^\/]*$/,''),sameAs:(c.socials||[]).map(function(x){return x.url;}).filter(Boolean)}].concat(ev);
+  var graph=[{'@type':'Person',name:'Dave Young',jobTitle:'Comedian',url:siteBase(c),sameAs:(c.socials||[]).map(function(x){return x.url;}).filter(Boolean)}].concat(ev);
   return JSON.stringify({'@context':'https://schema.org','@graph':graph});}
 function ldApply(c){if(!/^(index|live)$/.test(PAGE)||EDITING||PREV)return;var s=document.getElementById('dy-ld');if(!s){s=document.createElement('script');s.type='application/ld+json';s.id='dy-ld';document.head.appendChild(s);}s.textContent=ldJSON(c);}
 

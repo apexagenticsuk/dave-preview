@@ -10,5 +10,18 @@ const blocks=await p.evaluate(()=>{const out=[];document.querySelectorAll('main 
  const t=e.innerText&&e.innerText.trim();if(t&&t.length>=28)out.push(t);});return out;});
 for(const t of new Set(blocks.map(norm)))(seen[t]=seen[t]||[]).push(pg);await p.close();}
 const shared={};
+// extra checks: (1) the same image used twice on one page, (2) collection items (reviews, credits, service cards, date rows) repeated across pages,
+// (3) the same collection region rendered with identical text on two pages
+let extra=0;const items={},regions={};
+for(const pg of pages){const p=await b.newPage();await p.goto(`${base}/${pg}.html`,{waitUntil:'networkidle'});
+ const d=await p.evaluate(()=>{const n=s=>s.replace(/\s+/g,' ').trim().toLowerCase();const imgs={};
+  document.querySelectorAll('main img').forEach(i=>{if(i.closest('.lg,.logos,footer,.socials,.faces,.gal'))return;const k=(i.getAttribute('src')||'').replace(/\?.*/,'');if(k)imgs[k]=(imgs[k]||0)+1;});
+  const it=[...document.querySelectorAll('main .tcard, main .cg li, main .svc, main .show, main .clip, main .prod')].map(e=>n(e.innerText)).filter(t=>t.length>12);
+  const rg=[...document.querySelectorAll('main [data-cms]')].filter(e=>e.children.length>2).map(e=>e.getAttribute('data-cms')+'|'+n(e.innerText));
+  return {imgs:Object.entries(imgs).filter(([k,v])=>v>1).map(([k])=>k),it,rg};});
+ d.imgs.forEach(k=>{extra++;console.log('IMAGE USED TWICE on',pg,'|',k);});
+ new Set(d.it).forEach(t=>(items[t]=items[t]||[]).push(pg));new Set(d.rg).forEach(t=>(regions[t]=regions[t]||[]).push(pg));await p.close();}
+for(const [t,ps] of Object.entries(items))if(ps.length>1){extra++;console.log('ITEM REPEATED',ps.join('+'),'|',t.slice(0,90));}
+for(const [t,ps] of Object.entries(regions))if(ps.length>1){extra++;console.log('REGION REPEATED',ps.join('+'),'|',t.slice(0,90));}
 let n=0;for(const [t,ps] of Object.entries(seen))if(ps.length>1){n++;console.log(ps.join('+'),'|',t.slice(0,110));}
-console.log('DUPLICATED BLOCKS',n);await b.close();process.exit(n?1:0);})();
+console.log('DUPLICATED BLOCKS',n,'EXTRA',extra);await b.close();process.exit(n||extra?1:0);})();
