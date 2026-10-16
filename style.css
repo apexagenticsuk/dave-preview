@@ -112,7 +112,7 @@ form.enq .full{grid-column:1/-1}
 @media (max-width:600px){
  .wrap{padding:0 18px}
  header.top .wrap{height:64px}
- .brand{font-size:26px}.brand small{font-size:10px}
+ .brand{font-size:26px}.brand small{font-size:12px}
  nav.main{display:none}
  .burger{display:flex;gap:10px;align-items:center}
  .burger .ham{width:40px;height:40px;border-radius:8px;border:1px solid #333;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:0 10px}
