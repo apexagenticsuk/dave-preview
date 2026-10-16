@@ -215,3 +215,26 @@ main.pgm{min-height:70vh}
  .svc .svb{padding:26px 28px;justify-content:center;gap:2px}.svc .svb h3{font-size:28px}.svc .svb p{font-size:16px;line-height:1.55;margin:8px 0 18px}.svc .go{margin-top:0}
 }
 @media (max-width:600px){.svc .svb{padding:22px 22px 24px}.svc .svb h3{font-size:26px}.svc img{height:220px}.svcg{gap:18px}.svc{border-top:3px solid var(--gold)}}
+
+/* ---- round 4 (stress test): tap targets, face-safe stacked heroes, no sideways scroll at 200% zoom ---- */
+@media (max-width:900px){
+ .brand{min-height:44px;display:inline-flex;flex-direction:column;justify-content:center}
+ .btn.sm,.top .btn,.btn.call.sm{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+ .burger .ham{width:44px;height:44px}
+ footer a,.flinks a,.mail a,.crow a,.prose a,.card a:not(.btn),.ftxt a{display:inline-flex;align-items:center;min-height:44px;padding-inline:3px}
+ .sbi .hot{min-width:44px;min-height:44px}
+ .party .wrap{grid-template-columns:minmax(0,1fr);gap:26px}
+ .party .btn{display:flex}
+ /* every inner-page hero stacks: text first, whole photo underneath at its own aspect, so Dave's face is never cropped or covered */
+ .bhero.photo:not(.corp){height:auto!important;overflow:visible;display:flex;flex-direction:column}
+ .bhero.photo:not(.corp):before{display:none!important}
+ .bhero.photo:not(.corp) .txt{position:static!important;padding:34px 0 22px;order:1}
+ .bhero.photo:not(.corp) img{position:static!important;order:2;display:block;width:100%!important;max-width:100%;height:auto!important;opacity:1!important;object-fit:contain!important;right:auto!important;left:auto!important}
+}
+@media (max-width:640px){.wrap{min-width:0}.wrap>*{min-width:0}img,video,iframe{max-width:100%}}
+.show,.card,.tcard{min-width:0;overflow-wrap:anywhere}
+@media (max-width:900px){footer a,.flinks a,.mail a,.crow a,.prose a,.card a:not(.btn),.ftxt a{min-width:44px;justify-content:center}.btn{min-height:44px}.btnrow .btn,.f .btn{display:inline-flex;align-items:center;justify-content:center}}
+/* nothing under 12px */
+.brand small,small,.tag,.dow,.nxt,.nx-k,.vmb,.kicker small{font-size:max(12px,1em)}
+.tag,.dow,.nxt,.nx-k,.vmb{font-size:12px}
+@media (max-width:900px){.sticky{padding:8px 12px calc(8px + env(safe-area-inset-bottom));gap:8px}.sticky .btn{min-height:44px;padding-top:0;padding-bottom:0}}
