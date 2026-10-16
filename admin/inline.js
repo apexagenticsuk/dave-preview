@@ -152,12 +152,19 @@ function limFor(el){return /^H[1-6]$/.test(el.tagName)?120:(el.tagName==='A'||el
 function selLen(){try{return String(D.getSelection()).length;}catch(e){return 0;}}
 D.addEventListener('beforeinput',function(e){if(!editing||!/^insert/.test(e.inputType)||e.inputType==='insertParagraph'||e.inputType==='insertLineBreak')return;var lim=limFor(editing),room=lim-editing.textContent.length+selLen();
   if(e.inputType==='insertFromPaste'||e.inputType==='insertFromDrop')return; /* handled by the paste listener */
-  if(room<=0){e.preventDefault();DYE.toast('That\u2019s the longest this can be ('+lim+' letters). Please shorten it.',3500);}});
+  var dl=(e.data||'').length;if(room<=0||dl>room){e.preventDefault();if(room>0&&dl>room)D.execCommand('insertText',false,e.data.slice(0,room));DYE.toast('That\u2019s the longest this can be ('+lim+' letters). Please shorten it.',3500);}});
 D.addEventListener('paste',function(e){if(!editing)return;e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text/plain').replace(/\s*\n+\s*/g,' ');var lim=limFor(editing),room=Math.max(0,lim-editing.textContent.length+selLen());
   if(t.length>room){t=t.slice(0,room);DYE.toast('Pasted text was trimmed to fit the limit of '+lim+' letters.',3500);}if(t)D.execCommand('insertText',false,t);},true);
-function finishEdit(keepBar){var el=editing;if(!el)return;editing=null;el.removeAttribute('contenteditable');saveText(el,window.DY_clean(el.innerHTML));if(!keepBar&&sel===el&&curBar===el)buildBar(el);}
+/* typed text is saved a moment after you stop typing, so a reload or closed tab doesn't lose it; if something is still pending the browser warns first */
+var typeT=null;window.__dyTyping=false;
+D.addEventListener('input',function(){if(!editing)return;window.__dyTyping=true;clearTimeout(typeT);var el=editing;typeT=setTimeout(function(){if(editing!==el)return;var h=window.DY_clean(el.innerHTML);if(!/\S/.test(h.replace(/<br>/g,'')))return;
+  var keepSel=null;try{keepSel=D.getSelection().getRangeAt(0).cloneRange();}catch(e){}
+  if(el.hasAttribute('data-bf')){var bl=blockOf(el);if(bl){var bid=bl.dataset.bid,path=el.dataset.bf;DYE.change(function(c){var f=findBlock(c,bid);if(f)setP(f.b,path,h);});}}
+  else{var o=R.ids.get(el);if(o&&o.t){DYE.change(function(c){var t=bag(E(c,o.scope),'text');t[o.t]=h;});}}
+  window.__dyTyping=false;},900);},true);
+function finishEdit(keepBar){clearTimeout(typeT);window.__dyTyping=false;var el=editing;if(!el)return;editing=null;el.removeAttribute('contenteditable');saveText(el,window.DY_clean(el.innerHTML));if(!keepBar&&sel===el&&curBar===el)buildBar(el);}
 D.addEventListener('keydown',function(e){if(!editing)return;if(e.key==='Enter'){e.preventDefault();if(e.shiftKey)D.execCommand('insertLineBreak');else editing.blur();}if(e.key==='Escape')editing.blur();},true);
-D.addEventListener('paste',function(e){if(!editing)return;e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text/plain');D.execCommand('insertText',false,t.replace(/\s*\n\s*/g,' '));},true);
+
 D.addEventListener('focusout',function(e){if(editing&&e.target===editing)setTimeout(function(){if(editing===e.target)finishEdit();},0);},true);
 window.addEventListener('blur',function(){if(editing)finishEdit();});
 D.addEventListener('drop',function(e){if(editing)e.preventDefault();},true);
