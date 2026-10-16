@@ -243,3 +243,8 @@ small{font-size:12px}
 @media (max-width:420px){.top .wrap{gap:8px}.top .brand{flex:0 1 auto;min-width:0}.burger{gap:6px}.top .btn.sm{padding-inline:12px}}
 @media (max-width:900px){.sticky .btn{flex:1 1 0;min-width:0;padding-inline:8px}}
 .tag.ask,.tag{white-space:normal;overflow-wrap:anywhere;max-width:100%}
+/* a long venue/title must never stretch a show card: two lines then an ellipsis */
+.dc-v b,.nx-i b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
+.dc-v small,.nx-i>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
+.dchip,.nextshow,.dchips{align-items:stretch}.dchip{min-width:0}
+.blk-divider{max-width:100%;box-sizing:border-box}.blk-divider hr{width:100%;max-width:720px;margin:0 auto}

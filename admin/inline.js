@@ -147,6 +147,14 @@ function saveText(el,html){
     DYE.change(function(c){var f=findBlock(c,bid);if(f)setP(f.b,path,html);});return;}
   var o=R.ids.get(el);if(!o||!o.t)return;var orig=R.orig[o.scope][o.t];if(html.replace(/\s+/g,' ').trim()===''){html=orig;el.innerHTML=orig;DYE.toast('Text can\u2019t be empty, so it was put back. To remove something, hide its section or delete the item.');}
   DYE.change(function(c){var t=bag(E(c,o.scope),'text');if(html===orig)delete t[o.t];else t[o.t]=html;});}
+/* sensible length limits while typing: headings 120, buttons/links 60, paragraphs 1500; paste is plain text and trimmed to fit */
+function limFor(el){return /^H[1-6]$/.test(el.tagName)?120:(el.tagName==='A'||el.classList.contains('btn')?60:(el.tagName==='P'||el.tagName==='DIV'||el.tagName==='LI'?1500:200));}
+function selLen(){try{return String(D.getSelection()).length;}catch(e){return 0;}}
+D.addEventListener('beforeinput',function(e){if(!editing||!/^insert/.test(e.inputType)||e.inputType==='insertParagraph'||e.inputType==='insertLineBreak')return;var lim=limFor(editing),room=lim-editing.textContent.length+selLen();
+  if(e.inputType==='insertFromPaste'||e.inputType==='insertFromDrop')return; /* handled by the paste listener */
+  if(room<=0){e.preventDefault();DYE.toast('That\u2019s the longest this can be ('+lim+' letters). Please shorten it.',3500);}});
+D.addEventListener('paste',function(e){if(!editing)return;e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text/plain').replace(/\s*\n+\s*/g,' ');var lim=limFor(editing),room=Math.max(0,lim-editing.textContent.length+selLen());
+  if(t.length>room){t=t.slice(0,room);DYE.toast('Pasted text was trimmed to fit the limit of '+lim+' letters.',3500);}if(t)D.execCommand('insertText',false,t);},true);
 function finishEdit(keepBar){var el=editing;if(!el)return;editing=null;el.removeAttribute('contenteditable');saveText(el,window.DY_clean(el.innerHTML));if(!keepBar&&sel===el&&curBar===el)buildBar(el);}
 D.addEventListener('keydown',function(e){if(!editing)return;if(e.key==='Enter'){e.preventDefault();if(e.shiftKey)D.execCommand('insertLineBreak');else editing.blur();}if(e.key==='Escape')editing.blur();},true);
 D.addEventListener('paste',function(e){if(!editing)return;e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text/plain');D.execCommand('insertText',false,t.replace(/\s*\n\s*/g,' '));},true);
