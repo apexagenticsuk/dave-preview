@@ -248,3 +248,23 @@ small{font-size:12px}
 .dc-v small,.nx-i>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}
 .dchip,.nextshow,.dchips{align-items:stretch}.dchip{min-width:0}
 .blk-divider{max-width:100%;box-sizing:border-box}.blk-divider hr{width:100%;max-width:720px;margin:0 auto}
+
+/* round 5: 8px+ between tap targets, 320px logo on one line */
+.brand{white-space:nowrap}
+@media(max-width:900px){
+ .burger{gap:10px!important}
+ footer .mail{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+ footer .mail .em{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:0}
+ footer .mail .em a+a,footer .mail .em br{margin:0}
+ .crow{row-gap:8px}.crow a{margin-block:4px}
+ .btnrow,.f{display:flex;flex-wrap:wrap;gap:10px}.btnrow .btn,.f .btn{margin:0}
+ .flinks{gap:8px 12px}
+ .socials{display:flex;gap:10px;flex-wrap:wrap}
+ /* the four icons painted in the banner are too close for 44px targets with gaps: use real labelled buttons below the picture */
+ .sbi{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 14px}
+ .sbi img{grid-column:1/-1;margin:0 -14px;width:calc(100% + 28px);max-width:none}
+ .sbi .hot{position:static!important;width:auto!important;height:auto!important;min-height:48px;display:flex;align-items:center;justify-content:center;border:1px solid #444;border-radius:10px;background:#16161a;color:#fff;text-decoration:none;font-weight:700;font-size:15px}
+ .sbi .hot::after{content:attr(aria-label);text-align:center;padding:0 8px}
+}
+@media(max-width:360px){.brand{font-size:22px}.top .btn.sm{padding-inline:9px}}
+@media(max-width:900px){.dchips{gap:10px}.dchip{margin:0}}
