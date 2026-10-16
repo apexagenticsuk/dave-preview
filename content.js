@@ -152,7 +152,7 @@ function blockHTML(b,group){var t=b.type,h='',cls='blk blk-'+t,tag='div';
   case 'quotes':cls+=' tgrid';h=(b.items||[]).map(function(q,i){return '<blockquote class="tcard">'+F('b','','items.'+i+'.title',q.title,'Headline')+F('p','','items.'+i+'.text',q.text,'Quote')+F('cite','','items.'+i+'.who',q.who,'Who said it')+'</blockquote>';}).join('');break;
   case 'shows':h='<div class="shows" data-cms="shows"></div>';break;
   case 'divider':h=b.kind==='line'?'<hr>':'';cls+=b.kind==='line'?' line':' space';break;
-  case 'cta':h='<div>'+F('h3','','title',b.title,'Heading')+F('p','','text',b.text,'Text')+'</div><div class="btnrow">'+BT('btnLabel','btnUrl',b.btnLabel,b.btnUrl,b.btnStyle||'gold','btnStyle')+'<a class="btn call" href="tel:+353872616317">Call 087 261 6317</a></div>';break;
+  case 'cta':h='<div>'+F('h3','','title',T(b.title),'Heading')+F('p','','text',T(b.text),'Text')+'</div><div class="btnrow">'+BT('btnLabel','btnUrl',b.btnLabel,b.btnUrl,b.btnStyle||'gold','btnStyle')+'<a class="btn call" href="tel:+353872616317">Call 087 261 6317</a></div>';break;
   case 'socials':h='<div class="socials" data-cms="socials"></div>';break;
   case 'logos':cls+=' logos';h=(b.images||[]).map(function(m,i){return '<div class="lg">'+IM('images.'+i,m)+'</div>';}).join('');break;
   case 'cards':cls+=' c'+(b.cols===2?2:3);h=(b.items||[]).map(function(it,i){var p='items.'+i+'.';return '<div class="card">'+(it.img&&it.img.src?IM(p+'img',it.img):'')+F('h3','',p+'title',it.title,'Title')+F('p','',p+'text',it.text,'Text')+((it.btnLabel||EDITING)?'<div class="btnrow">'+BT(p+'btnLabel',p+'btnUrl',it.btnLabel,it.btnUrl,it.btnStyle||'red',p+'btnStyle',1)+'</div>':'')+'</div>';}).join('');break;
@@ -188,7 +188,8 @@ function buildNav(c){var items=c.nav;if(!items)return;var cur=PAGE;
   var f=document.querySelector('footer .flinks');if(f)f.innerHTML=items.filter(function(x){return x.show!=='none';}).map(function(x){return navLink(c,x,'');}).join('');}
 function seo(c){var s=(c.seo||{})[PAGE],cu=(c.custom||{})[PAGE];var title=(s&&s.title)||(cu&&cu.title?cu.title+' | Dave Young':'');if(title)document.title=title;
   if(s&&s.description!=null&&s.description!==''){var m=document.querySelector('meta[name=description]');if(!m){m=document.createElement('meta');m.name='description';document.head.appendChild(m);}m.content=s.description;}}
-function apply(c,R,res){
+function T(s,c){c=c||window.DY_C||{};s=String(s==null?'':s);var n=0;while(n++<4&&/\{[\w.]+\}/.test(s))s=s.replace(/\{([\w.]+)\}/g,function(m,p){var v=p.split('.').reduce(function(a,k){return a==null?a:a[k];},c);return(v==null||typeof v==='object')?m:v;});return s;}
+function apply(c,R,res){window.DY_C=c;
   DIMS=c.dims||{};
   RES=res||function(s){return s;};
   var P=scopeEdits(c,'page'),lists=P.lists||{};
