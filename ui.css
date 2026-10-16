@@ -268,3 +268,8 @@ small{font-size:12px}
 }
 @media(max-width:360px){.brand{font-size:22px}.top .btn.sm{padding-inline:9px}}
 @media(max-width:900px){.dchips{gap:10px}.dchip{margin:0}}
+
+/* round 5: long menu names wrap between words, never mid-word */
+nav.main a,.mnav a{overflow-wrap:normal;word-break:normal;hyphens:none}
+.mnav a{white-space:normal}
+nav.main a{white-space:nowrap}
