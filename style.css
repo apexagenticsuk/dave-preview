@@ -17,9 +17,9 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;h
 .brand small{display:block;font-family:Inter;font-style:italic;font-weight:700;font-size:12px;color:var(--gold);letter-spacing:.08em;text-transform:none;margin-top:4px}
 nav.main{display:flex;gap:26px;align-items:center;font-weight:600;font-size:15px}
 nav.main a.cur{color:var(--gold)}
-.btn{display:inline-block;font-weight:800;border-radius:999px;padding:12px 22px;font-size:15px;letter-spacing:.01em;white-space:nowrap}
+.btn{border:2px solid transparent;display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:.5em;line-height:1.2;box-sizing:border-box;font-weight:800;border-radius:999px;padding:12px 22px;font-size:15px;letter-spacing:.01em;white-space:nowrap}
 .btn.red{background:var(--red);color:#fff;box-shadow:0 4px 0 var(--red2)}
-.btn.gold{background:var(--gold);color:#1a1a1a;box-shadow:0 4px 0 #b88a12}
+.btn.gold{background:var(--gold);color:#111;border:2px solid #fff3c4;box-shadow:0 4px 0 #b88a12,0 0 0 3px rgba(246,195,67,.35),0 10px 22px -6px rgba(246,195,67,.55);font-weight:900}
 .btn.ghost{border:2px solid #fff;color:#fff;padding:10px 20px}
 .btn.sm{padding:9px 16px;font-size:14px}
 .burger{display:none}
@@ -128,9 +128,9 @@ form.enq .full{grid-column:1/-1}
  .date .dd{font-size:38px}.date .mm{font-size:18px}
  .venue b{font-size:17px}
  .show .act{grid-column:1/-1;text-align:left}
- .show .act .btn{display:block;text-align:center}
+ .show .act .btn{display:flex;text-align:center}
  .party .wrap{grid-template-columns:1fr;gap:26px}
- .party .btn{display:block;text-align:center}
+ .party .btn{display:flex;text-align:center}
  .credits .wrap{grid-template-columns:1fr;gap:24px}
  .credits .big30{font-size:64px}
  .quote{font-size:18px}
@@ -146,7 +146,7 @@ form.enq .full{grid-column:1/-1}
  form.enq{grid-template-columns:1fr}
  .opt{flex-direction:column;align-items:flex-start;gap:6px}
  .card{padding:18px}
- form.enq .btn{display:block;text-align:center;width:100%}
+ form.enq .btn{display:flex;text-align:center;width:100%}
  footer .small{flex-direction:column;gap:6px}
 }
 
@@ -170,7 +170,7 @@ form.enq .full{grid-column:1/-1}
 .inote b.lbl{display:block;font-size:10.5px;letter-spacing:.1em;color:#8a6d00;margin-bottom:2px}
 .venue .inote{display:block}
 .btn.call{background:#fff;color:#111;box-shadow:0 4px 0 #9a9a9a}
-.btn.call:before{content:"✆ ";}
+.btn.call:before{content:"✆";display:block;line-height:1;font-size:1.1em;flex:none}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .chip{padding:8px 12px;border-radius:999px;border:1px solid #3a3a40;background:#0e0e10;font-size:13.5px;font-weight:600;color:#ddd}
 .chip.on{background:var(--red);border-color:var(--red);color:#fff}
@@ -183,7 +183,7 @@ form.enq .full{grid-column:1/-1}
  .sticky .btn{flex:1;text-align:center;padding:13px 10px}
  .btnrow{flex-direction:column;align-items:stretch}
  .btnrow .btn{text-align:center}
- .ctabar .acts .btn{display:block}
+ .ctabar .acts .btn{display:flex}
 }
 .opt .tag,.venue .tag{display:inline-block;width:auto;font-size:10.5px;color:#111;margin-top:0}
 .opt .tag.w,.venue .tag.w{color:#fff}

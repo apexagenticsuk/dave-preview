@@ -128,7 +128,7 @@ footer .mail .em a{color:var(--mut);text-decoration:underline;font-weight:600}
  .credits .wrap:not(.q):not(.cr4){grid-template-columns:1fr}
  .hero.full img{width:100%}.hero.full{padding-top:0}
  .show{padding:18px}.rail{margin-right:-20px;padding-right:20px}
- .tagband .btn{display:inline-block}
+ .tagband .btn{display:inline-flex}
  body{padding-bottom:76px}
 }
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js-rv .rv{opacity:1;transform:none}}
@@ -159,13 +159,13 @@ html{scrollbar-gutter:stable}
 .ctabar .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-top:16px;padding-bottom:16px}
 .ctabar p{flex:1 1 320px;min-width:0}.ctabar .acts{display:flex;flex-wrap:wrap;gap:10px;flex:0 1 auto}
 .ctabar .btn{white-space:nowrap}
-@media (max-width:600px){.ctabar .acts{flex:1 1 100%;flex-direction:column}.ctabar .btn{display:block;text-align:center}}
+@media (max-width:600px){.ctabar .acts{flex:1 1 100%;flex-direction:column}.ctabar .btn{display:flex;text-align:center}}
 .nextshow{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-top:26px;padding:24px 28px;border-radius:22px;background:linear-gradient(160deg,#1f1f23,#0f0f11);border:1px solid var(--gold);box-shadow:var(--glow)}
 .nx-date{font-family:Anton,'Anton Fb',Impact,sans-serif;text-align:center;line-height:1;min-width:92px;padding:12px 14px;border-radius:16px;background:#000;border:1px solid #2c2c31}
 .nx-date .dow{display:block;font:700 12px Inter,'Inter Fb',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.nx-date .dd{display:block;font-size:56px;color:#fff;margin-top:2px}.nx-date .ord{font-size:.4em;vertical-align:super;color:var(--gold)}.nx-date .mm{display:block;font-size:22px;color:var(--red);text-transform:uppercase}
 .nx-i{display:flex;flex-direction:column;gap:4px;min-width:0}.nx-k{font:900 11px Inter,'Inter Fb',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.nx-i b{font-size:clamp(22px,3vw,32px);line-height:1.15}.nx-i span:last-child{color:var(--mut)}
 .seeall{margin-top:18px}
-@media (max-width:700px){.nextshow{grid-template-columns:auto 1fr;padding:18px}.nx-a{grid-column:1/-1}.nx-a .btn{display:block;text-align:center}}
+@media (max-width:700px){.nextshow{grid-template-columns:auto 1fr;padding:18px}.nx-a{grid-column:1/-1}.nx-a .btn{display:flex;text-align:center}}
 .credits.stat{padding:clamp(34px,5vw,64px) 0}.credits.stat .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px 48px}
 .credits.stat .big30{font-size:clamp(88px,15vw,190px);line-height:.9;background:linear-gradient(180deg,var(--gold),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
 .credits.stat .big30 small{display:block;-webkit-text-fill-color:#fff;color:#fff;font-size:.24em;letter-spacing:.08em;margin-top:6px}

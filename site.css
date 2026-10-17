@@ -97,7 +97,7 @@ a.type{display:block;color:inherit}a.type:hover{border-color:#555}
  .gal,.faces{grid-template-columns:1fr 1fr;gap:10px}
  .news{grid-template-columns:1fr}
  .enq{grid-template-columns:1fr}
- .enq .btn{display:block;text-align:center;width:100%}
+ .enq .btn{display:flex;text-align:center;width:100%}
  .bio aside{max-width:240px;margin:0 auto}
  .reelv .lab{white-space:normal;text-align:center;width:90%}
  .crow{grid-template-columns:84px 1fr}
