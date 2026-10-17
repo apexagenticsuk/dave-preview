@@ -3,10 +3,13 @@
    Pages secret EDITOR_PASSCODE (at least 12 characters). Login sets a signed, HttpOnly session cookie; optional SESSION_SECRET
    replaces the passcode as the cookie signing key. No secrets are stored in this file. */
 
+/* ---- per-site settings (the only part that differs between the sites) ---- */
+const SITE_NAME_SUFFIX = ' | Dave Young';
 const BUILTIN = ['index', 'live', 'about', 'book', 'clips', 'corporate', 'contact', 'magician', 'page'];
-const RESERVED = BUILTIN.concat(['admin', 'content', 'assets', 'style', 'site', 'robots', 'weddings', '404', 'tools', 'api', 'uploads', 'cloudflare']);
 const REQUIRED_KEYS = ['version', '_help', 'theme', 'contact', 'shows', 'socials', 'site', 'pages', 'contactSocials', 'testimonials', 'clips', 'services', 'clients', 'credits', 'offers', 'siteUrl', 'dims'];
 const OPTIONAL_KEYS = ['nav', 'custom', 'seo'];
+/* ---- end of per-site settings ---- */
+const RESERVED = BUILTIN.concat(['admin', 'content', 'assets', 'style', 'site', 'robots', 'weddings', '404', 'tools', 'api', 'uploads', 'cloudflare']);
 const MAX_JSON = 1024 * 1024;
 const MAX_IMG = 5 * 1024 * 1024;
 const NAME_RE = /^img-[a-z0-9]{8,40}\.(jpg|png|webp)$/;
@@ -77,7 +80,7 @@ function validate(c) {
   if (missing.length) return 'Missing: ' + missing.join(', ');
   const extra = keys.filter(k => REQUIRED_KEYS.indexOf(k) < 0 && OPTIONAL_KEYS.indexOf(k) < 0);
   if (extra.length) return 'Unexpected: ' + extra.join(', ');
-  if (typeof c.version !== 'string') return 'version must be text.';
+  if (typeof c.version !== 'string' && typeof c.version !== 'number') return 'version must be text or a number.';
   if (c.custom != null) {
     if (typeof c.custom !== 'object' || Array.isArray(c.custom)) return 'custom pages are not valid.';
     for (const k of Object.keys(c.custom)) if (!SLUG_RE.test(k) || RESERVED.indexOf(k) > -1) return 'The page address "' + k + '" is not allowed.';
@@ -194,11 +197,11 @@ export function makeWorker(deps) {
     const cu = c.custom && c.custom[slug];
     if (!cu) return null;
     const base = cu.base && SLUG_RE.test(cu.base) ? cu.base : 'page';
-    const r = await env.ASSETS.fetch(new Request(new URL('/' + base, 'https://assets.invalid')));
+    const r = await env.ASSETS.fetch(new Request(new URL(base === 'index' ? '/' : '/' + base, 'https://assets.invalid')));
     if (!r.ok) return null;
     let h = await r.text();
     const s = (c.seo && c.seo[slug]) || {};
-    const title = s.title || (cu.title || slug) + ' | Dave Young', desc = s.description || '';
+    const title = s.title || (cu.title || slug) + SITE_NAME_SUFFIX, desc = s.description || '';
     h = h.replace(/<title>[\s\S]*?<\/title>/, '<title>' + esc(title) + '</title>');
     if (/<meta name="description"[^>]*>/.test(h)) h = h.replace(/<meta name="description"[^>]*>/, '<meta name="description" content="' + esc(desc) + '">');
     else h = h.replace('</title>', '</title><meta name="description" content="' + esc(desc) + '">');

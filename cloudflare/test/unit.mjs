@@ -67,11 +67,11 @@ r=await t.call('/api/logout',{method:'POST',cookie:C});ok('logout clears the coo
 r=await t.call('/api/logout',{method:'POST',ed:false});ok('logout without the editor header refused (403)',r.status===403);
 // publish refusals with session
 r=await t.call('/api/publish',P('{broken',C));ok('broken JSON refused (400)',r.status===400);
-const w1=Object.assign({},base);delete w1.shows;r=await t.call('/api/publish',P(w1,C));ok('missing key refused (400)',r.status===400);
+const w1=Object.assign({},base);delete w1.contact;r=await t.call('/api/publish',P(w1,C));ok('missing key refused (400)',r.status===400);
 r=await t.call('/api/publish',P(Object.assign({},base,{evil:1}),C));ok('extra unknown key refused (400)',r.status===400);
 r=await t.call('/api/publish',P([1,2],C));ok('JSON array refused (400)',r.status===400);
 r=await t.call('/api/publish',P(Object.assign({},base,{custom:{'../x':{title:'x'}}}),C));ok('custom page with bad address refused (400)',r.status===400);
-r=await t.call('/api/publish',P(Object.assign({},base,{custom:{about:{title:'x'}}}),C));ok('custom page named like a built-in page refused (400)',r.status===400);
+r=await t.call('/api/publish',P(Object.assign({},base,{custom:{contact:{title:'x'}}}),C));ok('custom page named like a built-in page refused (400)',r.status===400);
 r=await t.call('/api/publish',P(Object.assign({},base,{_help:'x'.repeat(1024*1024)}),C));ok('over 1 MB refused (413)',r.status===413);
 r=await t.call('/api/publish',{method:'GET',cookie:C});ok('GET on publish refused (405)',r.status===405);
 ok('nothing was saved by the refusals',!t.kv.m.has('content.json'));
