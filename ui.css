@@ -268,7 +268,21 @@ nav.main a,.mnav a{overflow-wrap:normal;word-break:normal;hyphens:none}
 .mnav a{white-space:normal}
 nav.main a{white-space:nowrap}
 
-/* social icons painted in the banner: invisible hotspots centred on each icon. Hit area scales with the picture, never under 44px
-   (at 320px the two left-hand icons are only 42px apart, so the hit width is capped at the 13.2% pitch there: no overlap). */
-.sbi .hot{transform:translate(-50%,-50%);width:min(max(44px,12.5%),13.2%);height:max(44px,27%);border-radius:10px;-webkit-tap-highlight-color:rgba(255,255,255,.18)}
+/* social icons painted in the banner: invisible hotspots centred on each icon. The nearest two icons (YouTube, Instagram) are 13.28% of the picture
+   apart centre to centre, so every hotspot is that pitch minus 8px wide: a guaranteed 8px+ gap between hit boxes (about 35px at 320, 40px at 360,
+   44px at 390, 49px at 430) and never wider than the painted icon tile. Height 44px+ (taller than wide on phones is fine: the icons sit in a row). */
+.sbi .hot{transform:translate(-50%,-50%);width:min(12.5%,calc(13.28% - 8px));height:max(44px,27%);border-radius:10px;-webkit-tap-highlight-color:rgba(255,255,255,.18)}
 .sbi .hot:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+
+/* round 6: >= 10px (12px where it fits) between neighbouring tap targets on phones; tests/tapgap.js */
+.tagband .btn{margin:12px 6px 0}
+@media (max-width:900px){
+ .flinks{gap:12px 14px}
+ footer .mail,footer .mail .em{gap:12px}
+ .crow{row-gap:12px}
+}
+@media (min-width:340px) and (max-width:900px){.top .wrap{gap:12px}.burger{gap:12px!important}.top .btn.sm{padding-inline:12px}}
+@media (min-width:340px) and (max-width:420px){.top .wrap{gap:12px}.burger{gap:12px!important}}
+@media (max-width:900px){.sticky{gap:12px}}
+@media (max-width:900px){.crow a{margin-block:6px}}
+@media (max-width:900px){header.top{padding-bottom:3px}}
