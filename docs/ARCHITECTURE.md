@@ -66,3 +66,8 @@ Pages mark where a collection appears with a placeholder, e.g. `<div data-cms="t
 - `page.html` has an empty `<main class="pgm">` that custom-page sections are appended into.
 
 - **Shop removed (October 2026)**: `shop.html`, its images, nav/footer links and the Home shop teaser were removed in one commit. Restore with `git revert` of that commit.
+
+## v4 notes (17 Oct 2026)
+- Social banner (home): the four icons painted in `social_links_header.webp` are invisible `a.hot` hotspots centred on each icon (left% from the artwork). Hit area `min(max(44px,12.5%),13.2%)` wide, `max(44px,27%)` tall: 44px+ from 360px up; at 320px the two left icons are only 42.5px apart, so the hit width is 42px there (largest non-overlapping). No text buttons. Tests: `hotspots.js`.
+- Buttons: every `.btn` is `inline-flex`/`flex` with centred label, equal padding, and the phone glyph as a flex item; `btns.js` measures the painted ink (text vs button box) at 320/390/768/1280. `.btn.gold` (Book Dave) is the bordered, shadowed primary; `contrast.js` keeps filled labels >= 4.5:1.
+- Book page "Weddings: what's included" only lists what theweddingcomedian.ie /faqs says (own sound and lighting crew, set-up under 15 minutes, guests stay in the room, can be a surprise). `included.js` guards it.
