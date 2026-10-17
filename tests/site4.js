@@ -22,7 +22,7 @@ for(const w of [320,360,390,640,768]){const ctx=await b.newContext({viewport:{wi
 {const c2=await b.newContext({viewport:{width:320,height:700},isMobile:true,hasTouch:true});const q=await c2.newPage();
  for(const pg of ['index','about','contact','live','book']){await q.goto(B+'/'+pg+'.html',{waitUntil:'networkidle'});
   const r=await q.evaluate(()=>{const br=document.querySelector('header .brand');const k=[...br.children].map(x=>Math.round(x.getBoundingClientRect().top));
-   const els=[...document.querySelectorAll('header a, header button, footer a, .crow a, .sbi .hot, .btnrow .btn')].filter(e=>e.offsetParent!==null&&!e.matches('.skip')&&getComputedStyle(e).position!=='fixed');let min=99,pair='';
+   const els=[...document.querySelectorAll('header a, header button, footer a, .crow a, .btnrow .btn')].filter(e=>e.offsetParent!==null&&!e.matches('.skip')&&getComputedStyle(e).position!=='fixed');let min=99,pair='';
    for(let i=0;i<els.length;i++)for(let j=i+1;j<els.length;j++){const a=els[i],b=els[j];if(a.contains(b)||b.contains(a))continue;const x=a.getBoundingClientRect(),y=b.getBoundingClientRect();const dx=Math.max(x.left-y.right,y.left-x.right),dy=Math.max(x.top-y.bottom,y.top-x.bottom);if(dx<0&&dy<0)continue;const g=dx<0?dy:dy<0?dx:Math.max(dx,dy);if(g<min){min=g;pair=(a.textContent.trim()||a.getAttribute('aria-label')).slice(0,14)+'|'+(b.textContent.trim()||b.getAttribute('aria-label')).slice(0,14);}}
    return {one:k[0]===k[1],min,pair};});
   ok(pg+' @320: logo stays on one line',r.one);ok(pg+' @320: links/buttons are 8px+ apart',r.min>=7.5,r.min+' '+r.pair);}

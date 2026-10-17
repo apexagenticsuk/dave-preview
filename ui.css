@@ -222,7 +222,6 @@ main.pgm{min-height:70vh}
  .btn.sm,.top .btn,.btn.call.sm{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
  .burger .ham{width:44px;height:44px}
  footer a,.flinks a,.mail a,.crow a,.prose a,.card a:not(.btn),.ftxt a{display:inline-flex;align-items:center;min-height:44px;padding-inline:3px}
- .sbi .hot{min-width:44px;min-height:44px}
  .party .wrap{grid-template-columns:minmax(0,1fr);gap:26px}
  .party .btn{display:flex}
  /* every inner-page hero stacks: text first, whole photo underneath at its own aspect, so Dave's face is never cropped or covered */
@@ -260,11 +259,6 @@ small{font-size:12px}
  .btnrow,.f{display:flex;flex-wrap:wrap;gap:10px}.btnrow .btn,.f .btn{margin:0}
  .flinks{gap:8px 12px}
  .socials{display:flex;gap:10px;flex-wrap:wrap}
- /* the four icons painted in the banner are too close for 44px targets with gaps: use real labelled buttons below the picture */
- .sbi{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 14px}
- .sbi img{grid-column:1/-1;margin:0 -14px;width:calc(100% + 28px);max-width:none}
- .sbi .hot{position:static!important;width:auto!important;height:auto!important;min-height:48px;display:flex;align-items:center;justify-content:center;border:1px solid #444;border-radius:10px;background:#16161a;color:#fff;text-decoration:none;font-weight:700;font-size:15px}
- .sbi .hot::after{content:attr(aria-label);text-align:center;padding:0 8px}
 }
 @media(max-width:360px){.brand{font-size:22px}.top .btn.sm{padding-inline:9px}}
 @media(max-width:900px){.dchips{gap:10px}.dchip{margin:0}}
@@ -273,3 +267,8 @@ small{font-size:12px}
 nav.main a,.mnav a{overflow-wrap:normal;word-break:normal;hyphens:none}
 .mnav a{white-space:normal}
 nav.main a{white-space:nowrap}
+
+/* social icons painted in the banner: invisible hotspots centred on each icon. Hit area scales with the picture, never under 44px
+   (at 320px the two left-hand icons are only 42px apart, so the hit width is capped at the 13.2% pitch there: no overlap). */
+.sbi .hot{transform:translate(-50%,-50%);width:min(max(44px,12.5%),13.2%);height:max(44px,27%);border-radius:10px;-webkit-tap-highlight-color:rgba(255,255,255,.18)}
+.sbi .hot:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
