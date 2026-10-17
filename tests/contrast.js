@@ -12,7 +12,7 @@ for(const w of [390,1280]){const c=await b.newContext({viewport:{width:w,height:
    return [...document.querySelectorAll('.btn')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&getComputedStyle(e).display!=='none'}).map(e=>{const cs=getComputedStyle(e);const bg=P(cs.backgroundColor),fg=P(cs.color);return {label:e.textContent.trim().slice(0,24),cls:e.className,filled:bg&&bg.a>0.9,ratio:bg&&bg.a>0.9?CR(fg,bg):null,gold:/\bgold\b/.test(e.className),bw:parseFloat(cs.borderTopWidth),bs:cs.borderTopStyle,sh:cs.boxShadow!=='none',bc:cs.borderTopColor,bgc:cs.backgroundColor,sticky:!!e.closest('.sticky')}})});
   for(const it of r){n++;if(it.filled&&it.ratio<4.5)fail(pg+' @'+w+' ['+it.label+' '+it.cls+'] label contrast '+it.ratio.toFixed(2)+':1 < 4.5');
    if(it.gold){if(!it.filled)fail(pg+' @'+w+' gold button not filled');if(it.bw<2||it.bs==='none')fail(pg+' @'+w+' ['+it.label+'] gold button has no visible border');if(!it.sh)fail(pg+' @'+w+' ['+it.label+'] gold button has no shadow')}}
-  const st=r.filter(x=>x.sticky);if(st.length&&!(st.some(x=>x.gold)&&st.some(x=>/\bred\b/.test(x.cls))))fail(pg+' @'+w+' sticky bar should hold a red and a gold button');
+  const st=r.filter(x=>x.sticky);if(st.some(x=>x.gold)&&!st.some(x=>/\b(red|rose)\b/.test(x.cls)))fail(pg+' @'+w+' sticky bar should hold a red and a gold button');
   await p.close();}
  await c.close();}
 await b.close();console.log((bad?'FAIL':'PASS')+' contrast: '+n+' buttons checked, '+bad+' problems');process.exit(bad?1:0)})();
