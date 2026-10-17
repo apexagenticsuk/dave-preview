@@ -1,7 +1,7 @@
 /* Cloudflare Pages "advanced mode" Function for dave-preview. Single file, no imports.
-   Saved site content lives in the KV namespace bound as CONTENT. Editing and publishing is protected by Cloudflare Access:
-   every /api/* call must carry a valid Cf-Access-Jwt-Assertion (signature, issuer, audience, expiry all checked here).
-   Settings come from plain-text Pages variables ACCESS_TEAM_DOMAIN and ACCESS_AUD. No secrets are stored in this file. */
+   Saved site content lives in the KV namespace bound as CONTENT. The editor is protected by a passcode kept in the encrypted
+   Pages secret EDITOR_PASSCODE (at least 12 characters). Login sets a signed, HttpOnly session cookie; optional SESSION_SECRET
+   replaces the passcode as the cookie signing key. No secrets are stored in this file. */
 
 const BUILTIN = ['index', 'live', 'about', 'book', 'clips', 'corporate', 'contact', 'magician', 'page'];
 const RESERVED = BUILTIN.concat(['admin', 'content', 'assets', 'style', 'site', 'robots', 'weddings', '404', 'tools', 'api', 'uploads', 'cloudflare']);
@@ -12,52 +12,45 @@ const MAX_IMG = 5 * 1024 * 1024;
 const NAME_RE = /^img-[a-z0-9]{8,40}\.(jpg|png|webp)$/;
 const SLUG_RE = /^[a-z0-9][a-z0-9-]*$/;
 
-const enc = new TextEncoder();
-function b64uToBytes(s) { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; const b = atob(s); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
-function b64uJson(s) { return JSON.parse(new TextDecoder().decode(b64uToBytes(s))); }
 
-/* ---- Cloudflare Access token check (RS256 against the team's published keys) ---- */
-let certCache = { at: 0, team: '', keys: null };
-function teamHost(env) {
-  let t = String((env && env.ACCESS_TEAM_DOMAIN) || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
-  if (t && t.indexOf('.') < 0) t += '.cloudflareaccess.com';
-  return t;
+/* ---- passcode login and signed session cookie ---- */
+const COOKIE = '__Host-dy_session';
+const SESSION_SECONDS = 12 * 60 * 60;
+const MIN_PASSCODE = 12;
+const MAX_FAILS = 5, WINDOW_MS = 15 * 60 * 1000, LOCK_MS = 15 * 60 * 1000, MAX_PER_HOUR = 10;
+function b64u(bytes) { let s = ''; bytes = new Uint8Array(bytes); for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+function b64uToBytes(s) { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; const b = atob(s); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
+const enc = new TextEncoder();
+function configured(env) { return !!(env && env.CONTENT && typeof env.EDITOR_PASSCODE === 'string' && env.EDITOR_PASSCODE.length >= MIN_PASSCODE); }
+async function sha256(s) { return new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(s))); }
+async function passcodeMatches(given, env) {
+  const a = await sha256('dy-pass|' + String(given)), b = await sha256('dy-pass|' + env.EDITOR_PASSCODE);
+  let d = 0; for (let i = 0; i < 32; i++) d |= a[i] ^ b[i];
+  return d === 0;
 }
-async function getKeys(team, fetchFn) {
-  if (certCache.keys && certCache.team === team && Date.now() - certCache.at < 10 * 60 * 1000) return certCache.keys;
-  const r = await fetchFn('https://' + team + '/cdn-cgi/access/certs');
-  if (!r.ok) throw new Error('certs');
-  const j = await r.json();
-  if (!j || !Array.isArray(j.keys)) throw new Error('certs');
-  certCache = { at: Date.now(), team, keys: j.keys };
-  return j.keys;
+async function signKey(env) {
+  const raw = await sha256('dy-session-key-v1|' + (env.SESSION_SECRET && String(env.SESSION_SECRET).length >= MIN_PASSCODE ? env.SESSION_SECRET : env.EDITOR_PASSCODE));
+  return crypto.subtle.importKey('raw', raw, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']);
 }
-export async function verifyAccessJwt(token, env, fetchFn) {
-  fetchFn = fetchFn || fetch;
-  const team = teamHost(env), aud = String((env && env.ACCESS_AUD) || '').trim();
-  if (!team || !aud || !token) return null;
-  const parts = String(token).split('.');
-  if (parts.length !== 3) return null;
-  let head, pay;
-  try { head = b64uJson(parts[0]); pay = b64uJson(parts[1]); } catch (e) { return null; }
-  if (head.alg !== 'RS256') return null;
-  const now = Math.floor(Date.now() / 1000);
-  if (typeof pay.exp !== 'number' || pay.exp <= now) return null;
-  if (typeof pay.nbf === 'number' && pay.nbf > now + 60) return null;
-  if (pay.iss !== 'https://' + team) return null;
-  const auds = Array.isArray(pay.aud) ? pay.aud : [pay.aud];
-  if (auds.indexOf(aud) < 0) return null;
-  try {
-    let keys = await getKeys(team, fetchFn);
-    let jwk = keys.find(k => k.kid === head.kid);
-    if (!jwk) { certCache.at = 0; keys = await getKeys(team, fetchFn); jwk = keys.find(k => k.kid === head.kid); }
-    if (!jwk) return null;
-    const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
-    const ok = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, b64uToBytes(parts[2]), enc.encode(parts[0] + '.' + parts[1]));
-    return ok ? pay : null;
-  } catch (e) { return null; }
+async function makeSession(env, nowMs) {
+  const id = b64u(crypto.getRandomValues(new Uint8Array(16))), exp = Math.floor(nowMs / 1000) + SESSION_SECONDS;
+  const body = id + '.' + exp;
+  const sig = await crypto.subtle.sign('HMAC', await signKey(env), enc.encode(body));
+  return body + '.' + b64u(sig);
 }
-export function resetCertCache() { certCache = { at: 0, team: '', keys: null }; }
+function readCookie(request, name) {
+  const h = request.headers.get('Cookie') || '';
+  for (const p of h.split(';')) { const i = p.indexOf('='); if (i > 0 && p.slice(0, i).trim() === name) return p.slice(i + 1).trim(); }
+  return '';
+}
+async function sessionValid(request, env, nowMs) {
+  if (!configured(env)) return false;
+  const v = readCookie(request, COOKIE), parts = v.split('.');
+  if (parts.length !== 3 || !/^[A-Za-z0-9_-]{16,32}$/.test(parts[0]) || !/^\d{1,12}$/.test(parts[1])) return false;
+  if (Number(parts[1]) <= Math.floor(nowMs / 1000)) return false;
+  try { return await crypto.subtle.verify('HMAC', await signKey(env), b64uToBytes(parts[2]), enc.encode(parts[0] + '.' + parts[1])); } catch (e) { return false; }
+}
+function cookieHeader(value, maxAge) { return COOKIE + '=' + value + '; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=' + maxAge; }
 
 /* ---- helpers ---- */
 function withHeaders(res, extra) {
@@ -94,13 +87,9 @@ function validate(c) {
 
 export function makeWorker(deps) {
   deps = deps || {};
-  const verify = deps.verify || ((token, env) => verifyAccessJwt(token, env, deps.fetch));
+  const now = deps.now || (() => Date.now());
+  const sleep = deps.sleep || (ms => new Promise(r => setTimeout(r, ms)));
 
-  async function auth(request, env) {
-    const t = request.headers.get('Cf-Access-Jwt-Assertion');
-    if (!t) return null;
-    return await verify(t, env, request);
-  }
   function csrfOk(request) {
     const o = request.headers.get('Origin');
     if (o && o !== new URL(request.url).origin) return false;
@@ -118,16 +107,45 @@ export function makeWorker(deps) {
     return out;
   }
 
+  async function readLimits(env) {
+    try { return JSON.parse((await env.CONTENT.get('rl')) || '{}'); } catch (e) { return {}; }
+  }
+  async function login(request, env) {
+    const t = now();
+    const rl = await readLimits(env);
+    if (rl.lock && rl.lock > t) return err(429, 'Too many wrong passcodes. Please wait 15 minutes and try again.');
+    const len = Number(request.headers.get('Content-Length') || 0);
+    if (len > 2048) return err(413, 'That is too long.');
+    let given = '';
+    try { const j = JSON.parse(await request.text()); given = j && typeof j.passcode === 'string' ? j.passcode.slice(0, 256) : ''; } catch (e) { given = ''; }
+    if (given && await passcodeMatches(given, env)) {
+      if (rl.t && rl.t.length) await env.CONTENT.put('rl', JSON.stringify({ t: [], lock: 0, h: rl.h || {} }));
+      const v = await makeSession(env, t);
+      return json({ ok: true }, 200, { 'Set-Cookie': cookieHeader(v, SESSION_SECONDS) });
+    }
+    const fails = (rl.t || []).filter(x => x > t - WINDOW_MS); fails.push(t);
+    const hb = String(Math.floor(t / 3600000)), h = {}; h[hb] = ((rl.h && rl.h[hb]) || 0) + 1;
+    const lock = (fails.length >= MAX_FAILS || h[hb] >= MAX_PER_HOUR) ? t + LOCK_MS : 0;
+    await env.CONTENT.put('rl', JSON.stringify({ t: fails, lock, h }));
+    await sleep(800);
+    if (lock) return err(429, 'Too many wrong passcodes. Please wait 15 minutes and try again.');
+    return err(401, 'That passcode did not work.');
+  }
+
   async function api(request, env, path) {
-    if (!env.CONTENT) return err(503, 'The saving service is not set up yet.');
-    if (!(env.ACCESS_TEAM_DOMAIN && env.ACCESS_AUD)) return err(503, 'The sign-in service is not set up yet.');
+    if (!configured(env)) return err(503, 'The saving service is not set up yet.');
     const method = request.method;
-    const want = { '/api/publish': 'POST', '/api/upload': 'POST', '/api/restore': 'POST', '/api/export': 'GET' }[path];
+    const want = { '/api/login': 'POST', '/api/logout': 'POST', '/api/session': 'GET', '/api/publish': 'POST', '/api/upload': 'POST', '/api/restore': 'POST', '/api/export': 'GET' }[path];
     if (!want) return err(404, 'Not found.');
     if (method !== want) return err(405, 'Method not allowed.');
-    const who = await auth(request, env);
-    if (!who) return err(401, 'You are not signed in.');
-    if (method === 'POST' && !csrfOk(request)) return err(403, 'This request was refused.');
+    if (path === '/api/session') return json({ ok: true, signedIn: await sessionValid(request, env, now()) });
+    if (path === '/api/login' || path === '/api/logout') {
+      if (!csrfOk(request)) return err(403, 'This request was refused.');
+      if (path === '/api/logout') return json({ ok: true }, 200, { 'Set-Cookie': cookieHeader('', 0) });
+      return await login(request, env);
+    }
+    if (!(await sessionValid(request, env, now()))) return err(401, 'You are not signed in.');
+    if (!csrfOk(request)) return err(403, 'This request was refused.');
 
     if (path === '/api/export') {
       const cur = await currentJson(env);

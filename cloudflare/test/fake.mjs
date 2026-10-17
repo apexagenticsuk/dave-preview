@@ -6,4 +6,3 @@ export function fakeKV(){const m=new Map();return {m,
  async delete(k){m.delete(k);},
  async list(o){const keys=[...m.keys()].filter(k=>k.startsWith((o&&o.prefix)||'')).map(name=>({name}));return {keys,list_complete:true};}};}
 export function fakeAssets(files){return {async fetch(req){const p=new URL(req.url).pathname;const f=files[p];return f==null?new Response('index fallback',{status:200,headers:{'x-static':'fallback'}}):new Response(f,{status:200,headers:{'x-static':'1','Content-Type':p.endsWith('.json')?'application/json':'text/html'}});}};}
-export const fakeVerify=async(t)=>t==='good-token'?{email:'dave@example.com'}:null;
