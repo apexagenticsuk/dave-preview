@@ -4,7 +4,9 @@
   <div class="brand"><span class="d">Dave</span> <span class="y">Young</span><small>Website editor</small></div>
   <h1>Edit your website</h1>
   <p class="lead2">Click on anything on your pages to change it, then press Publish. No coding needed.</p>
-  <div class="row"><button class="btn red" id="signin">Open the editor</button><button class="btn ghost" id="demo">Just look around (demo mode)</button></div>
+  <label for="pass">Enter your passcode</label>
+  <input id="pass" type="password" autocomplete="current-password" maxlength="256">
+  <div class="row"><button class="btn red" id="signin">Sign in</button><button class="btn ghost" id="demo">Just look around (demo mode)</button></div>
   <p id="loginmsg" class="msg"></p>
 </div></div>
 
@@ -27,7 +29,7 @@
 <h2>How to edit your website</h2>
 <div id="restorebox" hidden><button class="btn ghost" id="restore">Go back one version</button></div>
 <div class="steps">
-<div><h3>Sign in</h3><p>Open this page and sign in when asked. <b>Demo mode</b> lets you try everything without changing the real site.</p></div>
+<div><h3>Sign in</h3><p>Open this page, enter your passcode and tap <b>Sign in</b>. <b>Demo mode</b> lets you try everything without changing the real site.</p></div>
 <div><h3>Change words</h3><p>Pick a page at the top. Things you can change get a yellow outline when you point at them. Click a heading, paragraph or button and just type. Click somewhere else when you're done.</p></div>
 <div><h3>Change a button</h3><p>Click any button or link. A panel opens on the right where you can change its words, where it goes (one of your pages, a web address, a phone number or an email) and its colour.</p></div>
 <div><h3>Change a show date</h3><p>Click a show (or its <b>Edit</b> button) to change the date, venue, town or ticket link. Type the date any normal way, for example <b>Fri 4th Dec</b>, <b>4 Dec 2026</b> or <b>04/12/2026</b>: the weekday is ignored and worked out for you, and a message tells you if a date can't be read. Shows sort themselves by date. Each row has its own <b>Sold out</b>, <b>Drag</b> and <b>Delete</b> buttons, and <b>+ Add show</b> is under the list.</p></div>

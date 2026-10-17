@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# Starts a local Pages dev server (wrangler pages dev) with a fake KV and the TEST-ONLY Access bypass. Usage: serve.sh <port> [persistdir]
+# Local Pages dev server with a fake KV and a THROWAWAY test passcode (not the real one). Usage: serve.sh <port>
 set -euo pipefail
-HERE="$(cd "$(dirname "$0")" && pwd)"; SITE="$HERE/../.."
+HERE="$(cd "$(dirname "$0")" && pwd)"
 PORT="${1:-8788}"; D=/tmp/cftest-$PORT
-rm -rf "$D"; "$HERE/../build.sh" "$D" >/dev/null
-cp "$HERE/../_worker.js" "$D/_real.js"; cp "$HERE/entry.mjs" "$D/_worker.js"; sed -i "s#'./_real.js'#'./_real.js'#" "$D/_worker.js"
+rm -rf "$D" "/tmp/cftest-persist-$PORT"; "$HERE/../build.sh" "$D" >/dev/null
 cd /workspace/cf-tools
-exec ./node_modules/.bin/wrangler pages dev "$D" --port "$PORT" --compatibility-date=2026-05-01 --kv CONTENT --binding ACCESS_TEAM_DOMAIN=testteam ACCESS_AUD=testaud --persist-to "/tmp/cftest-persist-$PORT" --show-interactive-dev-session=false
+exec ./node_modules/.bin/wrangler pages dev "$D" --port "$PORT" --compatibility-date=2026-05-01 --kv CONTENT --binding EDITOR_PASSCODE=local-test-passcode-0001 --persist-to "/tmp/cftest-persist-$PORT" --show-interactive-dev-session=false

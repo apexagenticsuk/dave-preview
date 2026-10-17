@@ -1,6 +1,6 @@
 /* Visual editor shell: draft, history, pages, pickers, preview and publishing. The page itself is edited in the iframe (inline.js). */
 (function(){
-/* Cloudflare Pages edition: publishes through the site's own Function (/api/*), protected by Cloudflare Access. No keys, no GitHub. */
+/* Cloudflare Pages edition: publishes through the site's own Function (/api/*), protected by Cloudflare passcode. No keys, no GitHub. */
 var MK='dy-mode',uploaded={};
 var $=function(s){return document.querySelector(s);};
 var LIB=window.DY_LIB,BUILTIN=LIB.BUILTIN,RESERVED=BUILTIN.concat(['page','admin','content','assets','style','site','robots','weddings','404','tools']);
@@ -217,13 +217,18 @@ function doPublish(){
 function goBack(){dialog({title:'Go back one version?',text:'The website goes back to how it was before your last Publish.',ok:'Go back'}).then(function(r){if(!r.ok)return;
   api('/api/restore',{method:'POST'}).then(function(){localStorage.removeItem(DK());$('#helpm').hidden=true;toast('Saved. Your site updates within a minute.',6000);start();})
   .catch(function(e){dialog({title:'Could not go back',text:explain(e),ok:'OK',cancel:false});});});}
-function explain(e){var s=e.status;if(s===401||s===403)return 'you are not signed in any more. Reload this page and sign in again.';if(s===413)return 'something is too big. Pictures can be up to 5 MB.';if(s===415)return 'a picture is not a JPEG, PNG or WebP.';if(s===400)return 'the website did not accept these changes ('+e.message+'). Please tell your web person.';if(s===409)return e.message;if(s===404||s===405||s===503)return 'publishing is not available on this address.';return 'something went wrong. Check your internet connection and try again.';}
+function explain(e){var s=e.status;if(s===401||s===403)return 'your session has ended. Reload this page and enter your passcode again.';if(s===413)return 'something is too big. Pictures can be up to 5 MB.';if(s===415)return 'a picture is not a JPEG, PNG or WebP.';if(s===400)return 'the website did not accept these changes ('+e.message+'). Please tell your web person.';if(s===409)return e.message;if(s===404||s===405||s===503)return 'publishing is not available on this address.';return 'something went wrong. Check your internet connection and try again.';}
 
 /* ---- sign in ---- */
-function probe(msg){var m=$('#loginmsg');if(msg){m.className='msg';m.textContent=msg;}
-  return api('/api/export').then(function(j){if(!j.content)throw new Error('no content');mode='live';start();}).catch(function(e){$('#login').hidden=false;m.className='msg err';
-    m.textContent=(e.status===401||e.status===403)?'You are not signed in. Reload this page to sign in.':'The live editor is not available on this address. You can still look around in demo mode.';});}
-function signin(){probe('Opening the editor…');}
+function openEditor(){mode='live';start();}
+function probe(){var m=$('#loginmsg');
+  return api('/api/session').then(function(j){if(j.signedIn){openEditor();return;}$('#login').hidden=false;$('#pass').focus();}).catch(function(e){$('#login').hidden=false;
+    m.className='msg err';m.textContent=e.status===503?'The saving service is not set up yet.':'The live editor is not available on this address. You can still look around in demo mode.';});}
+function signin(){var pw=$('#pass'),m=$('#loginmsg'),v=pw.value;if(!v){m.className='msg err';m.textContent='Please enter your passcode first.';return;}
+  m.className='msg';m.textContent='Checking…';$('#signin').disabled=true;
+  api('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode:v})}).then(function(){pw.value='';m.textContent='';openEditor();})
+  .catch(function(e){pw.value='';m.className='msg err';m.textContent=(e.status===401||e.status===429||e.status===503)?e.message:'The live editor is not available on this address. You can still look around in demo mode.';})
+  .then(function(){$('#signin').disabled=false;});}
 
 /* ---- style modal ---- */
 var NAMES={red:'Classic red',green:'Christmas green',purple:'Showtime purple',blue:'Electric blue'};
@@ -272,10 +277,10 @@ $('#vphone').onclick=function(){$('#stage').classList.add('phone');this.classLis
 $('#undo').onclick=undo;$('#redo').onclick=redo;$('#pundo').onclick=undo;$('#predo').onclick=redo;$('#preview').onclick=preview;$('#publish').onclick=publish;
 $('#helpb').onclick=function(){$('#helpm').hidden=false;};$('#style').onclick=styleModal;
 $('#discard').onclick=function(){if(!dirty()){toast('There is nothing unpublished to throw away.');return;}dialog({title:'Throw away changes?',text:'All changes that are not published yet will be removed.',ok:'Throw away',danger:true}).then(function(r){if(!r.ok)return;c=clone(base);uploads={};record();localStorage.removeItem(DK());$('#helpm').hidden=true;if(!exists(page))page='index';reload();});};
-$('#out').onclick=function(){if(mode==='live'){persist();location.href='/cdn-cgi/access/logout';return;}localStorage.removeItem(MK);location.reload();};
+$('#out').onclick=function(){if(mode==='live'){persist();api('/api/logout',{method:'POST'}).catch(function(){}).then(function(){location.reload();});return;}localStorage.removeItem(MK);location.reload();};
 if($('#restore'))$('#restore').onclick=goBack;
 $('#psettings').onclick=function(){pageSettings(page);};
-$('#signin').onclick=signin;
+$('#signin').onclick=signin;$('#pass').onkeydown=function(e){if(e.key==='Enter')signin();};
 $('#demo').onclick=function(){mode='demo';localStorage.setItem(MK,'demo');start();};
 
 if(mode==='demo')start();else probe();
